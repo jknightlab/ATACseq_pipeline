@@ -100,18 +100,19 @@ First, look at the influence of different parameters of
 - `--diff-min-len`
 - `--ignore-duplicate-peaks`
 
-Second, 
+Second, compare:
+
+- fraction of differentially called peaks of sample1
+- fraction of differentially called peaks of sample2
+- average coverage of differentially called peaks
+(normalized by the number of reads used for peak calling
+average for two input samples)
+- average peak width
+- number of differentially called peaks per functional category
 
 
 
 
 
-
-
-
-
-
-
-
-
+#### Designed by Irina Pulyakhina irina@well.ox.ac.uk
 
