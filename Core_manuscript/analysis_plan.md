@@ -70,7 +70,7 @@ down for more detail).
 
 Metrics to compare:
 
-** before functional annotation **
+**before functional annotation**
 
 - mapped reads after filtering
 - number of peaks normalized by the number of mapped reads
@@ -81,7 +81,7 @@ of reads mapped outside peaks to the regions of equal length)
 - average peak height (normalized by the number of reads used for
 peak calling)
 
-** after functional annotation **
+**after functional annotation**
 
 - number of peaks in each functional group (normalized by the
 number of reads used for peak calling)
