@@ -56,8 +56,51 @@ Suggested parameters to explore (at the moment -- only for
 - `--llocal`
 - `--broad`
 
-macs2 diffpeak
 
+### Comparison of the samples
+
+It is suggested to compare some technical aspects
+of the samples generated per sample (number of peaks,
+average length of peaks, average coverage, etc) and to
+assess peaks which were differentially called in each
+pair of samples (using `macs2 diffpeak`, please scroll
+down for more detail).
+
+#### Technical comparison of quality
+
+Metrics to compare:
+
+** before functional annotation **
+
+- mapped reads after filtering
+- number of peaks normalized by the number of mapped reads
+- number of reads in peaks normalized by the number of mapped reads
+- signal-to-noise ratio (number of reads in peaks divided by number
+of reads mapped outside peaks to the regions of equal length)
+- average peak width
+- average peak height (normalized by the number of reads used for
+peak calling)
+
+** after functional annotation **
+
+- number of peaks in each functional group (normalized by the
+number of reads used for peak calling)
+- average peak height in each functional group (normalized by the
+number of reads used for peak calling)
+- average peak width in each functional group
+- enrichment score in each functional group (using `cGAT`)
+
+
+#### Biological comparison -- differential peak calling
+
+First, look at the influence of different parameters of
+`macs2 diffpeak` on the results:
+
+- `--peak-min-len`
+- `--diff-min-len`
+- `--ignore-duplicate-peaks`
+
+Second, 
 
 
 
