@@ -206,27 +206,41 @@ echo "done."
 # 4. Removing reads that were not properly paired (wrong orientation, based on the bitscore flag 0x62)
 
 echo -n "`date`: filtering step 4 -- removing not properly paired reads..."
-$SAMTOOLS view \
-          -h -b \
-          -f 0x62 \
-          $FILENAME.nodup.MAPQ30.uniq.bam > \
-          $FILENAME.nodup.MAPQ30.uniq.proper_paired_read1.bam
 
-$SAMTOOLS view \
-          -h -b \
-          -f 0x92 \
-          $FILENAME.nodup.MAPQ30.uniq.bam > \
-          $FILENAME.nodup.MAPQ30.uniq.proper_paired_read2.bam
+## AC
+# $SAMTOOLS view \
+#           -h -b \
+#           -f 0x62 \
+#           $FILENAME.nodup.MAPQ30.uniq.bam > \
+#           $FILENAME.nodup.MAPQ30.uniq.proper_paired_read1.bam
 
-$PICARD MergeSamFiles.jar \
-          INPUT=$FILENAME.nodup.MAPQ30.uniq.proper_paired_read1.bam \
-          INPUT=$FILENAME.nodup.MAPQ30.uniq.proper_paired_read2.bam \
-          SORT_ORDER=coordinate \
-          OUTPUT=$FILENAME.nodup.MAPQ30.uniq.proper_paired.bam
+# $SAMTOOLS view \
+#           -h -b \
+#           -f 0x92 \
+#           $FILENAME.nodup.MAPQ30.uniq.bam > \
+#           $FILENAME.nodup.MAPQ30.uniq.proper_paired_read2.bam
+
+# $PICARD MergeSamFiles.jar \
+#           INPUT=$FILENAME.nodup.MAPQ30.uniq.proper_paired_read1.bam \
+#           INPUT=$FILENAME.nodup.MAPQ30.uniq.proper_paired_read2.bam \
+#           SORT_ORDER=coordinate \
+#           OUTPUT=$FILENAME.nodup.MAPQ30.uniq.proper_paired.bam
+
+## AC
+$SAMTOOLS view \
+	  -h \
+	  -b \
+	  -f 3 \
+	  -F 12 \
+	  $FILENAME.nodup.MAPQ30.uniq.bam > \
+          $FILENAME.nodup.MAPQ30.uniq.proper_paired.bam
+
+
 echo "done."
 
-rm $FILENAME.nodup.MAPQ30.uniq.proper_paired_read1.bam
-rm $FILENAME.nodup.MAPQ30.uniq.proper_paired_read2.bam
+## AC
+# rm $FILENAME.nodup.MAPQ30.uniq.proper_paired_read1.bam
+# rm $FILENAME.nodup.MAPQ30.uniq.proper_paired_read2.bam
 
 # 5. Removing reads mapped to mitochondrial DNA
 
@@ -262,6 +276,8 @@ $BEDTOOLS genomecov \
           -ibam $FILENAME.nodup.MAPQ30.uniq.proper_paired.noM.bam > \
           $FILENAME.nodup.MAPQ30.uniq.proper_paired.noM.coverage
 
+## AC
+LC_COLLATE=C
 sort -k1,1 -k2,2n \
           $FILENAME.nodup.MAPQ30.uniq.proper_paired.noM.coverage > \
           $FILENAME.nodup.MAPQ30.uniq.proper_paired.noM.sorted.coverage
@@ -354,28 +370,40 @@ $SAMTOOLS sort \
     -o $FILENAME.filtered.name_sort.bam
 
 # converting bam to bedpe
-$BEDTOOLS bamtobed \
-    -bedpe \
-    -i $FILENAME.filtered.name_sort.bam > \
+
+## AC: output file gets overwritten
+# $BEDTOOLS bamtobed \
+#     -bedpe \
+#     -i $FILENAME.filtered.name_sort.bam > \
+#     $FILENAME.filtered.bedpe.bed
+
+# $BEDTOOLS bamtobed \
+#     -bedpe \
+#     -i $FILENAME.filtered.name_sort.bam | \
+#     grep -v 'GL' | \
+#     grep -v 'NC' | \
+#     grep -v 'hs' | \
+#     grep -P '\t\+\t\-' > \
+#     $FILENAME.filtered.bedpe.bed
+
+# $BEDTOOLS sort \
+#     -i $FILENAME.filtered.bedpe.bed > \
+#     $FILENAME.filtered.bedpe.name_sorted.bed
+
+# # Selecting beginning and end of each fragment
+# cat $FILENAME.filtered.bedpe.name_sorted.bed | \
+#     sed s/chr//g | awk '{print "chr" $1 "\t" $2 "\t" $6 "\t" $7 }' > \
+#     $FILENAME.filtered.bedpe.fragments.bed
+
+getFragmentBed_pe_version.pl \
+    $FILENAME.filtered.name_sort.bam \
     $FILENAME.filtered.bedpe.bed
 
-$BEDTOOLS bamtobed \
-    -bedpe \
-    -i $FILENAME.filtered.name_sort.bam | \
-    grep -v 'GL' | \
-    grep -v 'NC' | \
-    grep -v 'hs' | \
-    grep -P '\t\+\t\-' > \
-    $FILENAME.filtered.bedpe.bed
+$BEDTOOLS \
+    sort \
+    -i $FILENAME.filtered.bedpe.bed \
+    $FILENAME.filtered.bedpe.fragments.bed 
 
-$BEDTOOLS sort \
-    -i $FILENAME.filtered.bedpe.bed > \
-    $FILENAME.filtered.bedpe.name_sorted.bed
-
-# Selecting beginning and end of each fragment
-cat $FILENAME.filtered.bedpe.name_sorted.bed | \
-    sed s/chr//g | awk '{print "chr" $1 "\t" $2 "\t" $6 "\t" $7 }' > \
-    $FILENAME.filtered.bedpe.fragments.bed
 
 # Number of reads mapped per chromosome
 echo -e "Chromosome\tFragments_per_chrom" > $FILENAME.temp_fragm_per_chrom
