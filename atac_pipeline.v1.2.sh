@@ -51,88 +51,88 @@ READ2=`echo $FILENAME.read2`
 # =                                                                    =
 # ======================================================================
 
-## mkdir $FILENAME.atac_analysis
+mkdir $FILENAME.atac_analysis
 
 # Extracting raw data from a zip archive
 
-## echo -n "`date`: unzipping the raw fastq files... "
-## $ZCAT $INPUT_READ1 > $FILENAME.atac_analysis/$READ1.fastq
-## $ZCAT $INPUT_READ2 > $FILENAME.atac_analysis/$READ2.fastq
-## echo "done."
+echo -n "`date`: unzipping the raw fastq files... "
+$ZCAT $INPUT_READ1 > $FILENAME.atac_analysis/$READ1.fastq
+$ZCAT $INPUT_READ2 > $FILENAME.atac_analysis/$READ2.fastq
+echo "done."
 
-## cd $FILENAME.atac_analysis
+cd $FILENAME.atac_analysis
 
 # Quality control on raw data
 
-###mkdir $READ1.fastqc_output
-###mkdir $READ2.fastqc_output
-###
-###echo -n "`date`: running FASTQC on raw fastq files... "
-###$FASTQC \
-###    $READ1.fastq \
-###    -f fastq \
-###    -o $READ1.fastqc_output \
-###    2> $FILENAME.fastqc_stderr.txt
-###
-###$FASTQC \
-###    $READ2.fastq \
-###    -f fastq \
-###    -o $READ2.fastqc_output \
-###    2> $FILENAME.fastqc_stderr.txt
-###echo "done."
-###
-#### Adapter trimming, removing low quality bases
-###
-###echo -n "`date`: removing adapters... "
-###$CUTADAPT \
-###    -a CTGTCTCTTATACACATCTCCGAGCCCACGAGAC \
-###    -A CTGTCTCTTATACACATCTGACGCTGCCGACGA \
-###    --overlap 10 \
-###    --minimum-length=20 \
-###    -o $READ1.trimmed.fastq \
-###    -p $READ2.trimmed.fastq \
-###    $READ1.fastq $READ2.fastq \
-###    2> $FILENAME.cutadapt_stderr.txt
-###echo "done."
-###
-#### Quality control on processed (cleaned) data
-###
-###mkdir $READ1.trimmed.fastqc_output
-###mkdir $READ2.trimmed.fastqc_output
-###
-###echo -n "`date`: running FASTQC on trimmed files... "
-###$FASTQC \
-###    $READ1.trimmed.fastq \
-###    -f fastq \
-###    -o $READ1.trimmed.fastqc_output \
-###    2> $FILENAME.fastqc_stderr.txt
-###
-###$FASTQC \
-###    $READ2.trimmed.fastq \
-###    -f fastq \
-###    -o $READ2.trimmed.fastqc_output \
-###    2> $FILENAME.fastqc_stderr.txt
-###echo "done."
-###
-#### Aligning processed data
-###echo -n "`date`: running the alignment... "
-###$BWA mem \
-###    -t 3 \
-###    $BWA_INDEX \
-###    $READ1.trimmed.fastq \
-###    $READ2.trimmed.fastq > \
-###    $FILENAME.sam \
-###    2> $FILENAME.bwa_stderr.txt
-###echo "done."
-###
-#### Manipulations on sam file: creating bam, sorting, indexing
-###
-###echo -n "`date`: converting sam to bam... "
-###$SAMTOOLS view \
-###    -bSh $FILENAME.sam > \
-###    $FILENAME.bam \
-###    2> $FILENAME.samtools_stderr.txt
-###echo "done."
+mkdir $READ1.fastqc_output
+mkdir $READ2.fastqc_output
+
+echo -n "`date`: running FASTQC on raw fastq files... "
+$FASTQC \
+    $READ1.fastq \
+    -f fastq \
+    -o $READ1.fastqc_output \
+    2> $FILENAME.fastqc_stderr.txt
+
+$FASTQC \
+    $READ2.fastq \
+    -f fastq \
+    -o $READ2.fastqc_output \
+    2> $FILENAME.fastqc_stderr.txt
+echo "done."
+
+# Adapter trimming, removing low quality bases
+
+echo -n "`date`: removing adapters... "
+$CUTADAPT \
+    -a CTGTCTCTTATACACATCTCCGAGCCCACGAGAC \
+    -A CTGTCTCTTATACACATCTGACGCTGCCGACGA \
+    --overlap 10 \
+    --minimum-length=20 \
+    -o $READ1.trimmed.fastq \
+    -p $READ2.trimmed.fastq \
+    $READ1.fastq $READ2.fastq \
+    2> $FILENAME.cutadapt_stderr.txt
+echo "done."
+
+# Quality control on processed (cleaned) data
+
+mkdir $READ1.trimmed.fastqc_output
+mkdir $READ2.trimmed.fastqc_output
+
+echo -n "`date`: running FASTQC on trimmed files... "
+$FASTQC \
+    $READ1.trimmed.fastq \
+    -f fastq \
+    -o $READ1.trimmed.fastqc_output \
+    2> $FILENAME.fastqc_stderr.txt
+
+$FASTQC \
+    $READ2.trimmed.fastq \
+    -f fastq \
+    -o $READ2.trimmed.fastqc_output \
+    2> $FILENAME.fastqc_stderr.txt
+echo "done."
+
+# Aligning processed data
+echo -n "`date`: running the alignment... "
+$BWA mem \
+    -t 3 \
+    $BWA_INDEX \
+    $READ1.trimmed.fastq \
+    $READ2.trimmed.fastq > \
+    $FILENAME.sam \
+    2> $FILENAME.bwa_stderr.txt
+echo "done."
+
+# Manipulations on sam file: creating bam, sorting, indexing
+
+echo -n "`date`: converting sam to bam... "
+$SAMTOOLS view \
+    -bSh $FILENAME.sam > \
+    $FILENAME.bam \
+    2> $FILENAME.samtools_stderr.txt
+echo "done."
 
 echo -n "`date`: sorting alignments in orer to remove duplicates... "
 $SAMTOOLS sort \
