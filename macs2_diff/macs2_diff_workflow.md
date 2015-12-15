@@ -93,21 +93,21 @@ Width and background noise matter more than the height of the peak:
 
 ### Conclusions (*very* primary)
 
-1) We have to scale the data, but we are not sure whether the current
+1. We have to scale the data, but we are not sure whether the current
 scaling (inplemented in macs2) is the best.
-2) A rather limited numbers of peaks is expected in the list of overlapping
+2. A rather limited numbers of peaks is expected in the list of overlapping
 peaks (around 10% rather than 90% for the same cell types generated in different
 labs).
-3) Both height, width and the background noise contribute to the decision whether
+3. Both height, width and the background noise contribute to the decision whether
 a peak will be reported as overlap.
 
 ### Future tasks
 
-1) Find out the best way of scaling/normalizing the data.
-2) The remaining comparisons (vs non-lesional; Greenleaf vs lesional skin).
-3) Look for good examples (skin-specific peaks, "house-keeping", monocyte-specific
+1. Find out the best way of scaling/normalizing the data.
+2. The remaining comparisons (vs non-lesional; Greenleaf vs lesional skin).
+3. Look for good examples (skin-specific peaks, "house-keeping", monocyte-specific
 peaks, stable peaks).
-4) Find out the best statistical threshold (perhaps we should take a lower threshold
+4. Find out the best statistical threshold (perhaps we should take a lower threshold
 for likelyhood ratio, as the current likelyhood ratio was designed for ChIP-Seq peaks,
 which are expected to generate cleaner signal).
 
