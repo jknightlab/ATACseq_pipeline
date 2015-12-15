@@ -41,5 +41,19 @@ nt changed.
   lesional skin) and `--depth2 943409` (number of reads mapped to peaks in
   non-lesional skip).
 
+### Results
+
+|                                  | lesional skin, default depth | lesional skin, changed depth | monocytes |
+| -------------------------------- | ------ | ------- | --------- |
+| non-lesional skin, minlength 10  | 231    | 163     | NA        |
+| non-lesional skin, minlength 50  | 193    | 138     | NA        |
+| non-lesional skin, minlength 75  | 166    | 117     | NA        |
+| non-lesional skin, minlength 100 | 144    | 104     | NA        |
+| non-lesional skin, minlength 125 | 126    | 89      | NA        |
+| non-lesional skin, minlength 150 | 100    | 72      | NA        |
+| non-lesional skin, minlength 175 | 87     | 52      | NA        |
+| non-lesional skin, minlength 200 | 69     | 41      | NA        |
+
+
 
 
