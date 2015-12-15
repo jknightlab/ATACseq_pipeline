@@ -134,7 +134,7 @@ $SAMTOOLS view \
     2> $FILENAME.samtools_stderr.txt
 echo "done."
 
-echo -n "`date`: sorting alignments in orer to remove duplicates... "
+echo -n "`date`: sorting alignments in order to remove duplicates... "
 $SAMTOOLS sort \
     $FILENAME.bam \
     $FILENAME.sorted \
@@ -186,7 +186,7 @@ $SAMTOOLS view \
 $SAMTOOLS view \
     $FILENAME.nodup.MAPQ30.uniq.proper_paired.bam | \
     awk '$3 ~ /chr/ {print $0}' | \
-    grep -v chrM >> \
+    grep -v 'chrM\|MT\|hs\|NC\|GL' >> \
     $FILENAME.filtered.non_sorted.sam
 
 $SAMTOOLS view \
@@ -202,7 +202,10 @@ rm $FILENAME.filtered.non_sorted.bam
 echo "done."
 
 # Creating WIGGLE file
-head -24 $CHROM_SIZE | sed s/chr//g | awk '{print "chr" $1 "\t" $2}' > $FILENAME.chrom_sizes.txt
+head -25 $FILENAME.filtered.bam | \
+    sed s/chr//g | \
+    awk '{print "chr" $1 "\t" $2}' > \
+    $FILENAME.chrom_sizes.txt
 
 echo -n "`date`: Generating bedgraph to create a bigwig file... "
 $GENOME_COVERAGE_BED \
@@ -216,13 +219,18 @@ echo "done."
 
 echo -n "`date`: Sorting bedgraph to create a bigwig file... "
 LC_COLLATE=C
-sort -k1,1 -k2,2n $FILENAME.bedgraph > $FILENAME.sorted.bedgraph
+sort \
+    -k1,1 \
+    -k2,2n \
+    $FILENAME.bedgraph > \
+    $FILENAME.sorted.bedgraph
 echo "done."
 
 echo -n "`date`: Generating bigwig from bedgraph... "
 $BEDGRAPH_TO_BIGWIG \
     $FILENAME.sorted.bedgraph \
-    $FILENAME.chrom_sizes.txt $FILENAME.bw \
+    $FILENAME.chrom_sizes.txt \
+    $FILENAME.bw \
     2> $FILENAME.bedtools_stderr.txt
 echo "done".
 
@@ -234,15 +242,6 @@ $SAMTOOLS sort \
     -o $FILENAME.filtered.name_sort.bam \
     2> $FILENAME.samtools_stderr.txt
 echo "done."
-
-echo -n "`date`: Generating bedpe from bam... "
-$BEDTOOLS bamtobed \
-    -bedpe \
-    -i $FILENAME.filtered.name_sort.bam > \
-    $FILENAME.filtered.bedpe.bed \
-    2> $FILENAME.bedpe_stderr.txt
-echo "done."
-
 
 echo -n "`date`: Fixing the flags... "
 $SAMTOOLS fixmate \
@@ -268,10 +267,12 @@ $BEDTOOLS bamtobed \
     2> $FILENAME.bedpe_stderr.txt
 echo "done."
 
-echo -n "`date`: Sorting bedpe file... "
-$BEDTOOLS \
-    sort \
-    -i $FILENAME.filtered.bedpe.bed > \
+echo -n "`date`: Sorting bedpe file and generating the file containing fragment coordinates (not read)... "
+$BEDTOOLS sort \
+    -i $FILENAME.filtered.bedpe.bed | \
+    grep -v -i 'GL\|NC\|hs' | \
+    sed s/chr//g | \
+    awk '$6-$2 > 0 {print "chr" $1 "\t" $2 "\t" $6 "\t" $7 }' > \
     $FILENAME.filtered.bedpe.fragments.bed \
     2> $FILENAME.bedpe_stderr.txt
 echo "done."
@@ -421,7 +422,7 @@ paste \
     <(awk '{print $2}' $FILENAME.temp_fragm_per_peaks) \
     <(awk '{print $2}' $FILENAME.temp_fragm_per_chrom) \
     <(awk '{print $2}' $FILENAME.temp_fragm_per_off_peaks_peak_length) > \
-    $FILENAME.stat.txt
+    $FILENAME.stat_new.txt
 rm $FILENAME.temp*
 echo "done."
 
