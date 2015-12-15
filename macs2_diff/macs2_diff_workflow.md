@@ -81,10 +81,16 @@ monocytes vs Jknight monocytes and lesional skin vs Jknight monocytes
 
 Here are some examples of peaks detected as overlaping peaks:
 
-![alt text](https://github.com/jknightlab/mirna_pipeline/blob/master/reads_mapped_to_miRNAs.png)
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/nrd1_greenleaf_not_skin.png)
 
-![alt text](https://github.com/jknightlab/mirna_pipeline/blob/master/reads_mapped_to_miRNAs.png)
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/two_peaks.png)
 
+
+| hi1 | hi2 |
+| --- | --- |
+|  ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/nrd1_greenleaf_not_skin.png)   |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/two_peaks.png)  |
+
+a
 
 ### Conclusions (*very* primary)
 
