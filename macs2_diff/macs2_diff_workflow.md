@@ -110,5 +110,5 @@ peaks, stable peaks).
 4. Find out the best statistical threshold (perhaps we should take a lower threshold
 for likelyhood ratio, as the current likelyhood ratio was designed for ChIP-Seq peaks,
 which are expected to generate cleaner signal).
-
+5. Find not only common, but also condition-specific peaks.
 
