@@ -79,18 +79,17 @@ and lesional skin data; bed files with common peaks for Greenleaf
 monocytes vs Jknight monocytes and lesional skin vs Jknight monocytes
 (with minimal required overlap of 100 bp).
 
-Here are some examples of peaks detected as overlaping peaks:
+Here are some examples of peaks detected as overlapping peaks:
+
+Different width of overlap:
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/nrd1_greenleaf_not_skin.png)
+
+Width and background noise matter more than the height of the peak:
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/two_peaks.png)
 
 
-| hi1 | hi2 |
-| --- | --- |
-|  ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/nrd1_greenleaf_not_skin.png)   |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/two_peaks.png)  |
-
-a
 
 ### Conclusions (*very* primary)
 
