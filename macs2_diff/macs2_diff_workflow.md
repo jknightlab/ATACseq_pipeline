@@ -73,7 +73,37 @@ overlap between two peaks to be selected. The column names stand for:
 
 ### Results: examples
 
+A [UCSC session](https://genome-euro.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=pulyakhina&hgS_otherUserSessionName=macs2_diff_initial)
+containint coverage files of Greenleaf monocytes, Jknight monocytes
+and lesional skin data; bed files with common peaks for Greenleaf
+monocytes vs Jknight monocytes and lesional skin vs Jknight monocytes
+(with minimal required overlap of 100 bp).
+
+Here are some examples of peaks detected as overlaping peaks:
+
+![alt text](https://github.com/jknightlab/mirna_pipeline/blob/master/reads_mapped_to_miRNAs.png)
+
+![alt text](https://github.com/jknightlab/mirna_pipeline/blob/master/reads_mapped_to_miRNAs.png)
+
+
+### Conclusions (*very* primary)
+
+1) We have to scale the data, but we are not sure whether the current
+scaling (inplemented in macs2) is the best.
+2) A rather limited numbers of peaks is expected in the list of overlapping
+peaks (around 10% rather than 90% for the same cell types generated in different
+labs).
+3) Both height, width and the background noise contribute to the decision whether
+a peak will be reported as overlap.
 
 ### Future tasks
+
+1) Find out the best way of scaling/normalizing the data.
+2) The remaining comparisons (vs non-lesional; Greenleaf vs lesional skin).
+3) Look for good examples (skin-specific peaks, "house-keeping", monocyte-specific
+peaks, stable peaks).
+4) Find out the best statistical threshold (perhaps we should take a lower threshold
+for likelyhood ratio, as the current likelyhood ratio was designed for ChIP-Seq peaks,
+which are expected to generate cleaner signal).
 
 
