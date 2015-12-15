@@ -19,8 +19,9 @@ interested in two files -- the file containing the background signal
 sample (*treat_pileup.bdg*).
 
 The analysis described here was performed on two skin samples, psoriatic
-lesional and non-lesional skin. Standard ATAC protocol was followed by
-sequencing on Illumina MiSeq.
+lesional and non-lesional skin; and two monocyte samples, a publicly available
+from Greenleaf lab and generated in-house. Standard ATAC protocol was followed by
+sequencing on Illumina MiSeq for all in-house generated samples.
 
 ### Parameters of *macs2 bdgdiff*
 
@@ -41,19 +42,38 @@ nt changed.
   lesional skin) and `--depth2 943409` (number of reads mapped to peaks in
   non-lesional skip).
 
-### Results
+### Results: statistics
 
-|                                  | lesional skin, default depth | lesional skin, changed depth | monocytes |
-| -------------------------------- | ------ | ------- | --------- |
-| non-lesional skin, minlength 10  | 231    | 163     | NA        |
-| non-lesional skin, minlength 50  | 193    | 138     | NA        |
-| non-lesional skin, minlength 75  | 166    | 117     | NA        |
-| non-lesional skin, minlength 100 | 144    | 104     | NA        |
-| non-lesional skin, minlength 125 | 126    | 89      | NA        |
-| non-lesional skin, minlength 150 | 100    | 72      | NA        |
-| non-lesional skin, minlength 175 | 87     | 52      | NA        |
-| non-lesional skin, minlength 200 | 69     | 41      | NA        |
+In the table below the overlap (number of common peaks) between jknight monocytes
+and lesional skin / greenleaf monocytes is shown when using different minimal required
+overlap between two peaks to be selected. The column names stand for:
+
+- GM -- monocytes generated in Greenleaf lab, not scaled/normalized to the number of reads
+  in peaks
+- GMS -- monocytes generated in Greenleaf lab, scaled to the number of reads in peaks
+- GMS_% -- percent of peaks in overlap from the total number of peaks detected for
+  the Greenleaf monocytes
+- LS -- lesional skin, not scaled/normalized to the number of reads
+  in peaks
+- GMS -- lesional skin, scaled to the number of reads in peaks
+- GMS_% -- percent of peaks in overlap from the total number of peaks detected for
+  lesional skin
 
 
+| minlength  | GM   | GMS  | GMS_% | LS  | LSS | LSS_% |
+| ---------- | ---- | ---- | ----- | --- | --- | ----- |
+| minlen 10  | 3137 | 2691 | 7.32  | 474 | 372 | 1.03  |
+| minlen 50  | 2918 | 2519 | 6.85  | 380 | 323 | 0.89  |
+| minlen 75  | 2735 | 2368 | 6.44  | 319 | 286 | 0.79  |
+| minlen 100 | 2552 | 2212 | 6.02  | 259 | 260 | 0.72  |
+| minlen 125 | 2370 | 2041 | 5.55  | 216 | 221 | 0.61  |
+| minlen 150 | 2153 | 1838 | 5.00  | 176 | 182 | 0.50  |
+| minlen 175 | 1904 | 1609 | 4.38  | 139 | 157 | 0.43  |
+| minlen 200 | 1585 | 1353 | 3.68  | 99  | 124 | 0.34  |
+
+### Results: examples
+
+
+### Future tasks
 
 
