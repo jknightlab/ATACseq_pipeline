@@ -148,13 +148,13 @@ we can see that the results are very restricted.
 
 Red box on the left indicates a peak which should have been identified as common but were not (probably due to lower signal in Jknight monocytes). Red box on the right indicates a peak which should have been identified as specific for Jknight monocytes.
 
-|   |   |
-| - | - |
-| h |  ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png) |
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png)
 
-|    |    |
-| -- | -- |
-| hi | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png) |
+### Intermediate conclusion
+
+`macs2 bdgdiff` might not be the best tool to identify common and
+condition-specific peaks in ATAC-Seq data. We will look for a better
+tool to do that.
 
 
 ### Future tasks
