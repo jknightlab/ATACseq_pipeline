@@ -42,6 +42,8 @@ nt changed.
   lesional skin) and `--depth2 943409` (number of reads mapped to peaks in
   non-lesional skip).
 
+## Part 1: changing minimal length of overlap
+
 ### Results: statistics
 
 In the table below the overlap (number of common peaks) between jknight monocytes
@@ -90,7 +92,6 @@ Width and background noise matter more than the height of the peak:
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/two_peaks.png)
 
 
-
 ### Conclusions (*very* primary)
 
 1. We have to scale the data, but we are not sure whether the current
@@ -100,6 +101,49 @@ peaks (around 10% rather than 90% for the same cell types generated in different
 labs).
 3. Both height, width and the background noise contribute to the decision whether
 a peak will be reported as overlap.
+
+
+## Part 2: changing likelihood
+
+
+### Results: number of overlapping peaks with different likelihood ratios
+
+This table contains number of peaks overlapping between monocyte data
+generated at Jknight lab and at Greenleaf lab (hence ``GM''. Scaling was used to
+make samples comparable (hence ``S''). Column 4 contains percent of total
+peaks identified in Greenleaf monocytes that were in overlap with Jknight
+monocyte peaks (hence ``%'').
+
+| likelihood | minlength  | GMS  | GMS_% |
+| ---------- | ---------- | ---- | ----- |
+| 1          | minlen 75  | 8082 | 21.98 |
+| 1          | minlen 100 | 7725 | 21.01 |
+| 1          | minlen 125 | 7334 | 19.95 |
+| 1          | minlen 150 | 6901 | 18.77 |
+|            |            |      |       |
+| 1.5        | minlen 75  | 5489 | 14.93 |
+| 1.5        | minlen 100 | 5210 | 14.17 |
+| 1.5        | minlen 125 | 4904 | 13.34 |
+| 1.5        | minlen 150 | 4553 | 12.38 |
+|            |            |      |       |
+| 2          | minlen 75  | 3921 | 10.66 |
+| 2          | minlen 100 | 3708 | 10.08 |
+| 2          | minlen 125 | 3469 |  9.43 |
+| 2          | minlen 150 | 3224 |  8.77 |
+|            |            |      |       |
+| 2.5        | minlen 75  | 3030 |  8.24 |
+| 2.5        | minlen 100 | 2870 |  7.80 |
+| 2.5        | minlen 125 | 2663 |  7.24 |
+| 2.5        | minlen 150 | 2420 |  6.58 |
+
+We can see from the table that even with mild cutoff for the likelihood
+ratio (e.g., **1**) we can see only 20% peaks in overlap between the
+same cell line (monocyte CD14+).
+
+### Results: examples
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png)
+
 
 ### Future tasks
 
