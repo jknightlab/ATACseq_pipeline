@@ -157,14 +157,39 @@ condition-specific peaks in ATAC-Seq data. We will look for a better
 tool to do that.
 
 
+### Results: comparing skin and Jknight monocytes
+
+Selecting minimal required overlap for peaks to be considered "common" **75 bp**
+and likelihood ratio **1.5**, we counted number of peaks common/condition specific
+for:
+
+- lesional vs non-lesional skin (L_vs_nonL in the table)
+- lesional skin vs monocytes (L_vs_mono in the table)
+- non-lesional skin vs monocytes (nonL_vs_mono)
+
+|            | L_vs_nonL   | L_vs_mono    | nonL_vs_mono |
+| ---------- | ----------- | ------------ | ------------ | 
+| cond1 only | 0           | 580 (1.6%)   | 292 (0.77%)  |
+| cond2 only | 0           | 180 (0.49%)  | 464 (1.23%)  |
+| common     | 756 (2.09%) | 1440 (3.97%) | 875 (2.33%)  |
+
+
+## Conclusions
+
+Such a low overlap between samples and low percentage of condition-specific peaks
+strongly indicates that `macs2` is not ideal for performing statistically valid
+comparisons of peaks called in different samples. This might be happening due to:
+
+- not perfect scaling (so we will try to normalize the peaks upfront nd run `macs2 bdgdiff`
+  on normalized peaks);
+- it is more likely that `macs2 bdgdiff` is not suitable for comparing ATAC-like data.
+  It was initially designed to compare ChIP-Seq samples which always have a file with
+  control background signal to model noise of ChIP experiment. Since we do not generate
+  a file with such control background noise, `macs2 bdgdiff` might not be able to design
+  the background signal properly and identify common/specific peaks adequately.
+
+
 ### Future tasks
 
 1. Find out the best way of scaling/normalizing the data.
-2. The remaining comparisons (vs non-lesional; Greenleaf vs lesional skin).
-3. Look for good examples (skin-specific peaks, "house-keeping", monocyte-specific
-peaks, stable peaks).
-4. Find out the best statistical threshold (perhaps we should take a lower threshold
-for likelyhood ratio, as the current likelyhood ratio was designed for ChIP-Seq peaks,
-which are expected to generate cleaner signal).
-5. Find not only common, but also condition-specific peaks.
-
+2. Look for other tools to compare ATAC-Seq samples.
