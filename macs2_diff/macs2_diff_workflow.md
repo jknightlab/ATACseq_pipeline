@@ -144,6 +144,8 @@ same cell line (monocyte CD14+).
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png =100x20)
 
+<img src="https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png" alt="Drawing" style="width: 200px;"/>
+
 
 ### Future tasks
 
