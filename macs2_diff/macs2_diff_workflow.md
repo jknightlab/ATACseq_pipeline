@@ -142,9 +142,13 @@ same cell line (monocyte CD14+).
 
 ### Results: examples
 
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png =100x20)
+This figure shows peaks identified as common or condition-specific using
+the most relaxed cutoffs for both minlength and likelihood ratio. Still,
+we can see that the results are very restricted.
 
-<img src="https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png" alt="Drawing" style="width: 20px;"/>
+|    |    |
+| -- | -- |
+| Red box on the left indicates a peak which should have been identified as common but were not (probably due to lower signal in Jknight monocytes). Red box on the right indicates a peak which should have been identified as specific for Jknight monocytes. | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png) |
 
 
 ### Future tasks
