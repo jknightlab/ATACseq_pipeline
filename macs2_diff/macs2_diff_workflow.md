@@ -148,6 +148,10 @@ we can see that the results are very restricted.
 
 Red box on the left indicates a peak which should have been identified as common but were not (probably due to lower signal in Jknight monocytes). Red box on the right indicates a peak which should have been identified as specific for Jknight monocytes.
 
+|   |   |
+| - | - |
+| h |  ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png) |
+
 |    |    |
 | -- | -- |
 | hi | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/macs2_diff/example_imperfections_macs2.png) |
