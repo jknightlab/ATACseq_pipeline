@@ -111,7 +111,13 @@ average for two input samples)
 - number of differentially called peaks per functional category
 
 
+### ToDo
 
+1. while running the pipeline, generate a log/stats/results file
+   containing all the info (metrics' values) mentioned above
+2. deside on some ultimate/most important quality control measures
+3. perform peak calling with F-Seq and Hotspot and compare the results
+4. identifying differentially called peaks -- try edgeR and DESeq
 
 
 #### Designed by Irina Pulyakhina irina@well.ox.ac.uk
