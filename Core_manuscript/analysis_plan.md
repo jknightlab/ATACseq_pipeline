@@ -66,6 +66,13 @@ assess peaks which were differentially called in each
 pair of samples (using `macs2 diffpeak`, please scroll
 down for more detail).
 
+#### Assesing sample quality on its own
+
+We need to come up with some cut-offs to give people a
+reference point of what is considered **good** and what is
+considered **bad** quality of the sample. This should probably
+be done after we analyze all the samples.
+
 #### Technical comparison of quality
 
 Metrics to compare:
