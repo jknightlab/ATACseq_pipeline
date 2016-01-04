@@ -115,9 +115,11 @@ average for two input samples)
 
 1. while running the pipeline, generate a log/stats/results file
    containing all the info (metrics' values) mentioned above
-2. deside on some ultimate/most important quality control measures
+2. decide on some ultimate/most important quality control measures
 3. perform peak calling with F-Seq and Hotspot and compare the results
 4. identifying differentially called peaks -- try edgeR and DESeq
+5. read a bit more on how ChIP-Seq samples are compared (and maybe use
+   some of the suggested ways of comparison).
 
 
 #### Designed by Irina Pulyakhina irina@well.ox.ac.uk
