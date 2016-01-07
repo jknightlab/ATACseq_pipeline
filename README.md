@@ -1,7 +1,8 @@
-ATAC-Seq pipeline
+PineChrom -- ATAC-Seq analysis pipeline
 --------------------------------------
 
-Pipeline to analyze ATAC-Seq data.
+**Pi**peli**ne** for **chrom**atin analysis using ATAC-Seq,
+a pipeline to analyze ATAC-Seq data.
 
 ### Usage
 
