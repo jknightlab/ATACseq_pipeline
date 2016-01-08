@@ -35,13 +35,6 @@ and `call-summits` directly influences the number, width and height of called pe
 |     |     |
 | --- | --- |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_macs2_number_of_peaks.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_macs2_peak_width.png) |
-| ![alt text](https://github.com/jknightlab/hussein_rnaseq/blob/master/mapped_reads_nodup.png) |   ![alt text](https://github.com/jknightlab/hussein_rnaseq/blob/master/reads_mapped_to_known_exons.png)|
-
-
-
-
-
-
 
 
 #### What is a shifting model and `extsize`
@@ -73,14 +66,12 @@ A UCSC session with coverage of one K562 fresh sample (20150818_Bulk_ATAC_K562_1
 
 Examples:
 
-fresh1_extsize_SPOPL_double_peak.png
-
-
 |     |     |
 | --- | --- |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_ASCC3.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_intergenic.png) |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_RPE_prom.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_triple_peak_low_coverage.png) |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_double_peak.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_mult_peaks.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_SPOPL_double_peak.png) |   |
 
 
 
