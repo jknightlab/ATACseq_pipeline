@@ -1,3 +1,4 @@
+#Pipeline for qc
 library(ggplot2)
 
 args<-commandArgs(TRUE)
