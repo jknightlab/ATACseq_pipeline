@@ -82,13 +82,9 @@ These files contains the peaks corresponding to open chromatin sites asayed usin
 These files have been downloaded from the Epigenome Roadmap with the ID E_057 and I think it is the same data 
 that the UW tracks in ENCODE: http://egg2.wustl.edu/roadmap/data/byFileType/peaks/consolidated/narrowPeak/
 
-<<<<<<< HEAD
 The narrowPeak file  contains the peak calling combined for the different repeats (usually 2) wich have been called 
 using MACS2 and default qval (0.01), same software and parametres that we are currently using. 
-=======
-The narrowPeak file  contains the peak calling combined for the different repeats (usually 2) which have been called 
-using MACS2 and default qval (0.01), which is the same software and parametres we are currently using. 
->>>>>>> f40a6e4fe7b7ee5ddfb945bcddc1044522921cdc
+
 
 Bed files (containing BAM file type of data from alignments) and wig Files for each repeat can also be downloaded 
 from http://genboree.org/EdaccData/Release-9/experiment-sample/Chromatin_Accessibility/CD14_Primary_Cells/.
@@ -115,11 +111,11 @@ The modified files are named using GAT as preffix: GAT_ID_UW_DNase.macs2.narrowP
 *2. Duke University DHS*
 
 Data can be retrieved via the UCSC website Table browser the Pk file Regions of enriched signal in DNaseI HS experiments. 
-Peaks were called based on signals created using [F-Seq](http://www.ncbi.nlm.nih.gov/pubmed/18784119), a software program developed at Duke (Boyle et al., 2008b). 
+Peaks were called based on signals created using [F-Seq](http://www.ncbi.nlm.nih.gov/pubmed/18784119), a software program developed 
+at Duke (Boyle et al., 2008b). 
 
 Significant regions were determined by fitting the data to a gamma distribution to calculate p-values. Contiguous 
-regions 
-where p-values were below a 0.05/0.01 threshold were considered significant. 
+regions where p-values were below a 0.05/0.01 threshold were considered significant. 
 
 Peak files are the results of pooled replicates. It is quite confussing the way it is explained.
 
@@ -134,7 +130,7 @@ performed. Files preffix for these files is GAT.
 
 
 
-###2.GAT workspace file
+### 2.GAT workspace file
 
 This is a file containing the human genome size hg19 build ungapped, which means it contains only the regions that have
 been properly assembled and not those which have not been able to be uneqivocally mapped.
@@ -148,7 +144,7 @@ The file is named contigs_ungapped.bed
 ---
 
 
-###3.ENSEMBLE transcription start sites (TSS) coordinates
+### 3.ENSEMBLE transcription start sites (TSS) coordinates
 
 This file  contains all the positions identidied as transcription start sites by ENSEMBL using the hg37 build. 
 It was provided by Silvia Salatino (Core Genomics).
