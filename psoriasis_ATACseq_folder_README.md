@@ -76,7 +76,7 @@ The suffix name for these files is: ID_18_core_K27ac_stateno.bed
 
 **ENCODE DNase-I hypersensitivity peak files**
 
-
+These files contains the peaks corresponding to open chromatin sites asayed using DNase-I hypersensitivity technique.
 ---
 
 *1. University of Washington (UW) DHS*
@@ -85,19 +85,24 @@ These files have been downloaded from the Epigenome Roadmap with the ID E_057 an
 that the UW tracks in ENCODE: http://egg2.wustl.edu/roadmap/data/byFileType/peaks/consolidated/narrowPeak/
 
 The narrowPeak file  contains the peak calling combined for the different repeats (usually 2) wich have been called 
-using MACS2 and default qval (0.01), which is the same software and parametres we are currently using. 
+using MACS2 and default qval (0.01), same software and parametres that we are currently using. 
 
 Bed files (containing BAM file type of data from alignments) and wig Files for each repeat can also be downloaded 
 from http://genboree.org/EdaccData/Release-9/experiment-sample/Chromatin_Accessibility/CD14_Primary_Cells/.
 
 The ID for the different cell types is the same that the previously specified for the chromatin segmentation
-files. The suffix name for these files is: ID_UW_DNase.macs2.narrowPeak.
+data. 
 
-In order to be able to use the file for analysis using the Genomic Association Tester (GAT) software some formating 
-has been necessary.
-The modified files only contain 4 columns: chromosome name, start, end and ID (a consensus name which is the same for 
-all the peaks).
-The output files are named using GAT as preffix: GAT_ID_UW_DNase.macs2.narrowPeak.
+The suffix name for the files containing this type of data is: ID_UW_DNase.macs2.narrowPeak.
+
+In order to be able to use the files for analysis using the Genomic Association Tester (GAT) software, some formating 
+to the narrow.Peak file has been necessary.
+
+The modified files contain the first 3 columns of the narrow.Peak file (chromosome name, start of the peak and end of the peak) 
+and a 4th column which is a description of which cells and experiment the peaks come from e.g CD14_UW. In order GAT performs the
+overlap and enrichment analysis appropriately the name of the 4th column needs to be the same for all the peaks.
+
+The modified files are named using GAT as preffix: GAT_ID_UW_DNase.macs2.narrowPeak.
 
 
 ---
