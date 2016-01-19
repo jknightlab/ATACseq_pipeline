@@ -14,7 +14,7 @@
 All ATAC-seq data generated for the psoriasis project using blood and skin from patients and controls is stored 
 in the following directory: /well/jknight/ATACseq_all_projects/Psoriasis
 
-Under this directory there are different folders containing either the the analysis of the data for the different 
+Under this directory there are different folders containing either the analysis of the data for the different 
 samples (with appropriate ID, so far none) as well as other relevant files used in the analysis.
 
 The folders which can be currently found are:
@@ -56,11 +56,9 @@ They are bed files containing chromosome number, starting position, end position
 
 The legend to interpret those labels can be found at:
 
-http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/imputed12marks/jointModel/final/
-labelmap_25_imputed.tab
+http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/imputed12marks/jointModel/final/labelmap_25_imputed.tab
 
-http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/imputed12marks/jointModel/final/
-annotation_25_imputed12marks.txt
+http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/imputed12marks/jointModel/final/annotation_25_imputed12marks.txt
 
 
 The ID for the different cell types are as follows:
@@ -84,8 +82,13 @@ These files contains the peaks corresponding to open chromatin sites asayed usin
 These files have been downloaded from the Epigenome Roadmap with the ID E_057 and I think it is the same data 
 that the UW tracks in ENCODE: http://egg2.wustl.edu/roadmap/data/byFileType/peaks/consolidated/narrowPeak/
 
+<<<<<<< HEAD
 The narrowPeak file  contains the peak calling combined for the different repeats (usually 2) wich have been called 
 using MACS2 and default qval (0.01), same software and parametres that we are currently using. 
+=======
+The narrowPeak file  contains the peak calling combined for the different repeats (usually 2) which have been called 
+using MACS2 and default qval (0.01), which is the same software and parametres we are currently using. 
+>>>>>>> f40a6e4fe7b7ee5ddfb945bcddc1044522921cdc
 
 Bed files (containing BAM file type of data from alignments) and wig Files for each repeat can also be downloaded 
 from http://genboree.org/EdaccData/Release-9/experiment-sample/Chromatin_Accessibility/CD14_Primary_Cells/.
@@ -112,7 +115,7 @@ The modified files are named using GAT as preffix: GAT_ID_UW_DNase.macs2.narrowP
 *2. Duke University DHS*
 
 Data can be retrieved via the UCSC website Table browser the Pk file Regions of enriched signal in DNaseI HS experiments. 
-Peaks were called based on signals created using F-Seq, a software program developed at Duke (Boyle et al., 2008b). 
+Peaks were called based on signals created using [F-Seq](http://www.ncbi.nlm.nih.gov/pubmed/18784119), a software program developed at Duke (Boyle et al., 2008b). 
 
 Significant regions were determined by fitting the data to a gamma distribution to calculate p-values. Contiguous 
 regions 
@@ -148,13 +151,13 @@ The file is named contigs_ungapped.bed
 ###3.ENSEMBLE transcription start sites (TSS) coordinates
 
 This file  contains all the positions identidied as transcription start sites by ENSEMBL using the hg37 build. 
-It was provided by Silvia (Core)
+It was provided by Silvia Salatino (Core Genomics).
 
 A similar file can be downloaded using the UCSC Table Browser (Genes and gene predictions, Ensmbl genes). The output file 
-contains different features of the genes and the TSS (labelled as txStart) can be retrieved. However this file contains the 
+contains different features of the genes and the TSS (labelled as txStart) can be retrieved. However, this file contains the 
 gene names with the ENS ID which would need to be converted.
 
-The file here stored is a bed file containing chromosome name, strand (-1 or 1), TSS coordinates and associated gene name.
+The file stored here is a bed file containing chromosome name, strand (-1 or 1), TSS coordinates and an associated gene name.
 
 The name of the file is Ensembl_TSS_GRCh37.txt.gz
 
