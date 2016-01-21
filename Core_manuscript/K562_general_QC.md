@@ -57,7 +57,7 @@ such high duplication rate. Three fresh K562 replicates from the same sample
 will be re-sequenced on HiSeq 4000 to confirm this observation.
 
 
-[!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.mapped_reads.png)
+[!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562.mapped_reads.png)
 
 
 **2. Fragment size**
