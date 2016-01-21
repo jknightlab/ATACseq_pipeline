@@ -57,25 +57,16 @@ such high duplication rate. Three fresh K562 replicates from the same sample
 will be re-sequenced on HiSeq 4000 to confirm this observation.
 
 
-
-
-| number of good quality reads |
-| ---------------------------- |
-| [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.mapped_reads.png) |
+[!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.mapped_reads.png)
 
 
 **2. Fragment size**
 
 
-| Biological process | Molecular function |
-| ------------------ | ------------------ |
-|  [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.min_frag_len.png) | [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.median_frag_len.png) |
-
-
-|     |     |
-| --- | --- |
-| |   |
-| [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.max_frag_len.png) |  [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.average_frag_len.png) |
+ [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.min_frag_len.png)
+ [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.median_frag_len.png)
+ [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.max_frag_len.png)
+ [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.average_frag_len.png)
 
 
 We can see that fragment size distribution is similar for fresh and frozen
