@@ -108,9 +108,53 @@ highest for frozen, reasonably high for fresh and the lowest for fixed samples
 (~170 bp compared to ~230). Once again, that means that the long fragments
 present in fixed samples do not contribute much.
 
+**4. Reproducibility of peaks**
+
+When we look at the number of peaks common for different replicates within one
+condition, we can see that 70% of peaks in frozen are common for all three
+replicates; and 60% of peaks in fresh are common for all three replicates.
+However, when we look at fixed cells, only 30% of peaks are common in
+fixed_day3 and only 10% of peaks are common in fixed_day7.
+
+When we look at the number of peaks common between ATAC and publicly available
+DNase data for K562, we can see that 80-90% of peaks are common between ATAC
+and DNase for fresh and frozen; however, we observe only 10-40% overlap between
+the peaks identified in DNase and fixed ATAC samples.
+
+**5. Comparison of peaks under different conditions**
+
+To be added by Jason.
+
+
+**General conclusion**
+
+1. We observe that fresh, frozen and fixed samples produced an ATAC-like
+fragment length distribution and reasonable number of good quality reads.
+Average fragment length is much higher for fresh and frozen samples (450-500 bp
+compared to 320-370 bp). However, we would like to address fresh samples once
+more, as we expected more good quality reads from those samples.
+
+2. Normalized number of peaks is the highest for fresh samples (comparable for
+frozen). Intensity of peaks (number of reads mapped to peaks) and average peak
+width is the highest for frozen samples (comparable for fresh). Fixed samples
+show less peaks with lower intensity and higher variability across replicates.
+
+3. Peaks in fresh and frozen samples are much more reproducible than peaks in
+fixed samples (>60% against <40%). Peaks in frozen samples are a bit more
+consistent when comparing three replicates; peaks in fresh samples are a bit
+more consistent when comparing with DNase samples. However, in this respect the
+difference between the results generated from fresh and frozen samples are
+minor.
+
+4. Signal-to-noise ratio shows that fresh and frozen samples have a very
+similar signal strength and are much cleaner than fixed samples, which look
+much noisier.
+
+5. Overall, it looks like fresh and frozen are worth further exploration, while
+fixed samples provide a very noisy, not reproducible signal.
 
 
 
 
-
-
+--------------------
+#### Developed by Irina Pulyakhina irina@well.ox.ac.uk
