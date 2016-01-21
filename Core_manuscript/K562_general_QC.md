@@ -57,16 +57,16 @@ such high duplication rate. Three fresh K562 replicates from the same sample
 will be re-sequenced on HiSeq 4000 to confirm this observation.
 
 
-[!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562.mapped_reads.png)
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562.mapped_reads.png)
 
 
 **2. Fragment size**
 
 
- [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.min_frag_len.png)
- [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.median_frag_len.png)
- [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.max_frag_len.png)
- [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.average_frag_len.png)
+ ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.min_frag_len.png)
+ ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.median_frag_len.png)
+ ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.max_frag_len.png)
+ ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.average_frag_len.png)
 
 
 We can see that fragment size distribution is similar for fresh and frozen
@@ -98,8 +98,8 @@ can conclude that long fragments are not highly abundant in fixed samples.
 
 |     |     |
 | --- | --- |
-| [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.num_peaks.normalized.png) |  [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.num_peaks_per_chrom.png) |
-| [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.reads_in_peaks.png) |    |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.num_peaks.normalized.png) |  ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.num_peaks_per_chrom.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.reads_in_peaks.png) |    |
 
 As can be appreciated from the boxplots mentioned above, number of peaks called
 in each condition (when normalized by the number of mapped reads) is the
@@ -113,7 +113,7 @@ in fixed samples is lower and more variable across the replicates.
 
 |     |     |
 | --- | --- |
-| [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.signal_to_noise.png) | [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.peak_width.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.signal_to_noise.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.peak_width.png) |
 
 Signal to noise ratio is a measure introduced by us to access the quality of
 the ATAC experiment -- it calculates the number of reads mapped *on target* (to
@@ -132,7 +132,7 @@ present in fixed samples do not contribute much.
 
 |     |     |
 | --- | --- |
-| [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.overlap_across_replicates.png) | [!alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.overlap_with_DNase.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.overlap_across_replicates.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.overlap_with_DNase.png) |
 
 
 When we look at the number of peaks common for different replicates within one
