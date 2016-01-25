@@ -79,6 +79,13 @@ for the other three conditions.
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragment_size_comparison.png)
 
+
+|       |       |
+| ----- | ----- |
+| Greenleaf ATAC dataset | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/Greenleaf_fragments.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/fresh_fragm.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/frozen_fragm.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/fixed3_fragm.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/fixed7_fragm.png) |
+
 As can be appriciated from the boxplots mentioned above, minimum fragment
 length is lower and less variable in fresh than in frozen/fixed samples. Median
 fragment length is the highest and most variable for fixed_day7 and the maximum
