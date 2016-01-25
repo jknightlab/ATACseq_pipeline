@@ -79,6 +79,17 @@ for the other three conditions.
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragment_size_comparison.png)
 
+When we look at the distribution of fragment length put on the same Y axis and
+compare it with the distribution of fragment sizes in Greenleaf dataset, we can
+see that fresh sample does not have a sharp narrow peak around 50bp fragment
+length (probably due to the longer read length -- 100 bp instead of 50 bp, as
+in Greenleaf and frozen/fixed datasets). We also notice that the maximum
+fragment length is similar in frozen and Greenleaf datasets and shorter  in
+fresh dataset. Fixed cells do not produce a peak around 50bp, have a more
+pronounced nucleosomal signal (deeper drops between the peaks at nucleosomal
+sizes), contain longer fragments (longer than 1 kB). Overall, the profile
+generated using frozen dataset is the closest to the profile of Greenleaf ATAC
+data.
 
 |       |       |
 | ----- | ----- |
