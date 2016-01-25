@@ -97,7 +97,7 @@ data.
 
 |       |       |
 | ----- | ----- |
-r| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/fresh_fragm.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/frozen_fragm.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/fresh_fragm.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/frozen_fragm.png) |r
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/fixed3_fragm.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/fixed7_fragm.png) |
 
 As can be appriciated from the boxplots mentioned above, minimum fragment
