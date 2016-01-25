@@ -147,7 +147,17 @@ the peaks identified in DNase and fixed ATAC samples.
 
 **5. Comparison of peaks under different conditions**
 
-To be added by Jason.
+To compare different conditions:
+
+- we created a summary peak list per condition using `bedtools intersect` and
+  only peaks present in all three replicates were considered. The same peak in
+  all three conditions has to have at least 1 bp overlap.
+- comparing two conditions: the summary peaks have to be 1 bp (or 50% of rach
+  peak length).
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/Macs2_venns-1bp.png)
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/Macs2_venns-50per.png)
 
 
 **General conclusion**
