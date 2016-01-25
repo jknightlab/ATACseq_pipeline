@@ -91,9 +91,10 @@ sizes), contain longer fragments (longer than 1 kB). Overall, the profile
 generated using frozen dataset is the closest to the profile of Greenleaf ATAC
 data.
 
-|       |       |
+|       | Greenleaf ATAC dataset |
 | ----- | ----- |
-| Greenleaf ATAC dataset | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/Greenleaf_fragments.png) |
+|       | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/Greenleaf_fragments.png) |
+|       |       |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/fresh_fragm.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/frozen_fragm.png) |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/fixed3_fragm.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragm_size/fixed7_fragm.png) |
 
