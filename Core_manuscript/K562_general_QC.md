@@ -177,12 +177,12 @@ To compare different conditions:
 - comparing two conditions: the summary peaks have to be 1 bp (or 50% of rach
   peak length).
 
-|    |
-| -- |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/Macs2_venns-1bp.png) |
-
-The overlap of peaks with minimum 50% overlap between two peaks can be found
+|          |           |
+| -------- | --------- |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/Macs2_venns-1bp.png) | The overlap of peaks with minimum 50% overlap between two peaks can be found
 [here](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/Macs2_venns-50per.png).
+ |
+
 
 
 **General conclusion**
