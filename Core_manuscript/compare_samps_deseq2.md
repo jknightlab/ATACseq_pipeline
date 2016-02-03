@@ -73,12 +73,25 @@ supposed to be differentially expressed are scaled to the same level:
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/fresh_frozen.raw_vs_norm.png)
 
 
+**Examples**
+
+These are the examples of how `DESeq2` performed on the ATAC data. These are
+the peaks which we identified as significantly different even though they were
+present in both samples -- so our previously used approach with `bedtools`
+would have considered them common and not different for two samples. More
+can be seen in this
+[UCSC session](https://genome-euro.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=pulyakhina&hgS_otherUserSessionName=K562_fresh_frozen_DESeq2).
 
 
+|    | Example |
+| -- | ------- |
+|    | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example1.png) |
+|    | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example2.png) |
+|    | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example3.png) |
 
 
+**ToDo**
 
-
-
-
+1. Compare the performance on union vs intersection of peaks
+2. Do not restrict to the peaks common for the two samples, generate a pile of peaks from two conditions.
 
