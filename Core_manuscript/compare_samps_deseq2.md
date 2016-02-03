@@ -82,12 +82,14 @@ would have considered them common and not different for two samples. More
 can be seen in this
 [UCSC session](https://genome-euro.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=pulyakhina&hgS_otherUserSessionName=K562_fresh_frozen_DESeq2).
 
-
-|    | Example |
-| -- | ------- |
-|    | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example1.png) |
-|    | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example2.png) |
-|    | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example3.png) |
+*Example 1:*
+ ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example1.png)
+ 
+*Example 2:*
+ ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example2.png)
+ 
+*Example 3:*
+ ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example3.png) 
 
 
 **ToDo**
