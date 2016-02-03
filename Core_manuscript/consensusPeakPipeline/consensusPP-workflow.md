@@ -2,8 +2,9 @@
 JHendry, 2016/02/03
 
 #### 1. Create consensus peak calls from narrow peak files.
-  Script: run_intrsctNPFs.sh
-  Requirements: generate-IntrsctUnnMed.R
+
+  - Script: run_intrsctNPFs.sh
+  - Requirements: generate-IntrsctUnnMed.R
   
   Three narrow peak files (.npf), contained within a single directory are
   combined into consensus peak files (.bed). Three types of consensus
