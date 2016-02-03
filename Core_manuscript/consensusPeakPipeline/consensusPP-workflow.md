@@ -5,6 +5,12 @@ JHendry, 2016/02/03
 
   - Script: run_intrsctNPFs.sh
   - Requirements: generate-IntrsctUnnMed.R
+
+
+```
+Script: run_intrsctNPFs.sh
+Requirements: generate-IntrsctUnnMed.R
+```
   
   Three narrow peak files (.npf), contained within a single directory are
   combined into consensus peak files (.bed). Three types of consensus
