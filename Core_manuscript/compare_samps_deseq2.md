@@ -29,7 +29,7 @@ frozen cells).
 
 Hereby we explored how `DESeq2` performs on ATAC data.
 
-#### DESeq2 for peaks common for fresh and frozen samples
+### DESeq2 for peaks common for fresh and frozen samples
 
 We started testing `DESeq2` of fresh and frozen K562 samples, as they seemed to
 be of the best quality:
@@ -93,6 +93,43 @@ can be seen in this
 *Example 3:*
 
  ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example3.png) 
+
+
+### DESeq2 for full peak list
+
+For a real biological (and technical) comparison we will be using a full peak list: peaks common for two conditions and peaks called in one sample (unique per condition). In order to get the full peak set:
+```
+cat /well/bsgjknight/Jason_analysis/atac_k562/macs_frozen/macs_frozen.union.bed \
+    /well/bsgjknight/Jason_analysis/atac_k562/macs_fresh/macs_fresh.union.bed \
+    | sort -k1,1 -k2,2n > macs_fresh_frozen.pile.sorted.bed
+
+bedtools merge -i macs_fresh_frozen.pile.sorted.bed > macs_fresh_frozen.full_list.bed
+
+echo -e "peaks\tfresh_1\tfresh_2\tfresh_3\tfrozen_1\tfrozen_2\tfrozen_3" > \
+    full_peak_list.fresh_vs_frozen.counts.txt
+
+for i in `cat macs_fresh_frozen.full_list.bed | awk '{print $1 ":" $2 "-" $3}' | sed s/chr//g`
+do
+    fresh1=`samtools view ../20150818_Bulk_ATAC_K562_1.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    fresh2=`samtools view ../20150818_Bulk_ATAC_K562_2.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    fresh3=`samtools view ../20150818_Bulk_ATAC_K562_3.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    frozen1=`samtools view ../20151216_Bulk_K562_frozen_1.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    frozen2=`samtools view ../20151216_Bulk_K562_frozen_2.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    frozen3=`samtools view ../20151216_Bulk_K562_frozen_3.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    echo -e "peak_$i\t$fresh1\t$fresh2\t$fresh3\t$frozen1\t$frozen2\t$frozen3"
+done >> full_peak_list.fresh_vs_frozen.counts.txt
+
+Rscript ./run_deseq2_atac.R \
+    full_peak_list.fresh_vs_frozen.counts.txt \
+    union_peaks.fresh_vs_frozen.counts.txt \
+    macs2.fresh_frozen.deseq2
+```
+
+**Examples of peaks unique per condition**
+
+
+
+
 
 
 **ToDo**
