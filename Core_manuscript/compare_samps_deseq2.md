@@ -127,6 +127,60 @@ Rscript ./run_deseq2_atac.R \
 
 **Examples of peaks unique per condition**
 
+### DESeq2 for full list of peaks called in fresh and frozen samples
+
+```
+Working directories:
+
+/well/bsgjknight/Irina_analysis/Sample_comparison/Overlaps
+/well/bsgjknight/Irina_analysis/Sample_comparison/DESeq2.fresh030_vs_frozen030
+```
+
+**Restricted consensus peak list**
+
+First of all, we decided to create restricted lists of peaks common per sample
+(present in all three replicates). Peak calling is by far not optimal and fresh
+samples have low coverage and hence noisy peak calling data, so we are afraid
+that we have too many rubbish peaks in the consensus list, as we only require
+peaks to have 1bp overlap to be called one peak. Using
+[Jason's pipeline](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/consensusPeakPipeline/consensusPP-workflow.md),
+we generated consensus peak lists with minimum 1bp, 25% of peak length (in both
+replicates), 30%, 40%, 50% overlap.
+
+This table contains the summary stats:
+
+| Overlap            | 50.00% | 40.00% | 30.00% | 25.00% | 1bp   |
+| ------------------ | ------ | ------ | ------ | ------ | ------|
+| Intrsct_2          | 8737   | 10274  | 11569  | 12054  | 13826 |
+| Intrsct_3          | 5959   | 7446   | 8759   | 9275   | 11280 |
+|                    |        |        |        |        |       |
+| Consens. intersect | 5959   | 7446   | 8759   | 9275   | 11280 |
+| Consens. median    | 5959   | 7442   | 8656   | 9057   | 10130 |
+| Consens. overlap   | 5952   | 7423   | 8598   | 8969   | 9825  |
+
+Where:
+
+- *Intrsct_2* -- Replicate 1 v. 2 interescting peaks
+- *Intrsct_3* -- Three-way intersecting peaks
+- *Consens. intersect* -- No. Consensus Peaks, Post-merge Intersect
+- *Consens. median* -- No. Consensus Peaks, Post-merge Median
+- *Consens. overlap* -- No. Consensus Peaks, Post-merge Union
+
+|          |           |
+| -------- | --------- |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/fresh_consensus_diff_overlap.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/fresh_consensus_diff_overlap_difference.png)
+ |
+
+We cat see that there is almost no difference in results between the values of
+25% and 30% overlap, so we are at some kind of plato. Therefore we are taking
+30% of peak length as menimum required overlap between two replicates to be
+considered a common/shared peak.
+
+**DESeq2 for restricted consensus peak lists**
+
+Restricted consensus peak lists (with 30% of peak length reciprocally as the
+minimum required overlap) were created for three replicates of fresh and three
+replicates of frozen samples.
 
 
 
@@ -134,6 +188,8 @@ Rscript ./run_deseq2_atac.R \
 
 **ToDo**
 
-1. Compare the performance on union vs intersection of peaks
-2. Do not restrict to the peaks common for the two samples, generate a pile of peaks from two conditions.
+1. DESeq vs DESeq2
+2. What happens when we restrict peaks to the annotation?
 
+------------------------------
+Designed by Irina Pulyakhina, irina@well.ox.ac.uk
