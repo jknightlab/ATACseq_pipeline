@@ -12,7 +12,7 @@ lists between conditions/samples.
 #### 1. Create consensus peak calls from narrow peak files.
 ```
 Script: run_intrsctNPFs.sh
-Requirements: generate-IntrsctUnnMed.R
+Requirements: generate-IntrsctUnnMdn.R
 ```
   
   Three narrow peak files (.npf), contained within a single directory are
