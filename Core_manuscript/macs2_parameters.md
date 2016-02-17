@@ -31,7 +31,7 @@ peaks.
 
 |     |     |
 | --- | --- |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_macs2_number_of_peaks.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_macs2_peak_width.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_macs2_number_of_peaks.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_macs2_peak_width.png) |
 
 
 #### What is a shifting model and `extsize`
@@ -103,10 +103,10 @@ Examples:
 
 |     |     |
 | --- | --- |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_ASCC3.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_intergenic.png) |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_RPE_prom.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_triple_peak_low_coverage.png) |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_double_peak.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_mult_peaks.png) |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_extsize_SPOPL_double_peak.png) |   |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_extsize_ASCC3.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_extsize_intergenic.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_extsize_RPE_prom.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_extsize_triple_peak_low_coverage.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_extsize_double_peak.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_extsize_mult_peaks.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_extsize_SPOPL_double_peak.png) |   |
 
 
 
@@ -148,8 +148,8 @@ Examples:
 
 |     |     |
 | --- | --- |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_sign_coverage20_example2.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_sign_coverage20_example3.png) |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_sign_coverage20_example4.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fresh1_sign_coverage20_examples1.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_sign_coverage20_example2.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_sign_coverage20_example3.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_sign_coverage20_example4.png) |   ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Macs2_params/fresh1_sign_coverage20_examples1.png) |
 
 #### Conclusion on extsize and filtering peaks
 

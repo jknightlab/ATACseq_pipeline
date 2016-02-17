@@ -78,7 +78,7 @@ Fragment size distribution for fixed_day7 is very noisy and variable across
 replicates for fragment sizes between 50 bp and 600 bp, which is not observed
 for the other three conditions.
 
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/fragment_size_comparison.png)
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/fragment_size_comparison.png)
 
 When we look at the distribution of fragment length put on the same Y axis and
 compare it with the distribution of fragment sizes in Greenleaf dataset, we can
