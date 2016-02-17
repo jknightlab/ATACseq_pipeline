@@ -7,11 +7,11 @@ run separately. If you want to run just one module, make sure that you follow
 the instructions on how your input files should be called. **Pinechrom**
 consists of three modules:
 
--- `pinechrom_general` is run per sample, it performs read alignment, filtering
+1) `pinechrom_general` is run per sample, it performs read alignment, filtering
     of mapped reads, quality checks and generates statistical overview of the
     quality, as well as some informative plots;
--- `pinechrom_peaks`
--- `pinechrom_genes`
+2) `pinechrom_peaks`
+3) `pinechrom_genes`
 
 
 #### Module "pinechrom_general"
