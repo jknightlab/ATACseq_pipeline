@@ -95,38 +95,6 @@ can be seen in this
  ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DESeq2/deseq_fresh_vs_frozen.ucsc_example3.png) 
 
 
-### DESeq2 for full peak list
-
-For a real biological (and technical) comparison we will be using a full peak list: peaks common for two conditions and peaks called in one sample (unique per condition). In order to get the full peak set:
-```
-cat /well/bsgjknight/Jason_analysis/atac_k562/macs_frozen/macs_frozen.union.bed \
-    /well/bsgjknight/Jason_analysis/atac_k562/macs_fresh/macs_fresh.union.bed \
-    | sort -k1,1 -k2,2n > macs_fresh_frozen.pile.sorted.bed
-
-bedtools merge -i macs_fresh_frozen.pile.sorted.bed > macs_fresh_frozen.full_list.bed
-
-echo -e "peaks\tfresh_1\tfresh_2\tfresh_3\tfrozen_1\tfrozen_2\tfrozen_3" > \
-    full_peak_list.fresh_vs_frozen.counts.txt
-
-for i in `cat macs_fresh_frozen.full_list.bed | awk '{print $1 ":" $2 "-" $3}' | sed s/chr//g`
-do
-    fresh1=`samtools view ../20150818_Bulk_ATAC_K562_1.dedup.q30f3F12.chr1_X.bam $i | wc -l`
-    fresh2=`samtools view ../20150818_Bulk_ATAC_K562_2.dedup.q30f3F12.chr1_X.bam $i | wc -l`
-    fresh3=`samtools view ../20150818_Bulk_ATAC_K562_3.dedup.q30f3F12.chr1_X.bam $i | wc -l`
-    frozen1=`samtools view ../20151216_Bulk_K562_frozen_1.dedup.q30f3F12.chr1_X.bam $i | wc -l`
-    frozen2=`samtools view ../20151216_Bulk_K562_frozen_2.dedup.q30f3F12.chr1_X.bam $i | wc -l`
-    frozen3=`samtools view ../20151216_Bulk_K562_frozen_3.dedup.q30f3F12.chr1_X.bam $i | wc -l`
-    echo -e "peak_$i\t$fresh1\t$fresh2\t$fresh3\t$frozen1\t$frozen2\t$frozen3"
-done >> full_peak_list.fresh_vs_frozen.counts.txt
-
-Rscript ./run_deseq2_atac.R \
-    full_peak_list.fresh_vs_frozen.counts.txt \
-    union_peaks.fresh_vs_frozen.counts.txt \
-    macs2.fresh_frozen.deseq2
-```
-
-**Examples of peaks unique per condition**
-
 ### DESeq2 for full list of peaks called in fresh and frozen samples
 
 ```
@@ -182,7 +150,57 @@ Restricted consensus peak lists (with 30% of peak length reciprocally as the
 minimum required overlap) were created for three replicates of fresh and three
 replicates of frozen samples.
 
+For a real biological (and technical) comparison we will be using a full peak
+list: peaks common for two conditions and peaks called in one sample (unique
+per condition). In order to get the full peak set:
 
+```
+BEDTOOLS="/apps/well/bedtools/2.24.0/bedtools"
+SAMTOOLS="/apps/well/samtools/1.2/bin/samtools"
+DESEQ2="/well/bsgjknight/Irina_analysis/Sample_comparison/DESeq2.fresh030_vs_frozen030/run_deseq2_atac.R"
+
+fresh_file="/well/bsgjknight/Irina_analysis/Sample_comparison/Overlaps/fresh_npf/bed_030/fresh_npf.union.bed"
+frozen_file="/well/bsgjknight/Irina_analysis/Sample_comparison/Overlaps/frozen_npf/bed_030/frozen_npf.union.bed"
+
+fresh=`echo $fresh_file | sed 's/.*\///g' | sed s/\.bed//g`
+frozen=`echo $frozen_file | sed 's/.*\///g' | sed s/\.bed//g`
+
+cat $fresh_file $frozen_file | \
+    sort -k1,1 -k2,2n \
+    > $fresh.$frozen.restricted.macs.pile.sorted.bed
+
+$BEDTOOLS merge \
+    -d 10 \
+    -i $fresh.$frozen.restricted.macs.pile.sorted.bed \
+    > $fresh.$frozen.merge_10_dist.bed
+
+echo -e "fresh_1\tfresh_2\tfresh_3\tfrozen_1\tfrozen_2\tfrozen_3" > \
+    $fresh.$frozen.full_peak_list.counts.txt
+
+for i in `cat $fresh.$frozen.merge_10_dist.bed | awk '{print $1 ":" $2 "-" $3}' | sed s/chr//g`
+do
+    fresh1=`$SAMTOOLS view ../20150818_Bulk_ATAC_K562_1.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    fresh2=`$SAMTOOLS view ../20150818_Bulk_ATAC_K562_2.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    fresh3=`$SAMTOOLS view ../20150818_Bulk_ATAC_K562_3.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    frozen1=`$SAMTOOLS view ../20151216_Bulk_K562_frozen_1.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    frozen2=`$SAMTOOLS view ../20151216_Bulk_K562_frozen_2.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    frozen3=`$SAMTOOLS view ../20151216_Bulk_K562_frozen_3.dedup.q30f3F12.chr1_X.bam $i | wc -l`
+    echo -e "peak_$i\t$fresh1\t$fresh2\t$fresh3\t$frozen1\t$frozen2\t$frozen3"
+done >> $fresh.$frozen.full_peak_list.counts.txt
+
+module load R/3.2.2
+
+Rscript $DESEQ2 \
+    $fresh.$frozen.full_peak_list.counts.txt \
+    fresh_vs_frozen.colnames.txt \
+    $fresh.$frozen.restricted.deseq2
+
+```
+
+Unfortunately even with a more careful choice of peaks we are not happy with DESeq2 performance.
+It still calls very strange peaks as differentially used and misses some which look like
+differentially used. This is probably happening due to the non-optimal normalization. We will
+try to use DESeq (or even edgeR) instead of DESeq2 and the TMM normalization.
 
 
 
@@ -190,6 +208,7 @@ replicates of frozen samples.
 
 1. DESeq vs DESeq2
 2. What happens when we restrict peaks to the annotation?
+3. edgeR and TMM normalization
 
 ------------------------------
 Designed by Irina Pulyakhina, irina@well.ox.ac.uk
