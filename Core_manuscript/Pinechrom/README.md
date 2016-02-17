@@ -1,8 +1,20 @@
 PineChrom -- ATAC-Seq analysis pipeline
 --------------------------------------
 
-**Pi**peli**ne** for **chrom**atin analysis using ATAC-Seq,
-a pipeline to analyze ATAC-Seq data.
+**Pi**peli**ne** for **chrom**atin analysis using ATAC-Seq, a pipeline to
+analyze ATAC-Seq data. It consists of multipe independant modules that can be
+run separately. If you want to run just one module, make sure that you follow
+the instructions on how your input files should be called. **Pinechrom**
+consists of three modules:
+
+-- `pinechrom_general` is run per sample, it performs read alignment, filtering
+    of mapped reads, quality checks and generates statistical overview of the
+    quality, as well as some informative plots;
+-- `pinechrom_peaks`
+-- `pinechrom_genes`
+
+
+#### Module "pinechrom_general"
 
 This module of **PineChrom** is starting the analysis with
 the filtered *bam* files. It generates *bigwig* files, calls
