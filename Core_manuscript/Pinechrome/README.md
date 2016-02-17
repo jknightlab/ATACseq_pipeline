@@ -18,10 +18,12 @@ pinechrom <BAM_FILENAME> <BAM_LOCATION> <FOLDER>
 where:
 ```
 <BAM_FILENAME>  - name of the bam file without ".bam" (e.g., if
-the bam file is called "sample1.bam", specify "sample" as BAM_FILENAME)
+                  the bam file is called "sample1.bam", specify
+                  "sample" as BAM_FILENAME)
 <BAM_LOCATION>  - full path to the bam file
 <FOLDER>        - name of the output folder; the pipeline will
-create all intermediate and final results and files in that folder
+                  create all intermediate and final results and
+                  files in that folder
 ```
 
 
