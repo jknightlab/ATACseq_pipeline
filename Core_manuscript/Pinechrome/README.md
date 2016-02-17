@@ -12,7 +12,7 @@ statistical reports as tables and figures.
 These are the instructions on how to run the pipeline:
 
 ```
-pinechrom <BAM_FILENAME> <BAM_LOCATION> <FOLDER>
+pinechrom_general <BAM_FILENAME> <BAM_LOCATION> <FOLDER>
 ```
 
 where:
