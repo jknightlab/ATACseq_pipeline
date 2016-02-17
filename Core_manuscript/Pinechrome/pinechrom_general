@@ -1,0 +1,363 @@
+#!/bin/bash
+
+
+echo "START : `date`"
+
+
+# Pre-installed tools
+
+SAMTOOLS="/apps/well/samtools/1.2/bin/samtools"
+PICARD="/apps/well/picard-tools/1.111/picard-Xmx3g"
+BEDTOOLS="/apps/well/bedtools/2.24.0-18-gb0bc5b7/bin/bedtools"
+BEDGRAPH_TO_BIGWIG="/well/jknight/software/rescomp/bin/bedGraphToBigWig"
+GENOME_COVERAGE_BED="/apps/well/bedtools/2.24.0-18-gb0bc5b7/bin/genomeCoverageBed"
+MACS2="/apps/well/python/2.7.8/bin/macs2"
+ATAC_QC="/well/jknight/Scripts/ATACseq_qc.R"
+DIST_BETWEEN_PEAKS="/well/jknight/Scripts/distance_between_regions.pl"
+EXTRACT_FRAGMENTS="/well/jknight/Scripts/bed_extract_fragments.pl"
+BLACKLIST="/well/jknight/reference/wgEncodeDacMapabilityConsensusExcludable.bed"
+
+
+# Input bam file
+
+FILENAME=$1
+BAM_LOCATION=$2
+FOLDER=$3
+
+
+echo "FILENAME=$FILENAME"
+echo "BAM_FLDR=$BAM_LOCATION"
+echo "NEW_FLDR=$FOLDER"
+
+mkdir $FOLDER
+cd $FOLDER
+
+# Creating WIGGLE file
+$SAMTOOLS view \
+    -H $BAM_LOCATION/$FILENAME.bam | \
+    head -26 | \
+    grep SN | \
+    head -24 | \
+    sed s/.*SN\://g | \
+    sed s/LN\://g |
+    awk '{print "chr" $0}' > \
+    $FILENAME.chrom_sizes.txt
+
+echo -n "`date`: Generating bedgraph to create a bigwig file... "
+$GENOME_COVERAGE_BED \
+    -bg \
+    -ibam $BAM_LOCATION/$FILENAME.bam \
+    -split \
+    -g $FILENAME.chrom_sizes.txt > \
+    $FILENAME.bedgraph \
+    2> $FILENAME.stderr.txt
+echo "done."
+
+echo -n "`date`: Sorting bedgraph to create a bigwig file... "
+LC_COLLATE=C
+sort -k1,1 -k2,2n $FILENAME.bedgraph | \
+    awk '{print "chr" $0}' > \
+    $FILENAME.sorted.bedgraph
+echo "done."
+
+echo -n "`date`: Generating bigwig from bedgraph... "
+$BEDGRAPH_TO_BIGWIG \
+    $FILENAME.sorted.bedgraph \
+    $FILENAME.chrom_sizes.txt $FILENAME.bw \
+    2> $FILENAME.stderr.txt
+echo "done".
+
+echo -n "`date`: sorting filtered bam file by name... "
+$SAMTOOLS sort \
+    -n \
+    -T $FILENAME.temp.bam \
+    $BAM_LOCATION/$FILENAME.bam \
+    -o $FILENAME.filtered.name_sort.bam \
+    2> $FILENAME.stderr.txt
+echo "done."
+
+echo -n "`date`: BEDPE Creating bedpe file... "
+$BEDTOOLS bamtobed \
+    -bedpe \
+    -i $FILENAME.filtered.name_sort.bam |
+    awk '{print "chr" $0}' > \
+    $FILENAME.filtered.bedpe.bed \
+    2> $FILENAME.stderr.txt
+echo "done."
+
+echo -n "`date`: Sorting bedpe file... "
+$BEDTOOLS \
+    sort \
+    -i $FILENAME.filtered.bedpe.bed | \
+    grep -v -i 'GL\|NC\|hs' | \
+    awk '$6-$2 > 0 {print $1 "\t" $2 "\t" $6 "\t" $7 }' > \
+    $FILENAME.filtered.bedpe.fragments.bed \
+    2> $FILENAME.stderr.txt
+echo "done."
+
+echo -n "`date`: calling peaks on $FILENAME.bam ... "
+$MACS2 callpeak \
+    --nomodel \
+    -t $BAM_LOCATION/$FILENAME.bam \
+    --name $FILENAME.macs2 \
+    --outdir $FILENAME.macs2_results \
+    --nolambda \
+    --shift 5 \
+    --keep-dup all \
+    --slocal 10000 \
+    --SPMR \
+    --bdg 2> \
+    $FILENAME.stderr.txt
+echo "done."
+
+echo -n "`date`: adding \"chr\" to the list of peaks... "
+cat $FILENAME.macs2_results/$FILENAME.macs2_peaks.narrowPeak | \
+    awk '{print "chr" $0}' > \
+    $FILENAME.macs2_results/$FILENAME.macs2_peaks.chr.narrowPeak
+echo "done."
+
+
+echo -n "`date`: creating a list of peak widths -- for the histogram of peak width... "
+cat $FILENAME.macs2_results/$FILENAME.macs2_peaks.narrowPeak | \
+    awk '{print $3-$2}' > \
+    $FILENAME.peaks_width.hist
+echo "done."
+
+
+echo "QUALITY CONTROL 1 -- Called_peaks / Fragments_per_chromosome"
+
+echo -n "`date`: QC1 -- counting number of called peaks per chromosome... "
+echo -e "Chromosome\tCalled_peaks" > $FILENAME.temp_peaks_per_chrom
+for i in `echo {1..22} X Y`
+do
+    echo -n -e chr$i"\t" >> $FILENAME.temp_peaks_per_chrom
+    cat $FILENAME.macs2_results/$FILENAME.macs2_peaks.chr.narrowPeak | \
+    grep -cP "^chr$i\t" >> \
+    $FILENAME.temp_peaks_per_chrom
+done
+echo "done."
+
+echo -n "`date`: QC1 -- counting number of reads mapped per chromosome... "
+echo -e "Chromosome\tFragments_per_chrom" > $FILENAME.temp_fragm_per_chrom
+for i in `echo {1..22} X Y`
+do
+    echo -n -e chr$i"\t" >> \
+        $FILENAME.temp_fragm_per_chrom
+    cat $FILENAME.filtered.bedpe.fragments.bed | \
+        grep -cP "^chr$i\t" >> \
+        $FILENAME.temp_fragm_per_chrom
+done
+echo "done."
+
+echo "QUALITY CONTROL 2 -- Fragments_in_peaks / Fragments_per_chromosome"
+echo -n "`date`: QC2 -- overlapping fragments with the peak file... "
+$BEDTOOLS intersect \
+    -f 0.10 \
+    -wa \
+    -a $FILENAME.filtered.bedpe.fragments.bed \
+    -b $FILENAME.macs2_results/$FILENAME.macs2_peaks.chr.narrowPeak | \
+    uniq > \
+    $FILENAME.filtered.bedpe.fragments_to_peaks.bed \
+    2> $FILENAME.stderr.txt
+echo "done."
+
+echo -n "`date`: QC2 -- counting number of fragments in peaks per chromosome... "
+echo -e "Chromosome\tFragments_in_peaks" > $FILENAME.temp_fragm_per_peaks
+for i in `echo {1..22} X Y`
+do
+    echo -n -e chr$i"\t" >> \
+        $FILENAME.temp_fragm_per_peaks
+    cat $FILENAME.filtered.bedpe.fragments_to_peaks.bed | \
+        grep -cP "^chr$i\t" >> \
+        $FILENAME.temp_fragm_per_peaks
+done
+echo "done."
+
+echo "QUALITY CONTROL 4 -- Fragments_in_peaks / Fragments_off_peaks_same_size"
+
+echo -n "`date`: Generating off peak genome-wide file... "
+cat $FILENAME.chrom_sizes.txt | \
+    awk '{print $1 "\t1\t" $2}' > \
+    $FILENAME.temp_chrom
+
+$BEDTOOLS subtract \
+    -a $FILENAME.temp_chrom \
+    -b $FILENAME.macs2_results/$FILENAME.macs2_peaks.chr.narrowPeak > \
+    $FILENAME.no_peak.bed \
+    2> $FILENAME.stderr.txt
+echo "done."
+
+echo -n "`date`: Generating regions outside peaks of peak length... "
+echo > $FILENAME.off_peaks.peak_size.bed
+for i in `echo {1..22} X Y`
+do
+    cat $FILENAME.macs2_results/$FILENAME.macs2_peaks.chr.narrowPeak | \
+        grep -P "^chr$i\t" > \
+        peaks.$i.bed
+    cat $FILENAME.no_peak.bed | \
+        grep -P "^chr$i\t" > \
+        no_peaks.$i.bed
+    $EXTRACT_FRAGMENTS \
+        peaks.$i.bed \
+        no_peaks.$i.bed >> \
+        $FILENAME.off_peaks.peak_size.bed
+    rm peaks.$i.bed no_peaks.$i.bed
+done
+echo "done."
+
+echo -n "`date`: Getting reads mapped to regions outside peaks of peak length... "
+$BEDTOOLS intersect \
+    -f 0.10 \
+    -wa \
+    -a $FILENAME.filtered.bedpe.fragments.bed \
+    -b $FILENAME.off_peaks.peak_size.bed | \
+    uniq > \
+    $FILENAME.fragments_to_peaks.peak_length.bed \
+    2> $FILENAME.stderr.txt
+echo "done."
+
+echo -n "`date`: Counting the fragments mapped off peaks... "
+echo -e "Chromosome\tFragments_per_off_peaks_peak_length" > \
+    $FILENAME.temp_fragm_per_off_peaks_peak_length
+for i in `echo {1..22} X Y`
+do
+    echo -n -e chr$i"\t" >> \
+        $FILENAME.temp_fragm_per_off_peaks_peak_length
+    cat $FILENAME.fragments_to_peaks.peak_length.bed | \
+        grep -cP "^chr$i\t" >> \
+        $FILENAME.temp_fragm_per_off_peaks_peak_length
+done
+echo "done."
+
+echo -n "`date`: gathering all intermediate files into $FILENAME.stat.txt... "
+paste \
+    <(awk '{print $0}' $FILENAME.temp_peaks_per_chrom) \
+    <(awk '{print $2}' $FILENAME.temp_fragm_per_peaks) \
+    <(awk '{print $2}' $FILENAME.temp_fragm_per_chrom) \
+    <(awk '{print $2}' $FILENAME.temp_fragm_per_off_peaks_peak_length) > \
+    $FILENAME.stat.txt
+rm $FILENAME.temp*
+echo "done."
+
+echo -n "`date`: generating insertSizeMetric report on filtered data..."
+$PICARD CollectInsertSizeMetrics.jar \
+    VALIDATION_STRINGENCY=LENIENT \
+    ASSUME_SORTED=true \
+    HISTOGRAM_FILE=$FILENAME.filtered.picard_histogram \
+    INPUT=$BAM_LOCATION/$FILENAME.bam \
+    OUTPUT=$FILENAME.filtered.picard_insertSizeMetric_report \
+    2> $FILENAME.stderr.txt
+echo "done."
+
+echo -n "`date`: parsing picard output... "
+cat $FILENAME.filtered.picard_insertSizeMetric_report | \
+    grep -v -P '.*\t.*\t.*\t' | \
+    grep -P '^\d|^insert' > \
+    $FILENAME.filtered.insertSize_hist
+echo "done."
+
+echo -n "`date`: creating plots with quality metrics... "
+Rscript $ATAC_QC \
+    $FILENAME.peaks_width.hist \
+    $FILENAME.stat.txt \
+    $FILENAME.filtered.insertSize_hist \
+    $FILENAME.QC.pdf \
+    2> $FILENAME.stderr.txt
+echo "done."
+
+rm Rplots.pdf
+
+# ======================================================================
+# =                                                                    =
+# =                      GENERATING QC REPORT                          =
+# =                                                                    =
+# ======================================================================
+
+echo -n "`date`: counting number of reads mapped after filtering... "
+echo -n -e "number_mapped_reads_after_filt\t" > $FILENAME.report.txt
+$SAMTOOLS view \
+    -F 4 \
+    $BAM_LOCATION/$FILENAME.bam | \
+    wc -l >> \
+    $FILENAME.report.txt
+echo "done."
+
+MAPPED_READS=`$SAMTOOLS view -F 4 $BAM_LOCATION/$FILENAME.bam | wc -l`
+
+echo -n "`date`: calculating average fragment width... "
+echo -n -e "average_fragm_width\t" >> $FILENAME.report.txt
+NUM_FRAGMS=`cat $FILENAME.peaks_width.hist | wc -l`
+cat $FILENAME.peaks_width.hist | \
+    awk -v var="$NUM_FRAGMS" '{sum += $1} END {print sum/var}' >> \
+    $FILENAME.report.txt
+echo "done."
+
+echo -n "`date`: Counting total number of called peaks... "
+echo -n -e "total_called_peaks\t" >> $FILENAME.report.txt
+cat $FILENAME.stat.txt | \
+    grep -v 'chrY\|Called' | \
+    awk '{sum += $2} END {print sum}' >> \
+    $FILENAME.report.txt
+echo "done."
+
+echo -n "`date`: average peaks per chromosome... "
+echo -n -e "average_peaks_per_chrom\t" >> $FILENAME.report.txt
+cat $FILENAME.stat.txt | \
+    grep -v 'chrY\|Called' | \
+    awk '{sum += $2} END {print sum/23}' >> \
+    $FILENAME.report.txt
+echo "done."
+
+echo -n "`date`: counting number of peaks normalized by the total number of mapped reads... "
+echo -n -e "peaks_norm_mapped_reads\t" >> $FILENAME.report.txt
+cat $FILENAME.stat.txt | \
+    grep -v 'chrY\|Called' | \
+    awk -v var="$MAPPED_READS" '{sum += $2} END {print 1000000*(sum/(var*23))}' >> \
+    $FILENAME.report.txt
+echo "done."
+
+echo -n "`date`: counting number of peaks normalized by the number of reads mapped per chromosome... "
+echo -n -e "peaks_norm_mapped_reads_per_chrom\t" >> $FILENAME.report.txt
+cat $FILENAME.stat.txt | \
+    grep -v 'chrY\|Called' | \
+    awk '{sum += $2/$4} END {print 1000000*(sum/23)}' >> \
+    $FILENAME.report.txt
+echo "done."
+
+echo -n "`date`: counting number of reads in peaks normalized by the total number of mapped reads... "
+echo -n -e "reads_in_peaks_norm_mapped_reads\t" >> $FILENAME.report.txt
+cat $FILENAME.stat.txt | \
+    grep -v 'chrY\|Called' | \
+    awk -v var="$MAPPED_READS" '{sum += $3} END {print 1000000*(sum/(var*23))}' >> \
+    $FILENAME.report.txt
+echo "done."
+
+## Calculating signal-to-noise ratio -- number of
+## reads in peaks divided by number of reads mapped
+## outside peaks to the regions of equal length.
+
+echo -n "`date`: calculating signal-to-noise ratio... "
+echo -n -e "signal_to_noise\t" >> $FILENAME.report.txt
+cat $FILENAME.stat.txt | \
+    grep -v 'chrY\|Called' | \
+    awk '{print $3/$5}' | \
+    awk '{sum += $1} END {print sum/23}' >> \
+    $FILENAME.report.txt
+echo "done."
+
+echo -n "`date`: calculating average peak width... "
+echo -n -e "average_peak_width\t" >> $FILENAME.report.txt
+NUM_PEAKS=`cat $FILENAME.macs2_results/$FILENAME.macs2_peaks.narrowPeak | wc -l`
+cat $FILENAME.macs2_results/$FILENAME.macs2_peaks.narrowPeak | \
+    awk -v var="$NUM_PEAKS" '{sum += $NF} END {print sum/var}' >> \
+    $FILENAME.report.txt
+echo "done."
+
+# deleting intermediate files which won't be used anymore
+rm *.picard_insertSizeMetric_report
+rm *.picard_histogram
+rm *.bedgraph
+rm *.filtered.name_sort.bam
+
+echo "END : `date`"
+
