@@ -16,27 +16,42 @@ consists of three modules:
 
 #### Module "pinechrom_general"
 
-This module of **PineChrom** is starting the analysis with
-the filtered *bam* files. It generates *bigwig* files, calls
-peaks, performs quality control per sample and generates some
-statistical reports as tables and figures.
+This module of pinechrom, pinechrom_general, will run per-sample analysis on
+your ATAC-Seq samples. Starting from fastq or bam files, it will perform
+quality of mapped reads, statistical assesement of the quality of the sample,
+peak calling and statistical assesement of called peaks.
 
-These are the instructions on how to run the pipeline:
+pinechrom_general is flexible and can run different set of analysis steps
+depending on your input. You can run it in three modes:
+```
+    pinechrom_general --prefix --fastq /path/to/fq/read1.fastq.gz,/path/to/fq/read2.fastq.gz
+```
+In case you want to start your analysis from raw fastq files, perform quality
+checks of fastq files, run the alignment, filter good-quality reads and call
+peaks, you should use this command. **--prefix** will be the name of the folder
+that pinechrom_general will create and run all the analysis in, as well as the
+prefix of all output file names. Please make sure that your fastq files:
+  - are gzipped;
+  - are separated by comma without spaces (`file1,file2` NOT `file1, file2`);
+  - you specify the *full* path to your fastq files, even if they are located
+    in the same directory as the executable of pinechrom.
+```
+    pinechrom_general --prefix --bam /path/to/bam/sample.bam
+```
+In case you already generated bam files with mapped reads and want to proceed
+with filtering reads based on their quality, calling peaks and performing
+statistical analysis, you should use this command. You should specify the *full*
+path to your bam file using **--bam**.
+```
+    pinechrom_general --prefix --bam_filt /path/to/bam/sample.filt.bam
+```
+In case you performed filtering mapped reads yourself and use pinechrom to
+generate statistical reports, call peaks and assess the quality of the peaks,
+you should use this command. The pipeline will start with creating a bigwig
+file for your input filtered bam file, perform statistical analysis, call peaks
+and perform statistical analysis on them. You should specify the *full* path to
+your filtered bam file using **--bam_filt**.
 
-```
-pinechrom_general <BAM_FILENAME> <BAM_LOCATION> <FOLDER>
-```
-
-where:
-```
-<BAM_FILENAME>  - name of the bam file without ".bam" (e.g., if
-                  the bam file is called "sample1.bam", specify
-                  "sample" as BAM_FILENAME)
-<BAM_LOCATION>  - full path to the bam file
-<FOLDER>        - name of the output folder; the pipeline will
-                  create all intermediate and final results and
-                  files in that folder
-```
 
 
 ----------------------------------
