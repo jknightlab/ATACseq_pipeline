@@ -1,45 +1,306 @@
 #!/bin/bash
 
 
-echo "START : `date`"
+## echo "START : `date`"
 
 
 # Pre-installed tools
 
+ZCAT="/bin/zcat"
+FASTQC="/well/jknight/software/rescomp/bin/fastqc"
+CUTADAPT="/apps/well/python/2.7.8/bin/cutadapt"
+BWA="/apps/well/bwa/0.7.10/bwa"
+BWA_INDEX="/well/jknight/reference/mapping/bwa_g/Gencode19.GRCh37.genome.PGF.decoy.ERCC"
 SAMTOOLS="/apps/well/samtools/1.2/bin/samtools"
 PICARD="/apps/well/picard-tools/1.111/picard-Xmx3g"
 BEDTOOLS="/apps/well/bedtools/2.24.0-18-gb0bc5b7/bin/bedtools"
 BEDGRAPH_TO_BIGWIG="/well/jknight/software/rescomp/bin/bedGraphToBigWig"
 GENOME_COVERAGE_BED="/apps/well/bedtools/2.24.0-18-gb0bc5b7/bin/genomeCoverageBed"
+CHROM_SIZE="/well/jknight/reference/hs37_cox.chrom.sizes"
 MACS2="/apps/well/python/2.7.8/bin/macs2"
+BAMTOOLS="/apps/well/bamtools/2.3.0/bin/bamtools"
 ATAC_QC="/well/jknight/Scripts/ATACseq_qc.R"
 DIST_BETWEEN_PEAKS="/well/jknight/Scripts/distance_between_regions.pl"
 EXTRACT_FRAGMENTS="/well/jknight/Scripts/bed_extract_fragments.pl"
-BLACKLIST="/well/jknight/reference/wgEncodeDacMapabilityConsensusExcludable.bed"
+BLACKLIST="/well/jknight/ATACseq/ATACseq_001/Analysis/Peak_calling/blacklist_filtering/wgEncodeDacMapabilityConsensusExcludable.bed"
+
+function help { 
+echo "
+    ===========================================================
+    =                                                         =
+    =                  Welcome to pinechrom!                  =
+    =                                                         =
+    ===========================================================
+
+This module of pinechrom, pinechrom_general, will run per-sample analysis on
+your ATAC-Seq samples. Starting from fastq or bam files, it will perform
+quality of mapped reads, statistical assesement of the quality of the sample,
+peak calling and statistical assesement of called peaks.
+
+pinechrom_general is flexible and can run different set of analysis steps
+depending on your input. You can run it in three modes:
+
+    pinechrom_general --prefix --fastq /path/to/fq/read1.fastq.gz,/path/to/fq/read2.fastq.gz
+
+In case you want to start your analysis from raw fastq files, perform quality
+checks of fastq files, run the alignment, filter good-quality reads and call
+peaks, you should use this command. "--prefix" will be the name of the folder
+that pinechrom_general will create and run all the analysis in, as well as the
+prefix of all output file names. Please make sure that your fastq files:
+  - are gzipped;
+  - are separated by comma without spaces ("file1,file2" NOT "file1, file2");
+  - you specify the *full* path to your fastq files, even if they are located
+    in the same directory as the executable of pinechrom.
+
+    pinechrom_general --prefix --bam /path/to/bam/sample.bam
+
+In case you already generated bam files with mapped reads and want to proceed
+with filtering reads based on their quality, calling peaks and performing
+statistical analysis, you should use this command. You should specify the full
+path to your bam file using "--bam".
+
+    pinechrom_general --prefix --bam_filt /path/to/bam/sample.filt.bam
+
+In case you performed filtering mapped reads yourself and use pinechrom to
+generate statistical reports, call peaks and assess the quality of the peaks,
+you should use this command. The pipeline will start with creating a bigwig
+file for your input filtered bam file, perform statistical analysis, call peaks
+and perform statistical analysis on them. You should specify the full path to
+your filtered bam file using "--bam_filt".
+"
+}
 
 
-# Input bam file
+FILENAME="default"
+INPUT_READ1="default"
+INPUT_READ2="default"
+BAM="default"
+FILTERED_BAM="default"
 
-FILENAME=$1
-BAM_LOCATION=$2
-FOLDER=$3
+# ======================================================================
+# =                                                                    =
+# =                 READING IN COMMAND LINE ARGUMENTS                  =
+# =                                                                    =
+# ======================================================================
 
 
-echo "FILENAME=$FILENAME"
-echo "BAM_FLDR=$BAM_LOCATION"
-echo "NEW_FLDR=$FOLDER"
+# Checking if the user specified prefix for the output files
+if [[ $1 == "--prefix" ]]; then
+    if [ -z "$2" ]; then
+        echo "No argument supplied after --prefix, please specify a prefix for the output files."
+        exit
+    else
+        FILENAME="$2"
+        echo "Output folder name and prefix of output files will be $FILENAME."
+    fi
+else
+    help
+    exit
+fi
 
-mkdir $FOLDER
-cd $FOLDER
+# Checking whether fastq file ora  bam file was/were specified
+if [[ $3 == "--fastq" ]]; then
+    if [ -z "$4" ]; then
+        echo "No argument supplied after --fastq, please specify fastq file names separated by comma and no spaces (file1.fastq,file2.fastq)."
+        exit
+    else
+        INPUT_READ1=`echo $4 | sed s/\,.*//g`
+        INPUT_READ2=`echo $4 | sed s/.*\,//g`
+        echo "Name of the first fastq file is $INPUT_READ1."
+        echo "Name of the second fastq file is $INPUT_READ2."
+    fi
+elif [[ $3 == "--bam" ]]; then
+    if [ -z "$4" ]; then
+        echo "No argument supplied after --bam, please specify bam file name."
+        exit
+    else
+        BAM=$4
+        echo "Name of the unfiltered bam file is $BAM."
+    fi
+elif [[ $3 == "--bam_filt" ]]; then
+    if [ -z "$4" ]; then
+        echo "No argument supplied after --bam_filt, please specify filtered bam file name."
+        exit
+    else
+        FILTERED_BAM=$4
+        echo "Name of the filtered bam file is $FILTERED_BAM."
+    fi
+else
+    help
+    exit
+fi
 
+mkdir $FILENAME.pinechrom_general
+FULL_PATH_PINECHROM_RES="`pwd`/$FILENAME.pinechrom_general"
+
+if [ "$INPUT_READ1" != "default" ]; then
+    READ1=`echo $FILENAME.read1`
+    READ2=`echo $FILENAME.read2`
+    $ZCAT $INPUT_READ1 > $FILENAME.pinechrom_general/$READ1.fastq
+    $ZCAT $INPUT_READ2 > $FILENAME.pinechrom_general/$READ2.fastq
+    
+    cd $FILENAME.pinechrom_general
+
+    mkdir $READ1.fastqc_output
+    mkdir $READ2.fastqc_output
+
+    echo -n "`date`: running FASTQC on raw fastq files... "
+    $FASTQC \
+        $READ1.fastq \
+        -f fastq \
+        -o $READ1.fastqc_output 2> $FILENAME.fastqc_stderr.txt
+
+    $FASTQC \
+        $READ2.fastq \
+        -f fastq \
+        -o $READ2.fastqc_output 2> $FILENAME.fastqc_stderr.txt
+    echo "done."
+
+    # Adapter trimming, removing low quality bases
+    echo -n "`date`: removing adapters... "
+    $CUTADAPT \
+        -a CTGTCTCTTATACACATCTCCGAGCCCACGAGAC \
+        -A CTGTCTCTTATACACATCTGACGCTGCCGACGA \
+        --overlap 10 \
+        --minimum-length=20 \
+        -o $READ1.trimmed.fastq \
+        -p $READ2.trimmed.fastq \
+        $READ1.fastq $READ2.fastq 2> $FILENAME.cutadapt_stderr.txt
+    echo "done."
+
+    # Quality control on processed (cleaned) data
+    mkdir $READ1.trimmed.fastqc_output
+    mkdir $READ2.trimmed.fastqc_output
+
+    echo -n "`date`: running FASTQC on trimmed files... "
+    $FASTQC \
+        $READ1.trimmed.fastq \
+        -f fastq \
+        -o $READ1.trimmed.fastqc_output 2> $FILENAME.fastqc_stderr.txt
+
+    $FASTQC \
+        $READ2.trimmed.fastq \
+        -f fastq \
+        -o $READ2.trimmed.fastqc_output 2> $FILENAME.fastqc_stderr.txt
+    echo "done."
+
+    # Aligning processed data
+    echo -n "`date`: running the alignment... "
+    $BWA mem \
+        -t 3 \
+        $BWA_INDEX \
+        $READ1.trimmed.fastq \
+        $READ2.trimmed.fastq > \
+        $FILENAME.sam \
+        2> $FILENAME.bwa_stderr.txt
+    echo "done."
+
+    # Converting sam to bam
+    echo -n "`date`: converting sam to bam... "
+    $SAMTOOLS view \
+        -bSh $FILENAME.sam > \
+        $FILENAME.bam1 \
+        2> $FILENAME.samtools_stderr.txt
+    echo "done."
+    echo "filename of bam is $FILENAME.bam. we just created it using bwa."
+    BAM=$FILENAME.bam1
+fi
+
+cd $FULL_PATH_PINECHROM_RES
+
+if [ "$BAM" != "default" ]; then
+    $SAMTOOLS view -b $BAM > $FILENAME.bam
+
+    echo -n "`date`: sorting alignments in order to remove duplicates... "
+    $SAMTOOLS sort \
+        $FILENAME.bam \
+        $FILENAME.sorted \
+        2> $FILENAME.samtools_stderr.txt
+    echo "done."
+
+    echo -n "`date`: filtering step 1 -- removing duplicates using SAMTOOLS 0.1.19... "
+    /apps/well/samtools/0.1.19/bin/samtools rmdup \
+        $FILENAME.sorted.bam \
+        $FILENAME.nodup.bam \
+        2> $FILENAME.samtools_stderr.txt
+    echo "done."
+
+    echo -n "`date`: filtering step 2 -- selecting reads with high mapping quality > 30..."
+    $BAMTOOLS filter \
+        -mapQuality ">30" \
+        -in $FILENAME.nodup.bam \
+        -out $FILENAME.nodup.MAPQ30.bam \
+        2> $FILENAME.bamtools_stderr.txt
+    echo "done."
+
+    echo -n "`date`: filtering step 3 -- removing non-uniquely mapped reads..."
+    $SAMTOOLS view \
+        -h $FILENAME.nodup.MAPQ30.bam | \
+        grep -v "XA" | \
+        $SAMTOOLS view -bS - > \
+        $FILENAME.nodup.MAPQ30.uniq.bam \
+        2> $FILENAME.samtools_stderr.txt
+    echo "done."
+
+    echo -n "`date`: filtering step 4 -- removing not properly paired reads... "
+    $SAMTOOLS view \
+        -h \
+        -b \
+        -f 3 \
+        -F 12 \
+        $FILENAME.nodup.MAPQ30.uniq.bam > \
+        $FILENAME.nodup.MAPQ30.uniq.proper_paired.bam \
+        2> $FILENAME.samtools_stderr.txt
+    echo "done."
+
+    echo -n "`date`: Generating sam with reads mapped to conventional chromosomes... "
+    $SAMTOOLS view \
+        -H $FILENAME.nodup.MAPQ30.uniq.proper_paired.bam | \
+        grep chr | \
+        grep -v chrM > \
+        $FILENAME.filtered.non_sorted.sam
+
+    $SAMTOOLS view \
+        $FILENAME.nodup.MAPQ30.uniq.proper_paired.bam | \
+        awk '$3 ~ /chr/ {print $0}' | \
+        grep -v 'chrM\|MT\|hs\|NC\|GL' >> \
+        $FILENAME.filtered.non_sorted.sam
+
+    $SAMTOOLS view \
+        -bS $FILENAME.filtered.non_sorted.sam > \
+        $FILENAME.filtered.non_sorted.bam
+
+    $SAMTOOLS sort \
+        $FILENAME.filtered.non_sorted.bam \
+        $FILENAME.filtered \
+        2> $FILENAME.samtools_stderr.txt
+    rm $FILENAME.filtered.non_sorted.sam
+    rm $FILENAME.filtered.non_sorted.bam
+    echo "done."
+
+    mv $FILENAME.bam $FILENAME.unfiltered.bam
+    mv $FILENAME.filtered.bam $FILENAME.bam1
+
+    FILTERED_BAM=$FILENAME.bam1
+fi
+
+
+cd $FULL_PATH_PINECHROM_RES
+
+if [ "$FILTERED_BAM" != "default" ]; then
+    $SAMTOOLS view -b $FILTERED_BAM > $FILENAME.bam
+fi
+
+# Working on filtered bam file
 # Creating WIGGLE file
 $SAMTOOLS view \
-    -H $BAM_LOCATION/$FILENAME.bam | \
+    -H $FILENAME.bam | \
     head -26 | \
     grep SN | \
     head -24 | \
+    sed s/chr//g | \
     sed s/.*SN\://g | \
-    sed s/LN\://g |
+    sed s/LN\://g | \
     awk '{print "chr" $0}' > \
     $FILENAME.chrom_sizes.txt
 
@@ -359,5 +620,5 @@ rm *.picard_histogram
 rm *.bedgraph
 rm *.filtered.name_sort.bam
 
-echo "END : `date`"
+## echo "END : `date`"
 
