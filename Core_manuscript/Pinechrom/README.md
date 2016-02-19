@@ -24,7 +24,7 @@ peak calling and statistical assesement of called peaks.
 pinechrom_general is flexible and can run different set of analysis steps
 depending on your input. You can run it in three modes:
 ```
-    pinechrom_general --prefix --fastq /path/to/fq/read1.fastq.gz,/path/to/fq/read2.fastq.gz
+    pinechrom_general --prefix PREFIX --fastq /path/to/fq/read1.fastq.gz,/path/to/fq/read2.fastq.gz
 ```
 In case you want to start your analysis from raw fastq files, perform quality
 checks of fastq files, run the alignment, filter good-quality reads and call
@@ -36,14 +36,14 @@ prefix of all output file names. Please make sure that your fastq files:
   - you specify the *full* path to your fastq files, even if they are located
     in the same directory as the executable of pinechrom.
 ```
-    pinechrom_general --prefix --bam /path/to/bam/sample.bam
+    pinechrom_general --prefix PREFIX --bam /path/to/bam/sample.bam
 ```
 In case you already generated bam files with mapped reads and want to proceed
 with filtering reads based on their quality, calling peaks and performing
 statistical analysis, you should use this command. You should specify the *full*
 path to your bam file using **--bam**.
 ```
-    pinechrom_general --prefix --bam_filt /path/to/bam/sample.filt.bam
+    pinechrom_general --prefix PREFIX --bam_filt /path/to/bam/sample.filt.bam
 ```
 In case you performed filtering mapped reads yourself and use pinechrom to
 generate statistical reports, call peaks and assess the quality of the peaks,
