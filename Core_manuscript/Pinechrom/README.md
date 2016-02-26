@@ -10,7 +10,7 @@ consists of three modules:
 - `pinechrom_general` is run per sample, it performs read alignment, filtering
     of mapped reads, quality checks and generates statistical overview of the
     quality, as well as some informative plots;
-- `pinechrom_peaks`
+- `pinechrom_compare`
 - `pinechrom_genes`
 
 
