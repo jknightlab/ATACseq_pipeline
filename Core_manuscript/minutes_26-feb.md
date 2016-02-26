@@ -31,13 +31,13 @@ you enrich for artificial peaks and possibly DNase peaks which are not in TSSs
 
 
 ToDo
--- signal-to-noise ratio (Irina)
--- sens and spec on peak level -- take 25% overlap (Jason)
--- make sure that sens and spec on peak level is working (Jason)
--- jacard (Jason)
--- frozen
--- macs
--- coverage around TSSs
+- signal-to-noise ratio (Irina)
+- sens and spec on peak level -- take 25% overlap (Jason)
+- make sure that sens and spec on peak level is working (Jason)
+- jacard (Jason)
+- frozen
+- macs
+- coverage around TSSs
 
--- plot
+- plot
 
