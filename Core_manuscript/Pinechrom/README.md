@@ -53,7 +53,20 @@ and perform statistical analysis on them. You should specify the *full* path to
 your filtered bam file using **--bam_filt**.
 
 
+#### Module "pinechrom_compare"
+
+This module of pinechrom, pinechrom_compare, will compare peaks called under
+each of the two conditions. Starting from bam files and bed files containing
+called peaks, it will (if applicable) generate a consensus peak file for each
+condition, compare two consensus peak files and generate a list of peaks
+called only under the first condition, list a list of peaks called only under
+the second condition, a list of peaks common for both conditions and
+differentially expressed and a list of peaks common for both conditions and
+expressed at the same level.
+
+pinechrom_compare requires bam files containing mapped reads (per replicate)
+and bed files containing called peaks (also per replicate).
+
 
 ----------------------------------
 Designed by Irina Pulyakhina, irina@well.ox.ac.uk
-
