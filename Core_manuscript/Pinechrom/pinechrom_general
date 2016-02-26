@@ -1,8 +1,6 @@
 #!/bin/bash
 
-
-## echo "START : `date`"
-
+echo "START : `date`"
 
 # Pre-installed tools
 
@@ -620,5 +618,4 @@ rm *.picard_histogram
 rm *.bedgraph
 rm *.filtered.name_sort.bam
 
-## echo "END : `date`"
-
+echo "END : `date`"
