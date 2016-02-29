@@ -69,7 +69,7 @@ and bed files containing called peaks (also per replicate).
 
 |     |     |
 | --- | --- |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Pinechrom/pinechrom_general_schema.png) | pinechrom_compare_schema.png |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Pinechrom/pinechrom_general_schema.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Pinechrom/pinechrom_compare_schema.png) |
 
 
 ----------------------------------
