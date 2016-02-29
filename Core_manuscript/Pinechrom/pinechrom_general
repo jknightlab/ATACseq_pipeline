@@ -1,8 +1,6 @@
 #!/bin/bash
 
-
-## echo "START : `date`"
-
+echo "START : `date`"
 
 # Pre-installed tools
 
@@ -307,7 +305,7 @@ $SAMTOOLS view \
 echo -n "`date`: Generating bedgraph to create a bigwig file... "
 $GENOME_COVERAGE_BED \
     -bg \
-    -ibam $BAM_LOCATION/$FILENAME.bam \
+    -ibam $FILENAME.bam \
     -split \
     -g $FILENAME.chrom_sizes.txt > \
     $FILENAME.bedgraph \
@@ -332,7 +330,7 @@ echo -n "`date`: sorting filtered bam file by name... "
 $SAMTOOLS sort \
     -n \
     -T $FILENAME.temp.bam \
-    $BAM_LOCATION/$FILENAME.bam \
+    $FILENAME.bam \
     -o $FILENAME.filtered.name_sort.bam \
     2> $FILENAME.stderr.txt
 echo "done."
@@ -359,7 +357,7 @@ echo "done."
 echo -n "`date`: calling peaks on $FILENAME.bam ... "
 $MACS2 callpeak \
     --nomodel \
-    -t $BAM_LOCATION/$FILENAME.bam \
+    -t $FILENAME.bam \
     --name $FILENAME.macs2 \
     --outdir $FILENAME.macs2_results \
     --nolambda \
@@ -505,7 +503,7 @@ $PICARD CollectInsertSizeMetrics.jar \
     VALIDATION_STRINGENCY=LENIENT \
     ASSUME_SORTED=true \
     HISTOGRAM_FILE=$FILENAME.filtered.picard_histogram \
-    INPUT=$BAM_LOCATION/$FILENAME.bam \
+    INPUT=$FILENAME.bam \
     OUTPUT=$FILENAME.filtered.picard_insertSizeMetric_report \
     2> $FILENAME.stderr.txt
 echo "done."
@@ -538,12 +536,12 @@ echo -n "`date`: counting number of reads mapped after filtering... "
 echo -n -e "number_mapped_reads_after_filt\t" > $FILENAME.report.txt
 $SAMTOOLS view \
     -F 4 \
-    $BAM_LOCATION/$FILENAME.bam | \
+    $FILENAME.bam | \
     wc -l >> \
     $FILENAME.report.txt
 echo "done."
 
-MAPPED_READS=`$SAMTOOLS view -F 4 $BAM_LOCATION/$FILENAME.bam | wc -l`
+MAPPED_READS=`$SAMTOOLS view -F 4 $FILENAME.bam | wc -l`
 
 echo -n "`date`: calculating average fragment width... "
 echo -n -e "average_fragm_width\t" >> $FILENAME.report.txt
@@ -620,5 +618,4 @@ rm *.picard_histogram
 rm *.bedgraph
 rm *.filtered.name_sort.bam
 
-## echo "END : `date`"
-
+echo "END : `date`"

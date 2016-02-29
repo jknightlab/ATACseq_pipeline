@@ -1,0 +1,121 @@
+#!/bin/bash
+
+echo "START : `date`"
+
+# Pre-installed tools
+module load R/3.2.2
+
+BEDTOOLS="/apps/well/bedtools/2.24.0/bedtools"
+SAMTOOLS="/apps/well/samtools/1.2/bin/samtools"
+DESEQ2="/well/jknight/Scripts/run_deseq2_atac.R"
+
+# Input files
+
+COND1=$1
+COND2=$2
+
+cond1_bam1="../20150818_Bulk_ATAC_K562_1.dedup.q30f3F12.chr1_X.bam"
+cond1_bam2="../20150818_Bulk_ATAC_K562_2.dedup.q30f3F12.chr1_X.bam"
+cond1_bam3="../20150818_Bulk_ATAC_K562_3.dedup.q30f3F12.chr1_X.bam"
+cond2_bam1="../20151216_Bulk_K562_frozen_1.dedup.q30f3F12.chr1_X.bam"
+cond2_bam2="../20151216_Bulk_K562_frozen_2.dedup.q30f3F12.chr1_X.bam"
+cond2_bam3="../20151216_Bulk_K562_frozen_3.dedup.q30f3F12.chr1_X.bam"
+
+# ======================================================================
+# =                                                                    =
+# =                OVERLAPPING TWO CONSENSUS PEAKS                     =
+# =                                                                    =
+# ======================================================================
+
+echo -n "`date`: Joining two consensus peak lists into one file... "
+# Getting intersection of conditions and peaks unique for condition1
+$BEDTOOLS intersect \
+    -f 0.30 \
+    -r \
+    -wao \
+    -a $COND1.bed \
+    -b $COND2.bed > \
+    $COND1.$COND2.temp.bed
+
+# Getting intersection of conditions and peaks unique for condition2
+$BEDTOOLS intersect \
+    -f 0.30 \
+    -r \
+    -wao \
+    -a $COND2.bed \
+    -b $COND1.bed | \
+    awk '{print $4 "\t" $5 "\t" $6 "\t" $1 "\t" $2 "\t" $3 "\t" $7}' > \
+    $COND2.$COND1.temp.bed
+echo "done."
+
+echo -n "`date`: Getting peaks unique for the first condition $COND1... "
+cat $COND1.$COND2.temp.bed $COND2.$COND1.temp.bed | \
+    awk '$4 ~ /\./ {print $1 "\t" $2 "\t" $3}' > \
+    $COND1.uniq.bed
+echo "done."
+
+echo -n "`date`: Getting peaks unique for the second condition $COND2... "
+cat $COND1.$COND2.temp.bed $COND2.$COND1.temp.bed | \
+    awk '$1 ~ /\./ {print $4 "\t" $5 "\t" $6}' > \
+    $COND2.uniq.bed
+echo "done."
+
+echo -n "`date`: Getting peaks common for both conditions $COND1 and $COND2... "
+cat $COND1.$COND2.temp.bed $COND2.$COND1.temp.bed | \
+    grep -v '\.' | \
+    sort | \
+    uniq | \
+    awk '$2-$6 < 0 {print $1 "\t" $2 "\t" $6}' | \
+    $BEDTOOLS sort -i - | \
+    $BEDTOOLS merge -d -50 -i - > \
+    $COND1.$COND2.common.bed
+echo "done."
+
+# At this point we created the following files:
+# - peaks unique for cond1, $COND1.uniq.bed
+# - peaks unique for cond2, $COND2.uniq.bed
+# - peaks present under both conditions, $COND1.$COND2.common.bed
+
+
+rm $COND1.$COND2.temp.bed
+rm $COND2.$COND1.temp.bed
+
+
+# ======================================================================
+# =                                                                    =
+# =           RUNNING DIFFERENTIAL EXPRESSION ANALYSIS                 =
+# =                                                                    =
+# ======================================================================
+
+echo -n "`date`: Counting reads mapped to merged common peaks... "
+echo -e "$COND1.rep_1\t$COND1.rep_2\t$COND1.rep_3\t$COND2.rep_1\t$COND2.rep_2\t$COND2.rep_3" > \
+    $COND1.$COND2.read_count.txt
+
+for i in `cat $COND1.$COND2.common.bed | awk '{print $1 ":" $2 "-" $3}' | sed s/chr//g`
+do
+    cond1_1=`$SAMTOOLS view $cond1_bam1 $i -F 4 -c`
+    cond1_2=`$SAMTOOLS view $cond1_bam2 $i -F 4 -c`
+    cond1_3=`$SAMTOOLS view $cond1_bam3 $i -F 4 -c`
+    cond2_1=`$SAMTOOLS view $cond2_bam1 $i -F 4 -c`
+    cond2_2=`$SAMTOOLS view $cond2_bam2 $i -F 4 -c`
+    cond2_3=`$SAMTOOLS view $cond2_bam3 $i -F 4 -c`
+    echo -e "peak_$i\t$cond1_1\t$cond1_2\t$cond1_3\t$cond2_1\t$cond2_2\t$cond2_3"
+done >> $COND1.$COND2.read_count.txt
+echo "done."
+
+echo -n "`date`: Creating a table with conditions required as one of DESEQ2 input files... "
+echo -e "condition\ttype
+$COND1.1\ttreated\tpaired-end
+$COND1.2\ttreated\tpaired-end
+$COND1.3\ttreated\tpaired-end
+$COND2.1\tuntreated\tpaired-end
+$COND2.2\tuntreated\tpaired-end
+$COND2.3\tuntreated\tpaired-end" > $COND1.$COND2.colnames.txt
+echo "done."
+
+echo -n "`date`: Running DESEQ2 to identify differentially expressed peaks... "
+Rscript $DESEQ2 $COND1.$COND2.read_count.txt $COND1.$COND2.colnames.txt $COND1.$COND2.deseq
+echo "done."
+
+
+echo "END : `date`"
