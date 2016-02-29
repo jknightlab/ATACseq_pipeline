@@ -52,10 +52,10 @@ file for your input filtered bam file, perform statistical analysis, call peaks
 and perform statistical analysis on them. You should specify the *full* path to
 your filtered bam file using **--bam_filt**.
 
-|     |
-| --- |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Pinechrom/pinechrom_general_schema.png) |
-=======
+|     |     |
+| --- | --- |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Pinechrom/pinechrom_general_schema.png) |  |
+
 
 #### Module "pinechrom_compare"
 
