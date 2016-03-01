@@ -8,6 +8,7 @@ module load R/3.2.2
 BEDTOOLS="/apps/well/bedtools/2.24.0/bedtools"
 SAMTOOLS="/apps/well/samtools/1.2/bin/samtools"
 DESEQ2="/well/jknight/Scripts/run_deseq2_atac.R"
+PEAK_CORR="/well/jknight/Scripts/peak_correlation.R"
 
 # Input files
 
@@ -117,5 +118,8 @@ echo -n "`date`: Running DESEQ2 to identify differentially expressed peaks... "
 Rscript $DESEQ2 $COND1.$COND2.read_count.txt $COND1.$COND2.colnames.txt $COND1.$COND2.deseq
 echo "done."
 
+echo -n "`date`: calculating the correlation between the intensity of common peaks..."
+Rscript $PEAK_CORR $COND1.$COND2.read_count.txt $COND1.$COND2.correlation.txt
+echo "done."
 
 echo "END : `date`"
