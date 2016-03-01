@@ -10,7 +10,8 @@ consists of three modules:
 - `pinechrom_general` is run per sample, it performs read alignment, filtering
     of mapped reads, quality checks and generates statistical overview of the
     quality, as well as some informative plots;
-- `pinechrom_compare`
+- `pinechrom_compare` is run for a pair of conditions, each condition can be
+   represented by one or multiple samples. This module creates consensus peak lists for each condition, extracts peaks unique per condition, runs differential expression analysis on the common peaks and checks for the existences linear correlation between the intensities common peaks;
 - `pinechrom_genes`
 
 
