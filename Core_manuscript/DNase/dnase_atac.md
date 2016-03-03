@@ -1,8 +1,17 @@
 Comparing ATAC and DNase samples
 ---------------------------------------
 
+#### General statistics and parameters
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/dnase_va_atac.png)
+
+#### Correlation between common peaks
+
+|         |        |
+| ------- | ------ |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/dnase_atac_common_peaks.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/dnase_atac_common_peaks.log.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/dnase_atac_TSS_common_peaks.log.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/dnase_atac_nonTSS_common_peaks.log.png) |
+
 
 #### Examples
 
