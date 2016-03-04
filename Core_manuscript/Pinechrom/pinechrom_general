@@ -83,6 +83,7 @@ FILTERED_BAM="default"
 # =                                                                    =
 # ======================================================================
 
+echo "`date` : Reading in the input..."
 
 # Checking if the user specified prefix for the output files
 if [[ $1 == "--prefix" ]]; then
@@ -291,16 +292,22 @@ if [ "$FILTERED_BAM" != "default" ]; then
     $SAMTOOLS view -b $FILTERED_BAM > $FILENAME.bam
 fi
 
+echo
+echo
+echo "`date` : Working on the filtered bam file."
+echo
+
 # Working on filtered bam file
 # Creating WIGGLE file
+
 $SAMTOOLS view \
     -H $FILENAME.bam | \
-    head -26 | \
     grep SN | \
-    head -24 | \
-    sed s/chr//g | \
     sed s/.*SN\://g | \
     sed s/LN\://g | \
+    sed 's/\t.*\t/\t/g' | \
+    grep -v -i 'M\|MT\|hs\|NC\|GL\|COX\|er' | \
+    sed s/chr//g | \
     awk '{print "chr" $0}' > \
     $FILENAME.chrom_sizes.txt
 
@@ -317,6 +324,7 @@ echo "done."
 echo -n "`date`: Sorting bedgraph to create a bigwig file... "
 LC_COLLATE=C
 sort -k1,1 -k2,2n $FILENAME.bedgraph | \
+    grep 'chrM\|MT\|hs\|NC\|GL\|COX' -v | \
     sed s/chr//g | \
     awk '{print "chr" $0}' > \
     $FILENAME.sorted.bedgraph
@@ -369,6 +377,7 @@ $MACS2 callpeak \
     --keep-dup all \
     --slocal 10000 \
     --SPMR \
+    --format BAM \
     --bdg 2> \
     $FILENAME.stderr.txt
 echo "done."
