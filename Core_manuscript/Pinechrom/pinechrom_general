@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "START : `date`"
+
+## echo "START : `date`"
+
 
 # Pre-installed tools
 
@@ -315,6 +317,7 @@ echo "done."
 echo -n "`date`: Sorting bedgraph to create a bigwig file... "
 LC_COLLATE=C
 sort -k1,1 -k2,2n $FILENAME.bedgraph | \
+    sed s/chr//g | \
     awk '{print "chr" $0}' > \
     $FILENAME.sorted.bedgraph
 echo "done."
@@ -338,7 +341,8 @@ echo "done."
 echo -n "`date`: BEDPE Creating bedpe file... "
 $BEDTOOLS bamtobed \
     -bedpe \
-    -i $FILENAME.filtered.name_sort.bam |
+    -i $FILENAME.filtered.name_sort.bam | \
+    sed s/chr//g | \
     awk '{print "chr" $0}' > \
     $FILENAME.filtered.bedpe.bed \
     2> $FILENAME.stderr.txt
@@ -371,6 +375,7 @@ echo "done."
 
 echo -n "`date`: adding \"chr\" to the list of peaks... "
 cat $FILENAME.macs2_results/$FILENAME.macs2_peaks.narrowPeak | \
+    sed s/chr//g | \
     awk '{print "chr" $0}' > \
     $FILENAME.macs2_results/$FILENAME.macs2_peaks.chr.narrowPeak
 echo "done."
@@ -618,4 +623,5 @@ rm *.picard_histogram
 rm *.bedgraph
 rm *.filtered.name_sort.bam
 
-echo "END : `date`"
+## echo "END : `date`"
+
