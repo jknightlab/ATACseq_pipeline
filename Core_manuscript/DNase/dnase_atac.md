@@ -27,10 +27,11 @@ Comparing ATAC and DNase samples
 
 #### Overlap with the annotation
 
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/ATAC_k562_annotation_all_peaks_pie.png)
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/dnase_k562_annotation_all_peaks_pie.png)
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/ATAC_annotated_peaks_classification_pie.png)
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/DNase_annotated_peaks_classification_pie.png)
+| ATAC | DNase |
+| ---- | ----- |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/ATAC_k562_annotation_all_peaks_pie.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/dnase_k562_annotation_all_peaks_pie.png) |
+|      |       |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/ATAC_annotated_peaks_classification_pie.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/DNase_annotated_peaks_classification_pie.png) |
 
 
 dnase_atac_annotation_overlap.txt
