@@ -37,6 +37,9 @@ Comparing ATAC and DNase samples
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/ATAC_dnase_generalized_annotated_peaks_classification_pie.png)
 
+**Common peaks between ATAC and downsampled DNase**
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/downsampled.png)
+
 dnase_atac_annotation_overlap.txt
 
 ------------------------------
