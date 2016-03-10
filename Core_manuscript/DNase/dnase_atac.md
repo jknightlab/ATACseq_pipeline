@@ -40,7 +40,10 @@ Comparing ATAC and DNase samples
 **Common peaks between ATAC and downsampled DNase**
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/downsampled.png)
 
-dnase_atac_annotation_overlap.txt
+**Peaks unique for DNase or ATAC**
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/dnase_atac_unique_peak_annotation.png)
+
 
 ------------------------------
 Designed by Irina Pulyakhina, irina@well.ox.ac.uk
