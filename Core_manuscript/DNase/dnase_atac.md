@@ -44,6 +44,9 @@ Comparing ATAC and DNase samples
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/dnase_atac_unique_peak_annotation.png)
 
+#### Fresh ATAC against downsampled ATAC
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/fresh_vs_downsampled_frozen.png)
 
 ------------------------------
 Designed by Irina Pulyakhina, irina@well.ox.ac.uk
