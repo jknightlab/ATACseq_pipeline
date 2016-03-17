@@ -354,7 +354,9 @@ echo "done."
 echo -n "`date`: Sorting bedpe file... "
 $BEDTOOLS \
     sort \
-    -i $FILENAME.filtered.bedpe.bed | \
+    -i $FILENAME.filtered.bedpe.bed > $FILENAME.sorted.bed
+
+cat $FILENAME.sorted.bed | \
     grep -v -i 'GL\|NC\|hs' | \
     awk '$6-$2 > 0 {print $1 "\t" $2 "\t" $6 "\t" $7 }' > \
     $FILENAME.filtered.bedpe.fragments.bed \
@@ -625,6 +627,14 @@ rm *.picard_insertSizeMetric_report
 rm *.picard_histogram
 rm *.bedgraph
 rm *.filtered.name_sort.bam
+rm $FILENAME.nodup.MAPQ30.bam
+rm $FILENAME.nodup.MAPQ30.uniq.bam
+rm $FILENAME.nodup.MAPQ30.uniq.proper_paired.bam
+rm $FILENAME.nodup.bam
+rm $FILENAME.sam
+rm $FILENAME.bam1
+rm $FILENAME.sorted.bam
+rm $FILENAME.unfiltered.bam
 
-## echo "END : `date`"
+echo "END : `date`"
 
