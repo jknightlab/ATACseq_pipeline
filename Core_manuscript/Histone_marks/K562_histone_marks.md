@@ -38,14 +38,15 @@ Number of peaks:
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Histone_marks/histone_marks_width.png)
 
+#### Overlap of histone marks and ATAC/DNase
 
+| Name of a histon mark | Number of peaks | Overlap with ATAC | Overlap with DNase |
+| --------------------- | --------------- | ----------------- | ------------------ |
+| H3k27me3              | 21732           | 829               | 2009               |
+| H3k36me3              | 30760           | 2512              | 4328               |
+| H3k4me3               | 22664           | 22796             | 25216              |
 
-
-
-|          |           |
-| -------- | --------- |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.min_frag_len.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.median_frag_len.png) |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.max_frag_len.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/K562_General_QC/K562.average_frag_len.png) |
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Histone_marks/histone_marks_overlap_dnase_atac.png)
 
 
 
