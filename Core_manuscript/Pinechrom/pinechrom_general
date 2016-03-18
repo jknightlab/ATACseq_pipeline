@@ -352,9 +352,13 @@ $BEDTOOLS bamtobed \
 echo "done."
 
 echo -n "`date`: Sorting bedpe file... "
-$BEDTOOLS \
-    sort \
-    -i $FILENAME.filtered.bedpe.bed > $FILENAME.sorted.bed
+rm -rf $FILENAME.sorted.bed
+for i in `echo {1..22} X Y`
+do
+    cat $FILENAME.filtered.bedpe.bed | grep -P "^chr$i\t" > $FILENAME.temp.bed
+    $BEDTOOLS sort -i $FILENAME.temp.bed >> $FILENAME.sorted.bed
+    rm $FILENAME.temp.bed
+done
 
 cat $FILENAME.sorted.bed | \
     grep -v -i 'GL\|NC\|hs' | \
