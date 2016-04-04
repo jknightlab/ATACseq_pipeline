@@ -26,7 +26,7 @@ Primary quality control of K562 samples
 # | Required number of overlapping base, % of region length |       |         |       |         |       |
 
 
-| Hi   | Hi    | Hi      | Hi    | Hi      | Hi    |
+| Required number of overlapping base, % of region length   | Hi    | Hi      | Hi    | Hi      | Hi    |
 | ---- | ----- | ------- | ----- | ------- | ----- |
 | 0.1  | 21115 | 9305.04 | 22243 | 9006.36 | 1.033 |
 | 0.15 | 20721 | 9131.41 | 21853 | 8848.44 | 1.032 |
