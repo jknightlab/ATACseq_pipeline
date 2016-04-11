@@ -8,7 +8,7 @@ For F-Seq, we called peaks varying parameters **length** and **threshold** in th
 - Length = 100 or 200 or 400 or 600 or 800 or 1000 or 2000
 - Threshold = 2 or 4 or 6 or 8 or 10 or 12 or 14 or 16
 
-Code: /home/irina/Work/ATAC-Seq/Git/ATACseq_pipeline/Core_manuscript/Fseq_Macs2_Hotspot/run_fseq.sh
+[Code](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/run_fseq.sh).
 
 For MACS2
 
@@ -41,7 +41,7 @@ We used the following measurements as our QC metrics to the performance of each 
 - Sensitivity
 - A combination of sensitivity and specificity, F-Score
 
-Code: /home/irina/Work/ATAC-Seq/Git/ATACseq_pipeline/Core_manuscript/Fseq_Macs2_Hotspot/QC_metrics_compare_peakcallers.sh
+[Code](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/QC_metrics_compare_peakcallers.sh).
 
 More info about some QC metrics:
 
@@ -93,7 +93,7 @@ done | \
 
 `fresh.fseq.fdr.txt` can now be fed to the heatmap script and a heatmap will be generated in a separate *pdf* file.
 
-Code: /home/irina/Work/ATAC-Seq/Git/ATACseq_pipeline/Core_manuscript/Fseq_Macs2_Hotspot/create_heatmap.R
+[Code](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/create_heatmap.R).
 
 
 
