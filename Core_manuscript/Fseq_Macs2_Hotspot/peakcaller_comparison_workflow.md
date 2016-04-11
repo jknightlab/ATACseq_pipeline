@@ -113,18 +113,13 @@ paper). All plots show similar results, but only one plot -- comparison with
 DNase -- highlights one cell in the middle of a heatmap. The results are
 reproducible when analyzing fresh or frozen data:
 
-- F-Score with beta = 0.5 for fresh material analyzed with F-Seq
 
-https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/fresh.fseq.F-Score_0.5.dnase.pdf
 
-- F-Score with beta = 0.5 for frzen material analyzed with F-Seq
-
-https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/frozen_.fseq.F-Score_0.5.DNase.pdf
+| F-Score with beta = 0.5 for fresh material analyzed with F-Seq | F-Score with beta = 0.5 for frzen material analyzed with F-Seq |
+| -------------------------------------------------------------- | -------------------------------------------------------------- |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/fresh.fseq.F-Score_0.5.DNase.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/frozen.fseq.F-Score_0.5.DNase.png) |
 
 This makes us choose F-Seq with threshold 6, length 400.
-
-
-
 
 
 
