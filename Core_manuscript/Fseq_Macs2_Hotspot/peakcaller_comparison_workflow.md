@@ -15,7 +15,6 @@ the following range:
 For MACS2, we called peaks varying parameters **extention_size** and **q-value**
 in the following range:
 
-## 0.001 0.005 0.01 0.05 0.1 0.5
 - Extention size = 10 or 100 or 200 or 400 or 600 or 800 or 1000 or 2000
 - Q-value = 0.001 or 0.005 or 0.01 or 0.05 or 0.1 or 0.5
 
