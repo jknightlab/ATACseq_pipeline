@@ -3,14 +3,23 @@ Comparing the performance of peak callers
 
 #### Calling peaks
 
-For F-Seq, we called peaks varying parameters **length** and **threshold** in the following range:
+For F-Seq, we called peaks varying parameters **length** and **threshold** in
+the following range:
 
 - Length = 100 or 200 or 400 or 600 or 800 or 1000 or 2000
 - Threshold = 2 or 4 or 6 or 8 or 10 or 12 or 14 or 16
 
 [Code](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/run_fseq.sh).
 
-For MACS2
+
+For MACS2, we called peaks varying parameters **extention_size** and **q-value**
+in the following range:
+
+## 0.001 0.005 0.01 0.05 0.1 0.5
+- Extention size = 10 or 100 or 200 or 400 or 600 or 800 or 1000 or 2000
+- Q-value = 0.001 or 0.005 or 0.01 or 0.05 or 0.1 or 0.5
+
+[Code](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/run_macs.sh)
 
 For Hotspot
 
@@ -96,7 +105,7 @@ done | \
 [Code](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/create_heatmap.R).
 
 
-### F-Score results for F-Seq
+### F-Score results
 
 We performed comparison against different types of annotation:
 
@@ -114,13 +123,26 @@ DNase -- highlights one cell in the middle of a heatmap. The results are
 reproducible when analyzing fresh or frozen data:
 
 
-
 | F-Score with beta = 0.5 for fresh material analyzed with F-Seq | F-Score with beta = 0.5 for frzen material analyzed with F-Seq |
 | -------------------------------------------------------------- | -------------------------------------------------------------- |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/fresh.fseq.F-Score_0.5.DNase.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/frozen.fseq.F-Score_0.5.DNase.png) |
 
 This makes us choose F-Seq with threshold 6, length 400.
 
+We also had two parameters for Macs2, extention size (labeled as "length" on
+the heatmaps) and q-value (labeled as "thresh" from *threshold* on the
+heatmaps), therefore we used heatmaps to identify the best parameter set for
+Macs2:
+
+| F-Score with beta = 0.5 for fresh material analyzed with Macs2 | F-Score with beta = 0.5 for frzen material analyzed with Macs2 |
+| -------------------------------------------------------------- | -------------------------------------------------------------- |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/fresh_all.macs.F-Score_0.5.dnase.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/frozen_all.macs.F-Score_0.5.dnase.png) |
+
+We can clearly see that the best value of extention size ("length") is 100,
+while q-value does not have a local maximum and keeps increasing. The exact
+same behaviour was found in the DNase paper, so we are confirming/suggesting
+that DNase and ATAC data behave similarly when analyzed with Macs2 at different
+quality thresholds. We decided to stick to the devault "q-value" value.
 
 
 -------------------------------------------------
