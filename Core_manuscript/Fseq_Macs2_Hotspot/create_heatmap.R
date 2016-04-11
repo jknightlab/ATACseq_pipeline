@@ -10,7 +10,7 @@ nba <- read.table(input_parameter, header=TRUE, sep='\t')
 
 nba_matrix <- data.matrix(nba)
 
-my_palette <- colorRampPalette(c("royalblue", "deeppink4"))(n = 500)
+my_palette <- colorRampPalette(c("royalblue", "deeppink4"))(n = 50)
 
 pdf(output_name)
 heatmap.2(nba_matrix, dendrogram='none', Rowv=FALSE, Colv=FALSE,trace='none', density.info="none", main=title, tracecol=NA, col=my_palette, labRow=rownames(nba_matrix), margins=c(10, 10), cexRow=2, cexCol=2, keysize = 1)
