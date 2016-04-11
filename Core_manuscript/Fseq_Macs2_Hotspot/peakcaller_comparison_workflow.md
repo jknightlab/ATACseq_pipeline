@@ -115,15 +115,13 @@ reproducible when analyzing fresh or frozen data:
 
 - F-Score with beta = 0.5 for fresh material analyzed with F-Seq
 
-https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/F-Score_plots/fresh.fseq.F-Score_0.5.DNase.pdf
+https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/fresh.fseq.F-Score_0.5.dnase.pdf
 
 - F-Score with beta = 0.5 for frzen material analyzed with F-Seq
 
-https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/frozen_.fseq.F-Score_0.5.DNase.pdf
-
+https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/F-Score_plots/frozen_.fseq.F-Score_0.5.DNase.pdf
 
 This makes us choose F-Seq with threshold 6, length 400.
-
 
 
 
