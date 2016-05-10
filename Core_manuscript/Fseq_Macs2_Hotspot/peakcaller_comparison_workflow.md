@@ -129,6 +129,11 @@ annotated peak.
 
 
 
+| Peak caller | Default parameters | Chosen parameters | 
+| ----------- | ------------------ | ----------------- |
+| FSeq        | l=600, t=4         | l=200, t=8        |
+| Macs2       | ext=200, q=0.05    | ext=100, q=0.01   |
+
 
 
 
