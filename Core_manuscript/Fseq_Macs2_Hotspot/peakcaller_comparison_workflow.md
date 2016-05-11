@@ -38,6 +38,22 @@ ranging the two parameters in the following way:
 - `--extsize`: 10 100 200 400 600 800 1000 2000 
 - `--qvalue`: 0.001 0.005 0.01 0.05 0.1 0.5 
 
+Code to generate intersections (using Fseq peaks as example):
+```
+for l in `echo 100 200 400 600 800 1000 2000`
+do
+    for t in `echo 2 4 6 8 10 12 14 16`
+    do
+        fresh1="fresh1.fseq.length_$l.tresh_$t.bed"
+        fresh2="fresh2.fseq.length_$l.tresh_$t.bed"
+        fresh3="fresh3.fseq.length_$l.tresh_$t.bed"
+        bedtools intersect -f 0.3 -r -a $fresh1 -b $fresh2 | \
+            bedtools intersect -f 0.3 -r -a - -b $fresh3 | \
+            bedtools merge -i - > \
+            fresh.fseq.length_$l.tresh_$t.intrsct.bed;
+    done
+done
+```
 
 #### Choice of best parameters per peak caller
 
@@ -124,8 +140,43 @@ were called intersected if they had at least 30% overlap reciprocally in all
 three samples). We required the overlap of 50% of ATAC peak length with an
 annotated peak.
 
+Code to generate intersections between peaks and annotation:
+```
 
+for i in `ls *intrsct.bed`
+do
+    name=`echo $i | \
+        sed s/100.t/0100.t/g | \
+        sed s/200.t/0200.t/g | \
+        sed s/400.t/0400.t/g | \
+        sed s/600.t/0600.t/g | \
+        sed s/800.t/0800.t/g | \
+        sed s/h_2.intrsct.bed/h_02.intrsct.bed/g | \
+        sed s/h_4.intrsct.bed/h_04.intrsct.bed/g | \
+        sed s/h_6.intrsct.bed/h_06.intrsct.bed/g | \
+        sed s/h_8.intrsct.bed/h_08.intrsct.bed/g`
+    bases=`cat $i | awk '{sum += $3-$2} END {print sum}'`
+    on=`bedtools intersect -f 0.5 -a $i -b ../ONtarget.bed | \
+        bedtools merge -i - | \
+        wc -l`
+    on_bp=`bedtools intersect -f 0.5 -a $i -b ../ONtarget.bed | \
+        bedtools merge -i - | \
+        awk '{sum += $3-$2} END {print sum}'`
+    off=`bedtools intersect -f 0.5 -a $i -b ../OFFtarget.bed | \
+        bedtools merge -i - | \
+        wc -l`
+    off_bp=`bedtools intersect -f 0.5 -a $i -b ../OFFtarget.bed | \
+        bedtools merge -i - | \
+        awk '{sum += $3-$2} END {print sum}'`
+    peaks=`cat $i | wc -l`
+    echo -e "$name\t$bases\t$peaks\t$on\t$on_bp\t$off\t$off_bp"
+done
+
+```
 #### Results
+
+
+macs_fseq_performance.png
 
 
 
@@ -137,17 +188,6 @@ annotated peak.
 
 
 
-
-12918	fresh1.fseq.length_0400.tresh_10.bed
-11508	fresh1.fseq.length_0800.tresh_08.bed
-10321	fresh1.fseq.length_0600.tresh_08.bed
-9098	fresh1.fseq.length_0400.tresh_08.bed
-
-
-12682	fresh2.fseq.length_0400.tresh_08.bed
-12690	fresh2.fseq.length_0200.tresh_08.bed
-12841	fresh2.fseq.length_0400.tresh_10.bed
-12889	fresh2.fseq.length_0200.tresh_10.bed
 
 
 
