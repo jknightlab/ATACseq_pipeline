@@ -257,7 +257,12 @@ for FSeq (62% for the chosen parameter set).
 
 **Signal to noise ratio**
 
-
+| Parameter set            | Fresh K562 | Frozen K562 |
+| ------------------------ | ---------- | ----------- |
+| FSeq default parameters  | 3.5        | 1.65        |
+| FSeq chosen parameters   | 1.7        | 1.15        |
+| Macs2 default parameters | 3.48       | 3.35        |
+| Macs2 chosen parameters  | 2.34       | 2.17        |
 
 
 
