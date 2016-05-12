@@ -234,6 +234,15 @@ These density plots demonstrate that chosen parameters for both Macs2 and FSeq c
 
 **Peak height distribution**
 
+Density plots down below represent normalized peak intensity -- number of reads
+mapped to a certain region annotated as peak and divided by the length of this
+region. We can appreciate that when we run either FSeq or Macs2 with chosen
+(not default) parameters, we capture a higher fraction of peaks with higher
+coverage. This is one of the key metrics, as higher coverage indicates more
+evidence and better statistical performance of peak callers. In other words,
+deeper sequenced regions are more reliably called as peaks.
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/peak_intensity_distr.png)
 
 
 **Overlap between replicates**
