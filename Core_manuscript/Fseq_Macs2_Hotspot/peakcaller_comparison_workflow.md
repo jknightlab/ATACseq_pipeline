@@ -274,7 +274,15 @@ for FSeq (62% for the chosen parameter set).
 | Macs2 chosen parameters  | 2.34       | 2.17        |
 
 
+#### Conclusion
 
+On one hand, FSeq calls more narrow peaks (which is closer to reality) and has
+overall higher coverage per peak; also, it calls more peaks which map on
+target. On the other hand, Macs2 shows higher signal-to-noise ratio and higher
+overlap between replicates. We decide to proceed with FSeq as our peak caller
+of choice of this particular project. However, if you do not have multiple
+replicates, Macs2 might be a better choice, as it calles less false
+non-reproducible peaks per sample.
 
 
 -------------------------------------------------
