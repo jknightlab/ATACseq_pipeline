@@ -283,21 +283,21 @@ deeper sequenced regions are more reliably called as peaks.
 
 **Overlap between replicates**
 
-From this table we can appreciate that FSeq calls many more peaks than Macs2.
-However, a lot of them turn to be non-reproducible (13-25% overlap between
-replicates in FSeq compared to 51-54% in Macs2). However, when non-reproducible
-peaks are removed, we are left with more peaks when using FSeq for peak
-calling. We can appreciate, however, that the amount of peaks overlapping with
-annotation (annotated regions such as promoters, enhancers, etc -- but not,
-e.g., repressed) is higher for Macs2 (75% for the chosen parameter set) than
-for FSeq (62% for the chosen parameter set).
+We required 50% overlap of peak width reciprocally. From this table we can
+appreciate that FSeq calls many more peaks than Macs2 with default options.
+With chosen options it calls less peaks than Macs2 with chosen options,
+nevertheless the fraction of peaks overlapping between replicates is higher for
+FSeq chosen parameters (67% agains 46%).  When non-reproducible peaks are
+removed, we are left with almost the same amount of overlapping peaks for FSeq
+and Macs2. In other words, whe using FSeq we get higher % and the same number
+of overlapping peaks.
 
-|    | Average number of called peaks | Overlap between replicates | Number of overlapping peaks | Peaks mapped "on target", number | Peaks mapped "on target", percent |
-| ------------------------ | ------- | ------ | ------ | ------ | ------ |
-| FSeq default parameters  | 221,509 | 13.84% | 30,481 |  7,270 | 23.85% |
-| FSeq chosen parameters   |  86,044 | 24.00% | 20,625 | 12,768 | 61.91% |
-| Macs2 default parameters |  32,928 | 53.26% | 17,456 |  8,784 | 50.32% |
-| Macs2 chosen parameters  |  23,383 | 51.66% | 12,053 |  9,010 | 74.75% |
+|    | Average number of called peaks | Overlap between replicates | Number of overlapping peaks | 
+| ------------------------ | ------- | ------- | ------ | 
+| FSeq default parameters  | 221,509 |  13.62% | 30,171 |
+| FSeq chosen parameters   |  15,354 |  66.8%  | 10,256 |
+| Macs2 default parameters |  32,928 |  50.53% | 16,638 |
+| Macs2 chosen parameters  |  23,383 |  46.54% | 10,882 |
 
 
 **Signal to noise ratio**
