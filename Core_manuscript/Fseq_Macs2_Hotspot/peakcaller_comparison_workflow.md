@@ -211,38 +211,43 @@ within each category is almost identical for both selected parameter sets.
 
 **Overlap with DNaseI peaks**
 
-|  | all peaks | all bases | overlap peaks | overlap bases | % overlap peaks | % overlap bases |
-| ------------------------ | ----- | ------- | ----- | ------- | ------------- | ------------- |
-| 1 bp overlap required    |  |  |  |  |  |  |
-| Fseq chosen parameters   | 10211 | 5660092 | 10111 | 2129143 | 99.0206639898 | 37.6167560527 |
-| Fseq default parameters  | 30481 | 16258123 | 27214 | 5492672 | 89.2818477084 | 33.7841705343 |
-| Macs2 chosen parameters  | 12053 | 3705520 | 11706 | 1809307 | 97.1210487016 | 48.8273440705 |
-| Macs2 default parameters | 17456 | 8674924 | 16798 | 3265043 | 96.2305224565 | 37.637713022 |
-|  |  |  |  |  |  |  |
-| 20% overlap required     |  |  |  |  |  |  |
-| Fseq chosen parameters   | 10211 | 5660092 | 7619 | 1229551 | 74.615610616 | 21.7231628037 |
-| Fseq default parameters  | 30481 | 16258123 | 19419 | 2865479 | 63.7085397461 | 17.624906639 |
-| Macs2 chosen parameters  | 12053 | 3705520 | 10713 | 1485217 | 88.8824359081 | 40.081203178 |
-| Macs2 default parameters | 17456 | 8674924 | 13055 | 1984753 | 74.7880384968 | 22.8791975584 |
-|  |  |  |  |  |  |  |
-| 30% overlap required     |  |  |  |  |  |  |
-| Fseq chosen parameters   | 10211 | 5660092 | 4948 | 705862 | 48.457545784 | 12.4708573642 |
-| Fseq default parameters  | 30481 | 16258123 | 13598 | 1831689 | 44.6113972639 | 11.266300544 |
-| Macs2 chosen parameters  | 12053 | 3705520 | 9010 | 1149614 | 74.7531734838 | 31.0243636521 |
-| Macs2 default parameters | 17456 | 8674924 | 9131 | 1269566 | 52.3086617782 | 14.6348947841 |
-|  |  |  |  |  |  |  |
-| 40% overlap required     |  |  |  |  |  |  |
-| Fseq chosen parameters   | 10211 | 5660092 | 3023 | 412316 | 29.6053275879 | 7.2846165751 |
-| Fseq default parameters  | 30481 | 16258123 | 8993 | 1182706 | 29.5036252091 | 7.2745543874 |
-| Macs2 chosen parameters  | 12053 | 3705520 | 7161 | 886212 | 59.4125943748 | 23.9159955958 |
-| Macs2 default parameters | 17456 | 8674924 | 5649 | 768862 | 32.3613657195 | 8.8630401834 |
-|  |  |  |  |  |  |  |
-| 50% overlap required     |  |  |  |  |  |  |
-| Fseq chosen parameters   | 10211 | 5660092 | 1689 | 227635 | 16.540985212 | 4.0217544167 |
-| Fseq default parameters  | 30481 | 16258123 | 5339 | 702960 | 17.5158295332 | 4.3237463513 |
-| Macs2 chosen parameters  | 12053 | 3705520 | 5467 | 678938 | 45.3580021571 | 18.3223407241 |
-| Macs2 default parameters | 17456 | 8674924 | 3240 | 439841 | 18.5609532539 | 5.070257676 |
+- Fseq chosen parameters: called 10,211 peaks and 5,660,092 bases.
+- Fseq default parameters: called 30,481 peaks and 16,258,123 bases.
+- Macs2 chosen parameters: called 12,053 peaks and 3,705,520 bases.
+- Macs2 default parameters: called 17,456 peaks and 8,674,924 bases.
 
+
+|  |overlap peaks | overlap bases | % overlap peaks | % overlap bases |
+| ------------------------ | ------ | --------- | ----- | ----- |
+| 1 bp overlap required    |        |           |       |       |
+| Fseq chosen parameters   | 10,111 | 2,129,143 | 99.02 | 37.62 |
+| Fseq default parameters  | 27,214 | 5,492,672 | 89.29 | 33.78 |
+| Macs2 chosen parameters  | 11,706 | 1,809,307 | 97.12 | 48.83 |
+| Macs2 default parameters | 16,798 | 3,265,043 | 96.23 | 37.64 |
+|                          |        |           |       |       |
+| 20% overlap required     |        |           |       |       |
+| Fseq chosen parameters   | 7,633  | 3,146,105 | 74.75 | 55.58 |
+| Fseq default parameters  | 19,519 | 7,221,824 | 64.04 | 44.42 |
+| Macs2 chosen parameters  | 10,785 | 2,903,186 | 89.48 | 78.35 |
+| Macs2 default parameters | 13,087 | 4,992,763 | 74.97 | 57.55 |
+|                          |        |           |       |       |
+| 30% overlap required     |        |           |       |       |
+| Fseq chosen parameters   | 4,979  | 1,567,181 | 48.76 | 27.69 |
+| Fseq default parameters  | 13,826 | 3,952,452 | 45.36 | 24.31 |
+| Macs2 chosen parameters  | 9,246  | 2,043,185 | 76.71 | 55.14 |
+| Macs2 default parameters | 9,193  | 2,807,125 | 52.66 | 32.36 |
+|                          |        |           |       |       |
+| 40% overlap required     |        |           |       |       |
+| Fseq chosen parameters   | 3,074  | 773,220   | 30.1  | 13.66 |
+| Fseq default parameters  | 9,359  | 2,183,119 | 30.7  | 13.43 |
+| Macs2 chosen parameters  | 7,601  | 1,406,488 | 63.06 | 37.97 |
+| Macs2 default parameters | 5,740  | 1,438,146 | 32.88 | 16.58 |
+|                          |        |           |       |       |
+| 50% overlap required     |        |           |       |       |
+| Fseq chosen parameters   | 1,771  | 366,174   | 17.34 | 6.47  |
+| Fseq default parameters  | 5,868  | 1,142,485 | 19.25 | 7.03  |
+| Macs2 chosen parameters  | 6,214  | 996,034   | 51.56 | 26.88 |
+| Macs2 default parameters | 3,363  | 711,318   | 19.27 | 8.2   |
 
 
 
