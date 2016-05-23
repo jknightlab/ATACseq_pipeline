@@ -216,6 +216,13 @@ within each category is almost identical for both selected parameter sets.
 - Macs2 chosen parameters: called 12,053 peaks and 3,705,520 bases.
 - Macs2 default parameters: called 17,456 peaks and 8,674,924 bases.
 
+From this table we can appreciate that default parameters call more peaks than
+chosen parameters for both FSeq and Macs2.  However, % overlap with DNaseI
+peaks is always, at each cutoff higher for chosen parameter values.  When
+comparing chosen parameters of FSeq to chosen parameters of Macs2, we can
+appreciate that Macs2 always produces higher overlaps with DNaseI peaks both in
+number and in % of both peaks and bases.
+
 
 |  |overlap peaks | overlap bases | % overlap peaks | % overlap bases |
 | ------------------------ | ------ | --------- | ----- | ----- |
@@ -242,27 +249,6 @@ within each category is almost identical for both selected parameter sets.
 | Fseq default parameters  | 9,359  | 2,183,119 | 30.7  | 13.43 |
 | Macs2 chosen parameters  | 7,601  | 1,406,488 | 63.06 | 37.97 |
 | Macs2 default parameters | 5,740  | 1,438,146 | 32.88 | 16.58 |
-|                          |        |           |       |       |
-| 50% overlap required     |        |           |       |       |
-| Fseq chosen parameters   | 1,771  | 366,174   | 17.34 | 6.47  |
-| Fseq default parameters  | 5,868  | 1,142,485 | 19.25 | 7.03  |
-| Macs2 chosen parameters  | 6,214  | 996,034   | 51.56 | 26.88 |
-| Macs2 default parameters | 3,363  | 711,318   | 19.27 | 8.2   |
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -316,12 +302,30 @@ for FSeq (62% for the chosen parameter set).
 
 **Signal to noise ratio**
 
-| Parameter set            | Fresh K562 | Frozen K562 |
-| ------------------------ | ---------- | ----------- |
-| FSeq default parameters  | 3.5        | 1.65        |
-| FSeq chosen parameters   | 1.7        | 1.15        |
-| Macs2 default parameters | 3.48       | 3.35        |
-| Macs2 chosen parameters  | 2.34       | 2.17        |
+We can see that signal to noise ratio is not very much influenced by different
+parameters. Even more so -- it drops for chosen macs2 parameters. This is most
+probably caused by the fact that we are calling more peaks with default
+parameters, which means there are areas which do contain some coverage. When we
+call less peaks, we restrict the area of peaks (and therefore count less
+reads), however, our background now includes those areas which used to be peaks
+and have some coverage. Therefore we normalized signal-to-noise ratio by the
+number of bases in called peaks. We did the same normalization of S2N for the
+number of called peaks, it gave very similar results. However, since we are
+already using bases for other metrics (Fscore, Sensitivity, etc), we decided to
+use base pairs here as well.
+
+Looking at the normalized S2N, we can appreciate that S2N increased greatly for
+chosen parameters compared to the default parameters and is slightly higher for
+Macs2 than for FSeq.
+
+| Parameter set            | Fresh K562 | S2N / #bp |
+| ------------------------ | ---------- | --------- |
+| FSeq default parameters  | 3.5        | 2.15      | 
+| FSeq chosen parameters   | 3.3        | 5.8       |
+| Macs2 default parameters | 3.48       | 4.01      |
+| Macs2 chosen parameters  | 2.34       | 6.31      |
+
+
 
 
 #### Conclusion
