@@ -226,6 +226,11 @@ These categories disappear for each peak caller when we use the two selected
 parameter sets. We can also appreciate that the percentage of peaks falling
 within each category is almost identical for both selected parameter sets.
 
+On the bottom two plots you can see what the distribution of peaks look like
+when we group all "off target" categories (repressed and transcribed regions,
+promoter flanking) and "on target" categories (enhancer, weak enhancer, TSS,
+[CTCF](https://en.wikipedia.org/wiki/CTCF)).
+
 
 **Overlap with DNaseI peaks**
 
