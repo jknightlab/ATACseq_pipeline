@@ -165,7 +165,6 @@ lower for low-to-average length values of 100-200 for Macs2.
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/fdr-to-tpr_macs-fseq_fresh-frozen-dnase.png)
 
 
-
 #### Which parameter set is the best?
 
 |             | Macs2              | FSeq                |
@@ -290,7 +289,6 @@ for FSeq.
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/peak_width_distribution.png)
 
 
-
 **Peak height distribution**
 
 Density plots down below represent normalized peak intensity -- number of reads
@@ -368,14 +366,15 @@ Macs2 than for FSeq.
 
 #### Illustrations
 
+[This](https://genome-euro.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=pulyakhina&hgS_otherUserSessionName=K562_fresh_FSeq_Macs2_chosen_parameters)
+session was used to create the figures.
+
 |             |            |
 | ----------- | ---------- |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/one.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/two.png)  |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/three.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/four.png)  |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/five.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/six.png)  |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/seven.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/eight.png)  |
-
-
 
 
 #### Conclusion
@@ -401,7 +400,11 @@ between the replicates is much higher.
 Macs2 peaks have a higher % overlap with DNaseI peaks, slightly higher
 signal-to-noise ratio and narrower peaks.
 
+Most importantly, when looking at FSeq and Macs2 peaks by eye, FSeq peaks look
+more realistic.
 
+Based on these observations we made a decision to use the following peak caller
+to analyze our data further on: **FSeq, length 800, threshold 14**.
 
 -------------------------------------------------
 developed by Irina Pulyakhina irina@well.ox.ac.uk
