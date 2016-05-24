@@ -1,5 +1,5 @@
-f_def_input <- read.table ("fseq_chosen.counts.txt", header=FALSE)
-f_cho_input <- read.table ("fseq_default.counts.txt", header=FALSE)
+f_cho_input <- read.table ("fseq_chosen.counts.txt", header=FALSE)
+f_def_input <- read.table ("fseq_default.counts.txt", header=FALSE)
 m_def_input <- read.table ("macs.default.counts.txt", header=FALSE)
 m_cho_input <- read.table ("macs.chosen.counts.txt", header=FALSE)
 
