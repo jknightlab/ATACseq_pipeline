@@ -272,13 +272,30 @@ for FSeq.
 
 Density plots down below represent normalized peak intensity -- number of reads
 mapped to a certain region annotated as peak and divided by the length of this
-region. We can appreciate that when we run either FSeq or Macs2 with chosen
-(not default) parameters, we capture a higher fraction of peaks with higher
-coverage. This is one of the key metrics, as higher coverage indicates more
+region. This is one of the key metrics, as higher coverage indicates more
 evidence and better statistical performance of peak callers. In other words,
 deeper sequenced regions are more reliably called as peaks.
 
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/peak_intensity_distribution.png)
 
+
+We can appreciate that when we run either FSeq or Macs2 with chosen (not
+default) parameters, we capture a higher fraction of peaks with higher
+coverage. However, FSeq peaks called with chosen parameters have slightly lower
+average intensity compared to the peaks called with Macs2 chosen parameters.
+This might be happening due to the width of peaks and that the two peak callers
+have very different models, Macs2 was run with low length value (100, 200),
+while FSeq was run with my larger length values (600, 800). We did normalize
+for the peak width, however, peak nature implies that it has a spike in the
+middle and has high coverage over that spike and less coverage around it. So
+when the area around it is wide enough, we might be diluting the signal.  To
+account for that, we created another peak intensity distribution plot, but now
+we took the middle position of the peak and 50 bp upstread and downstream of it
+as the region of interest. We can see that indeed, average intensity of peaks
+is very similar for Macs2 and Fseq now; in fact, the mode of peak intensity
+distribution is slihtly higher for FSeq peaks called with chosen parameters.
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/peak_intensity_distribution_100bp.png)
 
 
 **Overlap between replicates**
