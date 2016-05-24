@@ -368,6 +368,15 @@ Macs2 than for FSeq.
 
 #### Illustrations
 
+|             |            |
+| ----------- | ---------- |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/one.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/two.png)  |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/three.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/four.png)  |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/five.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/six.png)  |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/seven.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/eight.png)  |
+
+
+
 
 #### Conclusion
 
