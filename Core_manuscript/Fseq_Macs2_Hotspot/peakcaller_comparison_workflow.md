@@ -366,9 +366,33 @@ Macs2 than for FSeq.
 | Macs2 chosen parameters  | 2.34       | 6.31      |
 
 
+#### Illustrations
 
 
 #### Conclusion
+
+|                                          | FSeq      | Macs2     |
+| ---------------------------------------- | --------- | --------- |
+| overlap with "on target" annotation, %   | 66%       | 33%       |
+| overlap with "off target" annotation, %  | 0.08%     | 0.02%     |
+| overlap with "on target" annotation, bp  | 6,769     | 3,960     |
+| overlap with "off target" annotation, pk | 9         | 3         |
+| overlap with DNaseI peaks, bp            | 3,146,105 | 2,903,186 |
+| overlap with DNaseI peaks, %             | 75%       | 89%       |
+| peak width distribution                  | 380 bp    | 180 bp    |
+| peak height distribution                 | higher    | lower     |
+| overlap between replicates               | 67%       | 47%       |
+| signal-to-noise ratio                    | 5.8       | 6.3       |
+
+FSeq peaks are more enriched for the "on target" K562 regulatory elements; in
+base pairs, they are more enriched for DNaseI peaks (but not in the % of
+peaks). The average intensity of FSeq peaks is slightly higher and the overlap
+between the replicates is much higher.
+
+Macs2 peaks have a higher % overlap with DNaseI peaks, slightly higher
+signal-to-noise ratio and narrower peaks.
+
+
 
 -------------------------------------------------
 developed by Irina Pulyakhina irina@well.ox.ac.uk
