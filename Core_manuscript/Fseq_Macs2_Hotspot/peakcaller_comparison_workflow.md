@@ -201,10 +201,28 @@ caller performs better. We looked at the following parameters:
 
 **Distribution of peaks across various categories of annotation**
 
-From the two boxplots down below (generated from)
+K562 segmentation track of annotated regulatory elements used by ENCODE was
+taken from
+[here](http://ucscbrowser.genap.ca/cgi-bin/hgTrackUi?hgsid=275287_Q3Wf4yyipacgB10HhqrM1BhHe10F&c=chr7&g=hub_1_genomeSegmentation).
+
+This is the legend interpretation
+
+- Distal CTCF/Candidate Insulator (CTCF)
+- Candidate strong enhancer (E)
+- Candidate weak enhancer (WE)
+- Repressed (R)
+- Promoter flanking (PF)
+- Transcribed (T)
+- TSS (TSS)
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/peak_distribution_across_annotation.png)
+
+From the two boxplots above (generated from
+[this data](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/peak_distribution_over_annotation_categories.txt)
+)
 we can appreciate that default parameter sets call peaks more peaks in areas
-that we do not expect to see ("repressed", "transcribed", "txn"). These
-categories disappear for each peak caller when we use the two selected
+that we do not expect to see ("repressed", "transcribed", "promoter flanking").
+These categories disappear for each peak caller when we use the two selected
 parameter sets. We can also appreciate that the percentage of peaks falling
 within each category is almost identical for both selected parameter sets.
 
