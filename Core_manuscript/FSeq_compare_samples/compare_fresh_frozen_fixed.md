@@ -3,7 +3,7 @@ Comparing called peaks in fresh, frozen and fixed ATAC
 
 
 
-|  param  | fresh | frozen | fixed_day1_inact_only | fixed_day1_inact_decrosslink | fixed_day3_inact_decrosslink | fixed_day7_inact_decrosslink |
+|  param  | fresh | frozen | fixed day1 inact only | fixed day1 inact decrosslink | fixed day3 inact decrosslink | fixed day7 inact decrosslink |
 | ---------------------------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
 | Number of filtered reads     | 11,860,451 | 15,979,159 | 33,108,409 | 26,462,788 | 36,800,607 | 49,502,051 |
 | Average fragment width       | 494 | 517 | 599 | 640 | 376 | 381 |
