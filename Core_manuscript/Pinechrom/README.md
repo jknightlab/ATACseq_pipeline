@@ -8,11 +8,42 @@ the instructions on how your input files should be called. **Pinechrom**
 consists of three modules:
 
 - `pinechrom_general` is run per sample, it performs read alignment, filtering
-    of mapped reads, quality checks and generates statistical overview of the
-    quality, as well as some informative plots;
+   of mapped reads, quality checks and generates statistical overview of the
+   quality, as well as some informative plots;
 - `pinechrom_compare` is run for a pair of conditions, each condition can be
-   represented by one or multiple samples. This module creates consensus peak lists for each condition, extracts peaks unique per condition, runs differential expression analysis on the common peaks and checks for the existences linear correlation between the intensities common peaks;
+   represented by one or multiple samples. This module creates consensus peak
+   lists for each condition, extracts peaks unique per condition, runs
+   differential expression analysis on the common peaks and checks for the
+   existences linear correlation between the intensities common peaks;
 - `pinechrom_genes`
+
+#### Prerequisites
+
+In order for script to run without errors and recognize all
+necessary tools, please specify the paths to the following
+tools (within the script):
+
+- zcat
+- FastQC
+- cutadapt
+- bwa version 0.7.10
+- bwa index files of human reference hg19
+- samtools version 1.2
+- picard version 1.1 and higher
+- bedtools version 2.2 and higher
+- bedGraphToBigWig
+- file containing chromosome names (as specified in the bwa index file) and
+  chromosome lengths
+- macs2
+- bamtools version 2.3.0
+- blacklist region -- regions that should be removed from consideration due to
+  a number of reasons
+
+You also need to specify path to the following in-house developed scripts:
+
+- ATACseq\_qc.R
+- bed\_extract\_fragments.pl
+
 
 
 #### Module "pinechrom_general"
@@ -52,6 +83,23 @@ you should use this command. The pipeline will start with creating a bigwig
 file for your input filtered bam file, perform statistical analysis, call peaks
 and perform statistical analysis on them. You should specify the *full* path to
 your filtered bam file using **--bam_filt**.
+
+The following procedures are carried out:
+
+- removing adapter sequences from the raw fastq files (`--fastq`);
+- aligning trimmed fastq files to the human reference hg19 with `BWA`
+  (`--fastq`);
+- filtering the alignment file: removing duplicates, alignments with mapping
+  quality < 30, non-uniquely mapped reads, not properly paired reads, reads
+  mapping to non-conventional chromosomes or mitochondrial DNA (`--fastq` /
+  `--bam`);
+- generating BigWig file with peaks of ATAC signal (`--fastq`, `--bam`,
+  `--bam_filt`);
+- calling peaks on filtered alignments using macs2 (`--fastq`, `--bam`,
+  `--bam_filt`);
+- running quality controls, such as number of mapped reads at every stage of
+  filtering the alignments, generating plots with number of reads mapped to
+  peaks, signal to noise ratio, peak width (`--fastq`, `--bam`, `--bam_filt`);
 
 
 #### Module "pinechrom_compare"
