@@ -34,11 +34,14 @@ from any material type is meaningful at all.
 |             |            |
 | ----------- | ---------- |
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_distr.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_intensity.png)  |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/overlap_between_types.png) | .  |
 
 
+*Overlap between different material types*
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/overlap_between_types.png)
 
 
+*Overlap with the annotation*
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/overlap_of_types_with_annotation.png)
 
