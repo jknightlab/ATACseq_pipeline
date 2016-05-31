@@ -28,7 +28,8 @@ from any material type is meaningful at all.
 | On target, bases, %          | 16.97%     | 27.51%     | 7.47%      | 7.82%      | 7.31%      | 10.41%     |
 | Off target, peaks, %         | 0.09%      | 0.09%      | 0.36%      | 0.44%      | 16.2%      | 49.21%     |
 | Off target, bases, %         | 0.02%      | 0.03%      | 0.38%      | 0.51%      | 13.39%     | 35%        |
-| [Signal to noise ratio](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/FSeq_compare_samples/s2n_calculations.txt)  | 3.49  | 2.9   | 2.7   | 3.11  | 4.74   | 2.95|
+| [Signal to noise ratio](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/FSeq_compare_samples/s2n_calculations.txt)  | 2.43 | 2.04 | 1.39 | 2.06 | 0.42 | 0.13 |
+
 
 
 |             |            |
@@ -64,7 +65,7 @@ from any material type is meaningful at all.
 
 ToDo:
 
-- visual analysis of samples
+- + visual analysis of samples
 - + number of called peaks
 - + number of called peaks normalized by library size
 - + overlap between replicates
