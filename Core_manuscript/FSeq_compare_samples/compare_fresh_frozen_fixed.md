@@ -36,18 +36,29 @@ from any material type is meaningful at all.
 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_distr.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_intensity.png)  |
 
 
-*Overlap between different material types*
+**Overlap between different material types**
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/overlap_between_types.png)
 
 
-*Overlap with the annotation*
+**Overlap with the annotation**
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/overlap_of_types_with_annotation.png)
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/on-off_target.png)
 
 
+**Screenshots from UCSC**
+
+|             |            |
+| ----------- | ---------- |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/hgt_genome_euro_5481_d95ac0.pdf.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/hgt_genome_euro_5956_d95f90.pdf.png) |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/hgt_genome_euro_5ec0_d96600.pdf.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/hgt_genome_euro_681e_d96f20.pdf.png) |
+
+
+
+
+**Observations**
 
 
 
