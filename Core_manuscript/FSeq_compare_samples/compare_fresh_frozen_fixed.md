@@ -58,8 +58,65 @@ from any material type is meaningful at all.
 
 
 
-
 **Observations**
+
+- Number of peaks called in fresh samples and normalized to the number of
+  mapped and filtered reads is slightly higher than for frozen samples, almost
+  two times higher than in samples fixed for 1 day (both inact only and inact
+  decross), more than 20 times higher than in samples fixed for 3 days or 7
+  days.
+
+- Average peak width of 550-570 is very similar for fresh and frozen samples,
+  much wider (780-800 bp) for both fixed_day1 samples, wider (670-680 bp) for
+  fixed_day3 and fixed_day7.
+
+- Both fresh and frozen samples have over 65% bases overlap with DNaseI peaks
+  (slightly higher overlap for fresh samples), only 40% for both fixed_day1
+  samples. Surprisingly the overlap between fixed_day3 with DNaseI is much
+  higher than for fixed_day7 (47% against 8%) and even higher than for
+  fixed_day1 (47% against 40%).
+
+- Overlap between replicates is similarly high for fresh and frozen samples
+  (76-77%), slightly lower for both fixed_day1 samples (70-72%) and much lower
+  for fixed_day3 and fixed_day7 (below 50%).
+
+- Number of bases mapped on target is higher for frozen samples (27%) than for
+  fresh (17%). This percentage is comparably low for all fixed samples (7-10%).
+
+- Number of bases mapped off target is a bit lower for fresh than for frozen
+  samples (0.02% against 0.03%). Fixed_day1 samples have 10 times higher peak
+  calling of target, fixed_day3 and fixed_day7 -- 100 times higher.
+
+- Signal-to-noise ratio is the highest for fresh samples, similarly high for
+  frozen and fixed_day1 inact+decross, much lower for fixed_day1_inact only
+  (2.06 against 1.39).
+
+- Overlap between samples of different types of material: the highest between
+  fixed_day1 inact+decross and fixed_day1_inact (78.7%); fresh and frozen
+  (72.1%); fixed_day1 inact+decross and fresh/frozen (60.7% / 64%).
+
+- Looking at the overlap with annotation, fixed_day3 still looks a bit like
+  fresh samples, but fixed_day7 looks very different.
+
+- Looking at the overlap with annotation, fresh samples have higher percentage
+  of TSS and frozen samples have higher percentage of enhancers, weak enhancers
+  and CTCFs.
+
+- Looking at the overlap with annotation, both fixed_day1 samples look almost
+  identical.
+
+- Looking at the images from UCSC, it looks like the signal is the same in all
+  samples, sometimes stronger in fresh, sometimes stronger in frozen samples.
+  And it gets gradually diluted from fixed_day1 to fixed_day3 and fixed_day7.
+
+- Fresh and frozen samples look the best. Some metrics look better for fresh,
+  some look better for frozen.
+
+- Fixed_day1 inact+decross looks slightly better than fixed_day1 inact only.
+
+- Fixed_day3 and day7 contain very noisy, diluted signal.
+
+
 
 
 
