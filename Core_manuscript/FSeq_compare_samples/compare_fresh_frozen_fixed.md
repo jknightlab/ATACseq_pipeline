@@ -174,20 +174,25 @@ of mterial.
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/overlap_between_material_types.png)
 
 
+#### Peak width for each of the main annotation categories
 
-
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_CTCF.png)
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples//peak_width_Enh.png)
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_WE.png)
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_TSS.png)
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_average.png)
 
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_CTCF.png)
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples//peak_width_Enh.png)
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_WE.png)
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_TSS.png)
 
 
 
 
 
-ToDo:
+
+
+#### ToDo:
 
 - + visual analysis of samples
 - + number of called peaks
