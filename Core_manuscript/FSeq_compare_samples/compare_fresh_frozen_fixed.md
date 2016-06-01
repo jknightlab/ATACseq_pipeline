@@ -117,6 +117,57 @@ from any material type is meaningful at all.
 - Fixed_day3 and day7 contain very noisy, diluted signal.
 
 
+#### Unique peaks
+
+This is what happens with the distribution of peak categories in fresh ATAC
+sample when we subtract peaks overlapping between fresh and frozen samples,
+fresh and fixed day1, etc. A big difference happens when we subtract frozen
+peaks from fresh peaks, after that, when we remove fixed peaks, not much
+change. Also, the main change happens in the number of TSS, they are over 50%
+of peaks that we loose when we subtract frozen peaks.
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/fresh_minus_frozen-fixed.png)
+
+
+This figure shows the number and percentage of peaks with different annotations
+which are unique in pairwise comparisons. E.g., fresh vs frozen means that
+these peaks are remaining in a fresh sample when we subtract frozen, but we
+have no information whether they are also present in any over peak list. We can
+see that subtracting fresh/frozen/fixed_day1 peaks from fixed_day3/fixed_day7
+leaves us with almost no peaks. We can also see that fresh and frozen samples
+look more similar to each other than to fixed_day1 samples. Both fresh and
+frozen samples have a lot more enhancers than fixed_day1.
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/unique_pairwise_peaks.png)
+
+
+On this plot we can see the annotation of peaks unique for each material type
+compared to all other types of material. Firstly, we can see that regardless of
+a very similar number of called peaks in fresh (~11,000), frozen (~13,000) and
+both fixed_day1 samples (~12,000), frozen samples contain many more unique
+peaks than fresh or fixed samples. We can also see than fixed day1 samples
+contain more unique peaks than fresh; and that fixed day1 inact_only contains
+more unique peaks than fixed_day1 inact+decrosslink. We can see that unique
+frozen peaks are enriched for enhancers and weak enhancers, while unique
+fixed_day1 peaks are enriched for TSS (and less for CTCF).
+
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/unique_peak_annotation.png)
+
+
+
+
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/overlap_between_material_types.png)
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_CTCF.png)
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples//peak_width_Enh.png)
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_WE.png)
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_TSS.png)
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_average.png)
+
+
+
 
 
 
@@ -134,9 +185,9 @@ ToDo:
 - + % overlap with annotation "off-target"
 - + % overlap with each functional group of the annotation
 - average peak intensity per group
-- average peak width per group
-- number of peaks overlapping between two material types in a pairwise manner
-- pairwise overlap between different types of material and its description (height, width, overlap with functional categories)
+- + average peak width per group
+- + number of peaks overlapping between two material types in a pairwise manner
+- + pairwise overlap between different types of material and its description (height, width, overlap with functional categories)
 - similar analysis of peaks specific for each type of material (height, width, overlap with functional categories)
 - sequence analysis of common peaks
 - sequence analysis of unique peeaks
