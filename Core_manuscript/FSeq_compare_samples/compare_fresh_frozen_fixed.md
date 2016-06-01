@@ -155,10 +155,26 @@ fixed_day1 peaks are enriched for TSS (and less for CTCF).
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/unique_peak_annotation.png)
 
 
+#### Peaks overlapping between different types of material
 
+This bar plot contains the annotation-based distribution of peaks common
+between each two types of materials. We can once again appreciated that frozen
+samples are enriched with enhancers and the fraction of overlapping enhancers
+is the highest for frozen samples. It is higher when we compare fresh and
+frozen samples than when we compare fixed and frozen samples. We can also
+appreciate that the number of overlapping peaks is very similar when we compare
+overlaps of fresh or frozen samples with fresh/frozen/fixed_day1. However, when
+we look at fixed_day1 overlaps with the other fixed_Day1 sample and
+fresh/frozen, two fixed_day1 samples are more similar than a fixed_day1 and a
+fresh/frozen sample.  From the Y axis we can also appreciate that both
+fixed_day3 and fixed_day7 have a significantly lower overlap with other types
+of mterial. 
 
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/overlap_between_material_types.png)
+
+
+
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_CTCF.png)
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples//peak_width_Enh.png)
@@ -188,7 +204,7 @@ ToDo:
 - + average peak width per group
 - + number of peaks overlapping between two material types in a pairwise manner
 - + pairwise overlap between different types of material and its description (height, width, overlap with functional categories)
-- similar analysis of peaks specific for each type of material (height, width, overlap with functional categories)
+- + similar analysis of peaks specific for each type of material (height, width, overlap with functional categories)
 - sequence analysis of common peaks
 - sequence analysis of unique peeaks
 
