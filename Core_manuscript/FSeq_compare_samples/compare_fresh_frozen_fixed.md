@@ -174,6 +174,27 @@ of mterial.
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/overlap_between_material_types.png)
 
 
+**Peak intensity per group**
+
+This figure shows the distribution of peak intensities for each of the main
+categories of RE -- CTCF, Enhancers, Weak Enhancers and TSS. We can appreciate
+that both fresh and frozen samples contain many more peaks with higher coverage
+than both fixed day1 samples. We can also appreciate that for each category
+fixed_day1 inact+decross has more peaks with higher intensity than fixed_day1
+inact_only.
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_intensity_on-target.png)
+
+On this density plot we see the distribution of peak intensity for all peaks
+annotated as Enhancers called in frozen samples and peaks annotated as
+enhancers found uniquely in frozen samples. We can see almost no
+difference/shift in the two distributions, just a slight distribution to higher
+intensity values for unique Enhancers.
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_intensity_frozen_enh.png)
+
+
+
 #### Peak width for each of the main annotation categories
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/width_distr_of_RE.png)
@@ -207,7 +228,7 @@ of mterial.
 - + % overlap with annotation "on-target"
 - + % overlap with annotation "off-target"
 - + % overlap with each functional group of the annotation
-- average peak intensity per group
+- + average peak intensity per group
 - + average peak width per group
 - + number of peaks overlapping between two material types in a pairwise manner
 - + pairwise overlap between different types of material and its description (height, width, overlap with functional categories)
