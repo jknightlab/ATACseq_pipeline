@@ -176,6 +176,8 @@ of mterial.
 
 #### Peak width for each of the main annotation categories
 
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/width_distr_of_RE.png)
+
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_average.png)
 
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/FSeq_compare_samples/peak_width_CTCF.png)
@@ -212,6 +214,7 @@ of mterial.
 - + similar analysis of peaks specific for each type of material (height, width, overlap with functional categories)
 - sequence analysis of common peaks
 - sequence analysis of unique peeaks
+- Downsample different types of material and see how the distribution of peaks across categories changes
 
 -------------------------
 Designed by Irina Pulyakhina, irina@well.ox.ac.uk
