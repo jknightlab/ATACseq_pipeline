@@ -34,7 +34,7 @@ samples.
 | FAIRE downsampled  |  11,782,011 |  12,845,269 |      -      |
 
 Downsampling:
-``
+```
 samtools view -b -s 0.1813 faire.rep1.bam > faire.rep1.fseq_downs.bam
 samtools view -b -s 0.1743 faire.rep2.bam > faire.rep2.fseq_downs.bam
 ```
