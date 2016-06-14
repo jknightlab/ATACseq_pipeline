@@ -67,21 +67,21 @@ bedtools intersect \
     dnase.fseq.intrsct.bed
 ```
 
-| Parameter                         | Fresh                 | Frozen                | DNaseI                | FAIRE              |
-| --------------------------------- | --------------------- | --------------------- | --------------------- | ------------------ |
-| Number of filtered reads          |            11,860,451 |            15,979,159 |            11,860,064 |         12,313,640 |
-| Number of peaks                   |                10,211 |                13,602 |                27,493 |              1,015 |
-| Normalized number of peaks        |                 86.09 |                 85.12 |                231.81 |               8.24 |
-| Number of bases in peaks          |             5,660,092 |             7,854,369 |            13,750,508 |            596,555 |
-| Average peak width                |                   554 |                   577 |                   500 |                588 |
-| Overlap with fresh ATAC, % bases  |                    NA | 76.84% (5,188,735 bp) | 43.47% (4,118,590 bp) |   0.41% (9,628 bp) |
-| Overlap with frozen ATAC, % bases | 76.84% (5,188,735 bp) |                    NA | 48.63% (5,092,382 bp) |   0.29% (9,012 bp) |
-| Overlap with DNaseI, % bases      | 43.47% (4,118,590 bp) | 48.63% (5,092,382 bp) |                    NA | 1.55% (156,001 bp) |
-| Overlap with FAIRE, % bases       |      0.41% (9,628 bp) |      0.29% (9,012 bp) |    1.55% (156,001 bp) |                 NA |
-| Overlap between replicates, %     |                76.02% |                76.65% |                79.25% |             52.74% |
-| On target, bases, %               |                16.97% |                27.51% |                50.87% |              0.10% |
-| Off target, bases, %              |                 0.02% |                 0.03% |                   XXX |                XXX |
-| Signal to noise ratio             |                  2.43 |                  2.04 |                  3.22 |                XXX |
+| Parameter                      | Fresh                 | Frozen                | DNaseI                | FAIRE              |
+| ------------------------------ | --------------------- | --------------------- | --------------------- | ------------------ |
+| Number of filtered reads       |            11,860,451 |            15,979,159 |            11,860,064 |         12,313,640 |
+| Number of peaks                |                10,211 |                13,602 |                27,493 |              1,015 |
+| Normalized number of peaks     |                 86.09 |                 85.12 |                231.81 |               8.24 |
+| Number of bases in peaks       |             5,660,092 |             7,854,369 |            13,750,508 |            596,555 |
+| Average peak width             |                   554 |                   577 |                   500 |                588 |
+| Overlap with fresh ATAC, % bp  |                    NA | 76.84% (5,188,735 bp) | 43.47% (4,118,590 bp) |   0.41% (9,628 bp) |
+| Overlap with frozen ATAC, % bp | 76.84% (5,188,735 bp) |                    NA | 48.63% (5,092,382 bp) |   0.29% (9,012 bp) |
+| Overlap with DNaseI, % bases   | 43.47% (4,118,590 bp) | 48.63% (5,092,382 bp) |                    NA | 1.55% (156,001 bp) |
+| Overlap with FAIRE, % bases    |      0.41% (9,628 bp) |      0.29% (9,012 bp) |    1.55% (156,001 bp) |                 NA |
+| Overlap between replicates, %  |                76.02% |                76.65% |                79.25% |             52.74% |
+| On target, bases, %            |                16.97% |                27.51% |                50.87% |              0.10% |
+| Off target, bases, %           |                 0.02% |                 0.03% |                   XXX |                XXX |
+| Signal to noise ratio          |                  2.43 |                  2.04 |                  3.22 |                XXX |
 
 
 
