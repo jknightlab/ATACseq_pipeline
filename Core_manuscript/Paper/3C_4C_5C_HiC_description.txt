@@ -1,0 +1,73 @@
+Chromosome Conformation Capture (3C)
+
+Step 1 Cross-linking
+Addition of formaldehyde results in the cross-linking of DNA segments to proteins and the cross-linking of proteins with each other.
+
+Step 2 Restriction digest
+A restriction enzyme is added in excess to the cross-linked DNA, separating the non-cross-linked DNA from the cross-linked chromatin.
+
+Step 3 Intramolecular Ligation
+Using very low concentrations of DNA favors the ligation of relevant DNA fragments with the corresponding junctions instead of the ligation of random fragments.
+- There are two major types of ligation junctions that are over-represented. One is the junction that forms between neighboring DNA fragments due to incomplete digestion, which represents about 20-30% of all junctions.
+- The other type of junctions over-represented here is the junction that forms when one end of the fragment ligates with the other end of the same fragment, and contributes up to 30% of all junctions formed.
+
+Step 4 Reverse Cross-links
+High temperature will result in the reversal of cross-links formed in step 1.
+The resulting linear DNA fragment has specific restriction ends as well as a central restriction site corresponding to the site of ligation.
+
+Step 5 Quantitation
+PCR uses primers against the site of ligation to semi-quantitatively assess the frequencies of a restriction fragment of interest.
+
+
+
+
+==================================================
+
+Circularized Chromosome Conformation Capture (4C)
+
+Steps 1-4
+See procedure listed in 3C. 6-bp-cutters are preferred in step 2.
+
+Step 5a Second Restriction Digest
+Another round of restriction digest with a frequent cutter resulting in smaller fragments with restriction ends that differ from the central restriction site (ligation junction).
+
+Step 5b Self-circularization
+Self-circularization of the DNA fragments is more favored now that they are not bound to other proteins or fragments.
+Intramolecular ligation occurs to induce the formation of the circular fragments.
+
+Step 5c Inverse PCR and Quantitation
+Primers are designed against the outer restriction sites of the “bait” sequence,
+which result in the amplification of the small unknown captured fragment.
+Large-scale sequencing can be used to sequence the 4C library.
+
+==================================================
+
+Carbon-Copy Chromosome Conformation Capture (5C)
+
+Steps 1-4
+Same as in 3C.
+
+Step 5 Ligation-mediated amplification and Quantitation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
