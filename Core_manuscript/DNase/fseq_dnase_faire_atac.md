@@ -71,9 +71,10 @@ annotation can be found
 
 #### Peak width distribution
 
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/atac_dnase_faire_peak_width.png)
 
-## -------> add -- distribution of width of peaks unique per sample
+| All peaks | Unique peaks |
+| --------- | ------------ |
+| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/atac_dnase_faire_peak_width.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/unique_atac_dnase_faire_peak_width.png) |
 
 
 
