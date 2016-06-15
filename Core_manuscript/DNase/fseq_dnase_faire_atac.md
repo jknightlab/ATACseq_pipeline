@@ -3,7 +3,7 @@ Comparing ATAC, DNaseI and FAIRE samples
 
 #### Workflow
 
-1. We downloaded DNaseI data from
+`1.` We downloaded DNaseI data from
 [here](https://www.encodeproject.org/experiments/ENCSR000EKN/).
 Three replicates for K562 were available. Description of samples from the
 ENCODE website: K562 (Homo sapiens, adult 53 year female), immortalized cell
@@ -21,7 +21,7 @@ ENCFF000TLN.bam -> faire.rep1.bam
 ENCFF000TLP.bam -> faire.rep2.bam
 ```
 
-2. We downsampled DNaseI and FAIRE data to the amount of reads in fresh
+`2.` We downsampled DNaseI and FAIRE data to the amount of reads in fresh
 samples.
 
 |                    | Replicate 1 | Replicate 2 | Replicate 3 |
@@ -39,7 +39,7 @@ samtools view -b -s 0.1813 faire.rep1.bam > faire.rep1.fseq_downs.bam
 samtools view -b -s 0.1743 faire.rep2.bam > faire.rep2.fseq_downs.bam
 ```
 
-3. We analyzed DNaseI and FAIRE data with
+`3.` We analyzed DNaseI and FAIRE data with
 [pinechrom](https://github.com/jknightlab/ATACseq_pipeline/tree/master/Core_manuscript/Pinechrom)
 in the same way we analyzed ATAC data (using F-Seq as a peak caller).
 
@@ -79,11 +79,75 @@ bedtools intersect \
 | Overlap with DNaseI, % bases   | 43.47% (4,118,590 bp) | 48.63% (5,092,382 bp) |                    NA | 1.55% (156,001 bp) |
 | Overlap with FAIRE, % bases    |      0.41% (9,628 bp) |      0.29% (9,012 bp) |    1.55% (156,001 bp) |                 NA |
 | Overlap between replicates, %  |                76.02% |                76.65% |                79.25% |             52.74% |
-| On target, bases, %            |                16.97% |                27.51% |                50.87% |              0.10% |
-| Off target, bases, %           |                 0.02% |                 0.03% |                   XXX |                XXX |
+| On target, bases, %            |                60.43% |                67.42% |                60.45% |              0.25% |
+| Off target, bases, %           |                 0.02% |                 0.02% |                  0.3% |              2.49% |
 | Signal to noise ratio          |                  2.43 |                  2.04 |                  3.22 |                XXX |
 
 
+How annotation was created:
+```
+we="/home/irina/Work/ATAC-Seq/Git/ATACseq_pipeline/Core_manuscript/Peaks/Annotation/wgEncodeAwgSegmentationCombinedK562-WE.bed"
+e="/home/irina/Work/ATAC-Seq/Git/ATACseq_pipeline/Core_manuscript/Peaks/Annotation/wgEncodeAwgSegmentationCombinedK562-E.bed"
+tss="/home/irina/Work/ATAC-Seq/Git/ATACseq_pipeline/Core_manuscript/Peaks/Annotation/wgEncodeAwgSegmentationCombinedK562-TSS.bed"
+ctcf="/home/irina/Work/ATAC-Seq/Git/ATACseq_pipeline/Core_manuscript/Peaks/Annotation/wgEncodeAwgSegmentationCombinedK562-CTCF.bed"
+
+cat $we $e $tss $ctcf | bedtools sort -i - | bedtools merge -i - > segmentation.on_target.bed
+
+pf="/home/irina/Work/ATAC-Seq/Git/ATACseq_pipeline/Core_manuscript/Peaks/Annotation/wgEncodeAwgSegmentationCombinedK562-PF.bed"
+r="/home/irina/Work/ATAC-Seq/Git/ATACseq_pipeline/Core_manuscript/Peaks/Annotation/wgEncodeAwgSegmentationCombinedK562-R.bed"
+t="/home/irina/Work/ATAC-Seq/Git/ATACseq_pipeline/Core_manuscript/Peaks/Annotation/wgEncodeAwgSegmentationCombinedK562-T.bed"
+
+cat $pf $r $t | bedtools sort -i - | bedtools merge -i - > segmentation.off_target.bed
+```
+
+Calculating overlap with the annotation:
+```
+annotation="segmentation.off_target.bed"
+
+for sample in `ls *intrsct.bed`
+do
+    bases_in_sample=`cat $sample | awk '{sum += $3-$2} END {print sum}'`
+    bases_in_overlap=`bedtools intersect -f 0.3 -r -a $sample -b $annotation | bedtools sort -i - | bedtools merge -i - | awk '{sum += $3-$2} END {print sum}'`
+    percent_overlap=`echo $bases_in_sample $bases_in_overlap | awk '{print ($2*100)/$1}'`
+    echo -e "$sample\t$percent_overlap"
+done
+```
+
+
+#### Peak width distribution
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/atac_dnase_faire_peak_width.png)
+
+## -------> add -- distribution of width of peaks unique per sample
+
+
+#### Distribution of peaks across different categories of the annotation
+
+Distribution of peaks (and bases in peaks) in DNaseI, FAIRE, fresh and frozen ATAC sample across different categories of the annotation:
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/DNase/atac_dnase_faire_peaks_across_categories.png)
+
+## -------> add -- distribution across categories of peaks unique per sample
+
+
+Code:
+```
+for i in `ls Annotation/wgEncodeAwgSegmentationCombinedK562-*bed`
+do
+    for j in `ls *intrsct.bed`
+    do
+        annotation=`echo $i | sed s/.*K562-//g`
+        peaks=`bedtools intersect -f 0.3 -r -a $j -b $i | bedtools intersect -u -a - -b $j | bedtools sort -i - | bedtools merge -i - | wc -l`
+        bases=`bedtools intersect -f 0.3 -r -a $j -b $i | bedtools intersect -u -a - -b $j | bedtools sort -i - | bedtools merge -i - | awk '{sum += $3-$2} END {print sum}'`
+        echo -e "$annotation\t$j\t$peaks\t$bases"
+    done
+    echo
+done
+```
+
+
+#### Figures?..
+#### Observations
 
 
 
