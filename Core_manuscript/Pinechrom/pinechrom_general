@@ -386,7 +386,7 @@ $FSEQ \
     -l 800 \
     -t 14 \
     -of npf \
-    -v
+    2> $FILENAME.stderr.txt
 
 npfFile="$FILENAME.fseq.narrowPeak"
 rm -rf $bedDir/$npfFile
@@ -647,18 +647,23 @@ cat $FILENAME.fseq.chr.narrowPeak | \
 echo "done."
 
 # deleting intermediate files which won't be used anymore
-rm *.picard_insertSizeMetric_report
-rm *.picard_histogram
-rm *.bedgraph
-rm *.filtered.name_sort.bam
-rm $FILENAME.nodup.MAPQ30.bam
-rm $FILENAME.nodup.MAPQ30.uniq.bam
-rm $FILENAME.nodup.MAPQ30.uniq.proper_paired.bam
-rm $FILENAME.nodup.bam
-rm $FILENAME.sam
-rm $FILENAME.bam1
-rm $FILENAME.sorted.bam
-rm $FILENAME.unfiltered.bam
-
+rm -rf *.picard_insertSizeMetric_report
+rm -rf *.picard_histogram
+rm -rf *.bedgraph
+rm -rf *.filtered.name_sort.bam
+rm -rf $FILENAME.nodup.MAPQ30.bam
+rm -rf $FILENAME.nodup.MAPQ30.uniq.bam
+rm -rf $FILENAME.nodup.MAPQ30.uniq.proper_paired.bam
+rm -rf $FILENAME.nodup.bam
+rm -rf $FILENAME.sam
+rm -rf $FILENAME.bam1
+rm -rf $FILENAME.sorted.bam
+rm -rf $FILENAME.unfiltered.bam
+rm -rf $FILENAME.fragments_to_peaks.peak_length.bed
+rm -rf $FILENAME.no_peak.bed
+rm -rf $FILENAME.off_peaks.peak_size.bed
+rm -rf $FILENAME.sorted.bed
+rm -rf $FILENAME.fseq.narrowPeak
+rm -rf $FILENAME.chrom_sizes.txt
 echo "END : `date`"
 
