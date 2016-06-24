@@ -17,6 +17,9 @@ We used data generated from fresh K562 cells, as we consider it gold standard,
 least biased (by freezing/fixing) and most accurate, therefore a perfect
 candidate for testing peak callers on.
 
+[This paper](http://journals.plos.org/plosone/article/asset?id=10.1371%2Fjournal.pone.0096303.PDF)
+was used as a reference point as it performed a similar task for DNaseI data.
+
 #### Experimental design
 
 We had three samples (`bam` files as input for Macs2 and `bed` files as input
@@ -27,33 +30,49 @@ We ran
 [FSeq](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/run_fseq.sh)
 ranging the two parameters in the following way:
 
-
-- `-l`: 100 200 400 600 800 1000 2000
-- `-t`: 2 4 6 8 10 12 14 16 
+- Paper: 0.001, 0.005, 0.05, 0.1, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 6.
+- Us: 0.01, 1, 2, 4, 6, 8, 10, 12, 14, 16 (threshold)
+- Us: 100 200 400 600 800 1000 2000 (length)
 
 We ran
 [Macs2](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/run_macs.sh)
 ranging the two parameters in the following way:
 
-- `--extsize`: 10 100 200 400 600 800 1000 2000 
-- `--qvalue`: 0.001 0.005 0.01 0.05 0.1 0.5 
+- Paper: 0.001, 0.005, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.2, 0.3
+- Us: 0.001, 0.005, 0.01, 0.02, 0.03, 0.05, 0.07, 0.09, 0.1, 0.5 (q-value)
+- Us: 100 200 400 600 800 1000 2000 (extension)
 
 Code to generate intersections (using Fseq peaks as example):
 ```
 for l in `echo 100 200 400 600 800 1000 2000`
 do
-    for t in `echo 2 4 6 8 10 12 14 16`
+    for t in `echo 1.5 2 2.5 3 4 6 8 10 12 14 16`
     do
-        fresh1="fresh1.fseq.length_$l.tresh_$t.bed"
-        fresh2="fresh2.fseq.length_$l.tresh_$t.bed"
-        fresh3="fresh3.fseq.length_$l.tresh_$t.bed"
+        fresh1=`find .. | grep "fresh1.filtered.bedpe.fseq.length_$l.tresh_$t\.na"`
+        fresh2=`find .. | grep "fresh2.filtered.bedpe.fseq.length_$l.tresh_$t\.na"`
+        fresh3=`find .. | grep "fresh3.filtered.bedpe.fseq.length_$l.tresh_$t\.na"`
+
+        bases1=`cat $fresh1 | awk '{sum += $3-$2} END {print sum}'`
+        bases2=`cat $fresh2 | awk '{sum += $3-$2} END {print sum}'`
+        bases3=`cat $fresh3 | awk '{sum += $3-$2} END {print sum}'`
+
+        overlap=`bedtools intersect -f 0.3 -r -a $fresh1 -b $fresh2 | \
+            bedtools intersect -f 0.3 -r -a - -b $fresh3 | \
+            bedtools sort -i - | \
+            bedtools merge -i - | \
+            awk '{sum += $3-$2} END {print sum}'`
         bedtools intersect -f 0.3 -r -a $fresh1 -b $fresh2 | \
             bedtools intersect -f 0.3 -r -a - -b $fresh3 | \
+            bedtools sort -i - | \
             bedtools merge -i - > \
-            fresh.fseq.length_$l.tresh_$t.intrsct.bed;
+            fresh.fseq.l_$l.t_$t.bed
+
+        echo length_$l.thresh_$t Overlap=$overlap Bases1=$bases1 Bases2=$bases2 Bases3=$bases3
     done
+    echo
 done
 ```
+
 
 #### Choice of best parameters per peak caller
 
@@ -79,7 +98,7 @@ annotations and their combinations:
 - overlap of "1_active_promoter", "2_weak_promoter", "4_strong_enhancer",
   "6_weak_enhancer" from ChromM
 - overlap of that with DNase
-- overlap of "TSS", "Enhancer", "Weak_Enhancer" from Segwey
+- overlap of "TSS", "Enhancer", "Weak_Enhancer" and "CTCF" from Segwey
 - overlap of that with DNase
 - overlap of "on target" areas (described above) between ChromM and Segwey
 - overlap of "on target" areas (described above) between ChromM, Segwey and
@@ -93,95 +112,130 @@ tend to be informative.
 
 We used the intersection of peaks called in 3 fresh ATAC K562 samples (peaks
 were called intersected if they had at least 30% overlap reciprocally in all
-three samples). We required the overlap of 50% of ATAC peak length with an
+three samples). We required the overlap of 20% of ATAC peak length with an
 annotated peak.
 
-[Here](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/code_for_overlaps.sh)
-is the code to generate intersections of peaks and the overlaps of these
-intersections with the annotation.
+Code to generate intersections of peaks and the overlaps of these
+intersections with the annotation:
 
+
+- on_target="/well/bsgjknight/Irina_analysis/Annotation/segmentation.on_target.bed"
+- off_target="/well/bsgjknight/Irina_analysis/Annotation/segmentation.off_target.bed"
+
+```
+for i in `ls fresh*bed`
+do
+    bases=`cat $i | awk '{sum += $3-$2} END {print sum}'`
+    on_target=`bedtools intersect -f 0.2 -r \
+        -a $i -b /well/bsgjknight/Irina_analysis/Annotation/seg.CTCF_TSS_E_WE.bed | \
+        bedtools intersect -u -a - -b $i | \
+        bedtools sort -i - | \
+        bedtools merge -i - | \
+        awk '{sum += $3-$2} END {print sum}'`
+    off_target=`bedtools intersect -f 0.2 -r \
+        -a $i -b /well/bsgjknight/Irina_analysis/Annotation/segmentation.off_target.bed | \
+        bedtools intersect -u -a - -b $i | \
+        bedtools sort -i - | \
+        bedtools merge -i - | \
+        awk '{sum += $3-$2} END {print sum}'`
+    on_bases=`cat /well/bsgjknight/Irina_analysis/Annotation/seg.CTCF_TSS_E_WE.bed | \
+        awk '{sum += $3-$2} END {print sum}'`
+    off_bases=`cat /well/bsgjknight/Irina_analysis/Annotation/segmentation.off_target.bed | \
+        awk '{sum += $3-$2} END {print sum}'`
+    echo -e "$i\t$bases\t$on_bases\t$off_bases\t$on_target\t$off_target"
+done | \
+sed s/t_1.b/t_01.b/g | \
+sed s/t_1.5.b/t_01.5.b/g | \
+sed s/t_2.b/t_02.b/g | \
+sed s/t_2.5.b/t_02.5.b/g | \
+sed s/t_3.b/t_03.b/g | \
+sed s/t_4.b/t_04.b/g | \
+sed s/t_6/t_06/g | \
+sed s/t_8/t_08/g | \
+sed s/l_100.t/l_0100.t/g | \
+sed s/l_200.t/l_0200.t/g | \
+sed s/l_400.t/l_0400.t/g | \
+sed s/l_600.t/l_0600.t/g | \
+sed s/l_800.t/l_0800.t/g | \
+sort -n -k 1
+```
 
 
 ### Results
 
-#### Choosing best parameters for each peak caller
+#### Choosing the best parameters for FSeq
 
-FDR (fraction of bases in peaks not called as annotation of all called bases):
-data generated by Macs2 for fresh ATAC, frozen ATAC or DNase samples  looks
-very similar. Maximum FDR is achieved at higher length parameter, starts
-rapidly increasing at the length value of 100-200. We can see that FDR is
-always high for low quality threshold (0.99). For FSeq peaks, FDR is always low
-for strict quality thresholds (12-16) in fresh samples regardless of the
-length. Looking at the data generated by FSeq for frozen ATAC or DNase samples,
-we can see that FDR in both of those samples is higher than in fresh samples.
-Also, FDR decreases with the increase of threshold. Also, there is a slight
-bias trend of shorter lengths~lower FDR in both frozen ATAC and DNase samples.
-
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/fdr_macs-fseq_fresh-frozen-dnase.png)
+Higher F-Score for length values 800, 1000 and 2000 (default 600 is not in this
+list, indicating that the default settings might not be the ones showing the
+best performance). The highest F-Score values were calculated for the
+combinations of length=800 and threshold=2, length=2000 and threshold=4 and
+length=1000 and threshold=2. We looked at some more stats for those parameter
+combinations.
 
 
-Specificity (fraction of bases in peaks called as annotation of all called
-bases): for Macs2, specificity is higher for lower length parameters and
-stricter quality thresholds. However, the difference in specificity depending
-on thresholds is dramatic only when comparing the threshold of 0.99 to any
-other thresholds (0.001, 0.01, 0.1 -- not much difference betwee these three).
-Peaks called by Fseq have higher specificity with higher quality thresholds and
-show a slight bias towards lower length values, but only for  frozen ATAC and
-DNase peaks. Observed for both peak callers: the behaviour is very similar for
-fresh ATAC, frozen ATAC and DNase data. However, DNase data had lower
-specificity than ATAC data for each parameter set.
+| Parameters               | F-Score | Overlap between replicates | %bases mapped to annotation | On_target/(On_target+Off_target) |
+| ------------------------ | ------- | -------------------------- | --- | --- |
+| length=800, threshold=2  | 0.527   | 15.33%                     | 70% | 97% |
+| length=2000, threshold=4 | 0.529   | 46.8%                      | 69% | 97% |
+| length=1000, threshold=2 | 0.533   | 17.2%                      | 66% | 96% |
 
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/specificity_macs-fseq_fresh-frozen-dnase.png)
+Based on reasonably high F-Score, the highest specificity and the highet
+percentage of bases mapped on target we chose the parameter set of
+**length=800, threshold=2**.
 
-
-Sensitivity (fraction of bases in peaks called as annotation of all annotation
-bases): For Macs2, sensitivity reaches its peak around length values of
-200-400, being the highest at quality threshold on 0.99. It is shifted towards
-smaller length values (10-100) for DNase, which is expected as we suppose that
-DNase peaks should be narrower than ATAC peaks and not wider than 150 bp. For
-peaks called with FSeq, frozen ATAC and DNase profile of sensitivity look
-similar and suggest that higher sensitivity is reached with lower threshold
-values. However, the highest sensitivity for fresh ATAC data is reached with
-length 800-1000 and threshold value 14-16.
-
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/sensitivity_macs-fseq_fresh-frozen-dnase.png)
+It is worth mentioning that we replicated the results from the paper which
+showed the same behaviour of F-Score with changing threshold values and
+suggested to use a threshold value between 2 and 3 for DNaseI data.
 
 
-FScore (a combination of sensitivity and specificity with a bit more weight
-given to sensitivity): For peaks called with Macs2, the FScore reaches its
-maximum around length 100-200 for fresh and frozen ATAC samples and again,
-narrower lengths values (10-100) for DNase samples. Similarly to sensitivity,
-FSeq data for ATAC fresh samples has a peak at length 800-1000 and threshold
-value 14-16.
+#### Choosing the best parameters for FSeq
 
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/fscore_macs-fseq_fresh-frozen-dnase.png)
-
-
-FDR/TPR: for both Macs2 and FSeq peaks, for any type of data, higherst
-FDR-to-TPR rate is for higher length values and lower quality values. It is
-almost equally low for any length valuse below 2000 for FSeq peaks and slightly
-lower for low-to-average length values of 100-200 for Macs2.
-
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/fdr-to-tpr_macs-fseq_fresh-frozen-dnase.png)
+Higher Macs2 were observed for the extension values of 600 and 800 (default 200
+is not in this list, indicating that the default settings might not be the ones
+showing the best performance). The highest F-Score values were calculated for
+the combinations of extension=800 and qvalue=0.05 and length=600 and
+qvalue=0.07. Similarly to FSeq, here we looked at some more stats for those
+parameter combinations.
 
 
-#### Which parameter set is the best?
+| Parameters                 | F-Score | Overlap between replicates | %bases mapped to annotation | On_target/(On_target+Off_target) |
+| -------------------------- | ------- | -------------------------- | --- | ----- |
+| extension=800, qvalue=0.05 | 0.504   | 61.68%                     | 63% | 96.5% |
+| extension=600, qvalue=0.07 | 0.525   | 46.8%                      | 69% | 97%   |
 
-|             | Macs2              | FSeq                |
-| ----------- | ------------------ | ------------------- |
-| FDR         | lower length value and any threshold value but 0.99 | strict threshold and a slight bias towards lower length values |
-| Specificity | lower length value and any quality threshold but 0.99 | strict threshold values and a slight bias towards lower length values |
-| Sensitivity | average length values of 100-400 | higher length values (800-1000) and strict thresholds |
-| FScore      | average length values of 100-400 | higher length values (800-1000) and strict thresholds |
-| FDR/TPR     | average length values of 100-200 and any quality threshold but 0.99 | any length value but 2000 and any threshold value higher than 6 |
+Based on reasonably high F-Score, the highest specificity and the highet
+percentage of bases mapped on target we chose the parameter set of
+**extension=600, qvalue=0.07**.
+
+Again, in terms of qvalue we got very close to the results from the paper. They
+suggest to use qval=0.05 for DNaseI data.
+
 
 Based on the observations described above we chose the following parameters as
 optimal:
 
 | Peak caller | Default parameters | Chosen parameters   |
 | ----------- | ------------------ | ------------------- |
-| FSeq        | l=600, t=4         | **l=800, t=14**     |
-| Macs2       | ext=200, q=0.05    | **ext=100, q=0.01** |
+| FSeq        | l=600, t=4         | **l=800, t=2**     |
+| Macs2       | ext=200, q=0.05    | **ext=600, q=0.07** |
+
+
+Here is what F-Score looks like:
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/Fresh.Fseq_Macs2.Fscore.png)
+
+
+F-Score, sensitivity and specificity, %bases mapped on target -- all that
+information can be found:
+
+- for FSeq [here](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/fseq.bases_fscore.txt)
+- for Macs2 [here](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/Fseq_Macs2_Hotspot/macs.bases_fscore.txt)
+
+
+
+
+
+# Old
 
 
 #### Choosing the best peak caller
