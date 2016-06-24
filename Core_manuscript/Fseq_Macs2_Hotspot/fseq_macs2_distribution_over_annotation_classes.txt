@@ -1,5 +1,0 @@
-Dnase	Seg_CTCF	Seg_Enhancers	Seg_Promoter flanking	Seg_Repressed	Seg_Transcribed	Seg_TSS	Seg_Weak enhancer	Chrom_10 Txn elongation	Chrom_11 Weak txn	Chrom_12 Repressed	Chrom_1_Active_Promoter	Chrom_2_Weak_Promoter	Chrom_3_Poised_Promoter	Chrom_4_Strong_Enhancer	Chrom_5_Strong_Enhancer	Chrom_6_Weak_Enhancer	Chrom_7_Weak_Enhancer	Chrom_8_Insulator	Chrom_9_Txn_Transition
-fseq_chosen	10117	1113	3681	13	28	21	14231	380	7	19	17	10443	2121	137	4136	596	1473	189	577	162
-fseq_default	5868	3439	7238	46	710	523	13296	1427	81	324	222	8944	2700	444	7142	1478	1945	827	2122	739
-macs.chosen	6214	377	2072	1	7	5	8819	193	2	11	15	6354	1158	73	2191	348	920	106	184	69
-macs.default	3363	903	3725	14	90	52	10970	411	9	37	20	7668	1660	162	3887	563	984	217	485	195
