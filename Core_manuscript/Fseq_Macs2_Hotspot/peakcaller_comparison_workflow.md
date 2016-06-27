@@ -324,7 +324,7 @@ promoter flanking) and "on target" categories (enhancer, weak enhancer, TSS,
 This is how signal to noise ratio is calculated:
 
 |         |                     |
-|:-------:|:-------------------:|
+| ------- | ------------------- |
 | (1) To calculate signal to noise ratio, we first count number of reads mapped to the regions where peaks were called. For each peak, we also calculate its width and randomly select a region of an equal width on the areas of the genome where no peaks were called. | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Paper/Figures/Sup_Figure_1.png) |
 | (2) We then calculate the number of reads mapped to these regions. After that, we calculate a ratio between the number of reads mapped to peaks and the number of reads mapped to the selected regions outside peaks. | (3) We then normalize the ratio by the total number of reads in a sample used for peak calling and multiply the normalized value by 1,000,000 to scale it up. | 
 
@@ -338,6 +338,17 @@ And these are the values that we get:
 | Macs2 default parameters | 3.484      |
 | Macs2 chosen parameters  | 6.79       |
 
+
+#### Illustrations
+
+[This](https://genome-euro.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=pulyakhina&hgS_otherUserSessionName=K562_fresh_FSeq_Macs2_chosen_parameters)
+session was used to create the figures.
+
+[The examples](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/Macs2_Fseq_ucsc_example2.pdf)
+
+
+
+#### Conclusions
 
 # OLD
 
