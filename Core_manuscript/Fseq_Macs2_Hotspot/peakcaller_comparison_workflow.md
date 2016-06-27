@@ -323,10 +323,10 @@ promoter flanking) and "on target" categories (enhancer, weak enhancer, TSS,
 
 This is how signal to noise ratio is calculated:
 
-|          |           |
-| -------- | --------- |
-| To calculate signal to noise ratio, we first count number of reads mapped to the regions where peaks were called. For each peak, we also calculate its width and randomly select a region of an equal width on the areas of the genome where no peaks were called. | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Paper/Figures/Sup_Figure_1.png) |
-| We then calculate the number of reads mapped to these regions. After that, we calculate a ratio between the number of reads mapped to peaks and the number of reads mapped to the selected regions outside peaks. | We then normalize the ratio by the total number of reads in a sample used for peak calling and multiply the normalized value by 1,000,000 to scale it up. | 
+|         |                     |
+|:-------:|:-------------------:|
+| (1) To calculate signal to noise ratio, we first count number of reads mapped to the regions where peaks were called. For each peak, we also calculate its width and randomly select a region of an equal width on the areas of the genome where no peaks were called. | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Paper/Figures/Sup_Figure_1.png) |
+| (2) We then calculate the number of reads mapped to these regions. After that, we calculate a ratio between the number of reads mapped to peaks and the number of reads mapped to the selected regions outside peaks. | (3) We then normalize the ratio by the total number of reads in a sample used for peak calling and multiply the normalized value by 1,000,000 to scale it up. | 
 
 
 And these are the values that we get:
