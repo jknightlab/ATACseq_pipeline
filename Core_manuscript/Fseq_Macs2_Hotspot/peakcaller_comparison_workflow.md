@@ -351,51 +351,21 @@ session was used to create the figures.
 
 
 
-#### Conclusions
-
-# OLD
-
-#### Illustrations
-
-[This](https://genome-euro.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=pulyakhina&hgS_otherUserSessionName=K562_fresh_FSeq_Macs2_chosen_parameters)
-session was used to create the figures.
-
-|             |            |
-| ----------- | ---------- |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/one.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/two.png)  |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/three.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/four.png)  |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/five.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/six.png)  |
-| ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/seven.png) | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/UCSC_examples/eight.png)  |
-
-
 #### Conclusion
 
-|                                          | FSeq      | Macs2     |
-| ---------------------------------------- | --------- | --------- |
-| overlap with "on target" annotation, %   | 66%       | 33%       |
-| overlap with "off target" annotation, %  | 0.08%     | 0.02%     |
-| overlap with "on target" annotation, bp  | 6,769     | 3,960     |
-| overlap with "off target" annotation, pk | 9         | 3         |
-| overlap with DNaseI peaks, bp            | 3,146,105 | 2,903,186 |
-| overlap with DNaseI peaks, %             | 75%       | 89%       |
-| peak width distribution                  | 380 bp    | 180 bp    |
-| peak height distribution                 | higher    | lower     |
-| overlap between replicates               | 67%       | 47%       |
-| signal-to-noise ratio                    | 5.8       | 6.3       |
+Chosen parameters showed a very similar F-Score for both Macs2 and FSeq.
+However, other criteria, such as overlap between replicates, overlap with the
+annotation and signal to noise ratio indicated that Macs2, when run with chosen
+parameters, generates a much cleaner list of peaks. This was confirmed by
+visual analysis of peaks as well. Therefore we proceeded with Macs2.
 
-FSeq peaks are more enriched for the "on target" K562 regulatory elements; in
-base pairs, they are more enriched for DNaseI peaks (but not in the % of
-peaks). The average intensity of FSeq peaks is slightly higher and the overlap
-between the replicates is much higher.
+|                                      | FSeq    | Macs2   |
+| ------------------------------------ | ------- | ------- |
+| overlap between replicates           | 29%     | 64%     |
+| overlap with "on target" annotation  | 64%     | 75%     |
+| overlap with "off target" annotation | 1.8%    | 0.7%    |
+| signal-to-noise ratio                | 4.2     | 6.8     |
 
-Macs2 peaks have a higher % overlap with DNaseI peaks, slightly higher
-signal-to-noise ratio and narrower peaks.
-
-Most importantly, when looking at FSeq and Macs2 peaks by eye, FSeq peaks look
-more realistic.
-
-Based on these observations we made a decision to use the following peak caller
-to analyze our data further on: **FSeq, length 800, threshold 14**.
 
 -------------------------------------------------
 developed by Irina Pulyakhina irina@well.ox.ac.uk
