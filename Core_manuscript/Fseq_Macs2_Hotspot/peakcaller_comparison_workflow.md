@@ -344,17 +344,11 @@ And these are the values that we get:
 [This](https://genome-euro.ucsc.edu/cgi-bin/hgTracks?hgS_doOtherUser=submit&hgS_otherUserName=pulyakhina&hgS_otherUserSessionName=K562_fresh_FSeq_Macs2_chosen_parameters)
 session was used to create the figures.
 
-(1)
+|             |            |
+| ----------- | ---------- |
+| Peaks called only by Macs2 or only by FSeq | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/Macs2_Fseq_ucsc_example.png)  |
+| Another example of a peak called only by Macs2 | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/Macs2_Fseq_ucsc_example2.png) |
 
-[The examples](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/Macs2_Fseq_ucsc_example2.pdf)
-
-(2) 
-
-https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/Macs2_Fseq_ucsc_example2.pdf
-
-(3) 
-
-![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Fseq_Macs2_Hotspot/Macs2_Fseq_ucsc_example2.pdf)
 
 
 #### Conclusions
