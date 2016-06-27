@@ -173,7 +173,7 @@ length=1000 and threshold=2. We looked at some more stats for those parameter
 combinations.
 
 
-| Parameters               | F-Score | Overlap between replicates | %bases mapped to annotation | On_target/(On_target+Off_target) |
+| Parameters               | F_Score | Overlap between replicates | %bases mapped to annotation | On_target / (On_target+Off_target) |
 | ------------------------ | ------- | -------------------------- | --- | --- |
 | length=800, threshold=2  | 0.527   | 15.33%                     | 70% | 97% |
 | length=2000, threshold=4 | 0.529   | 46.8%                      | 69% | 97% |
@@ -198,7 +198,7 @@ qvalue=0.07. Similarly to FSeq, here we looked at some more stats for those
 parameter combinations.
 
 
-| Parameters                 | F-Score | Overlap between replicates | %bases mapped to annotation | On_target / (On_target+Off_target) |
+| Parameters                 | F_Score | Overlap between replicates | %bases mapped to annotation | On_target / (On_target+Off_target) |
 | -------------------------- | ------- | -------------------------- | --- | ----- |
 | extension=800, qvalue=0.05 | 0.504   | 61.68%                     | 63% | 96.5% |
 | extension=600, qvalue=0.07 | 0.525   | 46.8%                      | 69% | 97%   |
@@ -322,6 +322,11 @@ promoter flanking) and "on target" categories (enhancer, weak enhancer, TSS,
 #### Signal to noise ratio
 
 This is how signal to noise ratio is calculated:
+|                          |            |
+| ------------------------ | ---------- |
+| To calculate signal to noise ratio, we first count number of reads mapped to the regions where peaks were called. For each peak, we also calculate its width and randomly select a region of an equal width on the areas of the genome where no peaks were called. We then calculate the number of reads mapped to these regions. After that, we calculate a ratio between the number of reads mapped to peaks and the number of reads mapped to the selected regions outside peaks. We then normalize the ratio by the total number of reads in a sample used for peak calling and multiply the normalized value by 1,000,000 to scale it up. | ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Paper/Figures/Sup_Figure_1.png)  |
+
+
 ![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Paper/Figures/Sup_Figure_1.png)
 
 And these are the values that we get:
