@@ -244,6 +244,41 @@ caller performs better. We looked at the following parameters:
 - signal-to-noise ratio
 
 
+#### Overlap between replicates
+
+We aimed to find out the best parameter to overlap replicates and select
+reproducible peaks. When two peaks are overlapped, we requested at least 0.1%,
+1%, 10%, 20%, ..., 100% of their length reciprocally to overlap (left panel of
+the figure):
+
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Paper/Figures/Sup_Figure_XX.png)
+
+We calculated the overlaps between three replicates (which you can see in the
+table down below). After that, we plotted the difference between the two
+adjacent values, in other words, how many peaks we gain when we relax the
+cutoff for the minimum overlap. We chose the value of 20%, as for three out of
+four peak callings it seemed to be within a plato of changes, before and after
+that value the number of peaks increased rapidly.
+
+**Overlap between replicates**
+
+| Required overlap | Fseq default | Fseq chosen | Macs2 default | Macs2 chosen |
+| ----- | ------ | ------ | ------ | ------ |
+| 0.001 | 18.78% | 44.08% | 61.51% | 67.48% |
+| 0.01  | 18.7%  | 43.44% | 61.21% | 67.28% |
+| 0.1   | 16.76% | 36.34% | 58.26% | 65.57% |
+| 0.2   | 14.73% | 29.09% | 54.84% | 63.61% |
+| 0.3   | 12.83% | 22.99% | 50.96% | 61.22% |
+| 0.4   | 10.89% | 17.69% | 46.12% | 58.13% |
+| 0.5   | 8.87%  | 13.06% | 39.27% | 53.22% |
+| 0.6   | 6.65%  | 8.86%  | 30.23% | 45.72% |
+| 0.7   | 4.32%  | 5.07%  | 19.67% | 35.03% |
+| 0.8   | 2.02%  | 2.056% | 8.73%  | 20.82% |
+| 0.9   | 0.36%  | 0.29%  | 1.69%  | 5.62%  |
+| 1     | 0      | 0      | 0      | 0      |
+
+
+
 #### Distribution of peaks across various categories of annotation
 
 K562 segmentation track of annotated regulatory elements used by ENCODE was
