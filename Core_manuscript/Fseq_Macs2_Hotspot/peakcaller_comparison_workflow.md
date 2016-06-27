@@ -198,7 +198,7 @@ qvalue=0.07. Similarly to FSeq, here we looked at some more stats for those
 parameter combinations.
 
 
-| Parameters                 | F-Score | Overlap between replicates | %bases mapped to annotation | On_target/(On_target+Off_target) |
+| Parameters                 | F-Score | Overlap between replicates | %bases mapped to annotation | On_target / (On_target+Off_target) |
 | -------------------------- | ------- | -------------------------- | --- | ----- |
 | extension=800, qvalue=0.05 | 0.504   | 61.68%                     | 63% | 96.5% |
 | extension=600, qvalue=0.07 | 0.525   | 46.8%                      | 69% | 97%   |
@@ -319,52 +319,22 @@ promoter flanking) and "on target" categories (enhancer, weak enhancer, TSS,
 [CTCF](https://en.wikipedia.org/wiki/CTCF)).
 
 
+#### Signal to noise ratio
+
+This is how signal to noise ratio is calculated:
+![alt text](https://github.com/jknightlab/ATACseq_pipeline/blob/master/Core_manuscript/Paper/Figures/Sup_Figure_1.png)
+
+And these are the values that we get:
+
+| Parameter set            | Fresh K562 |
+| ------------------------ | ---------- |
+| FSeq default parameters  | 3.499      |
+| FSeq chosen parameters   | 4.156      |
+| Macs2 default parameters | 3.484      |
+| Macs2 chosen parameters  | 6.79       |
+
+
 # OLD
-
-**Overlap between replicates**
-
-We required 50% overlap of peak width reciprocally. From this table we can
-appreciate that FSeq calls many more peaks than Macs2 with default options.
-With chosen options it calls less peaks than Macs2 with chosen options,
-nevertheless the fraction of peaks overlapping between replicates is higher for
-FSeq chosen parameters (67% agains 46%).  When non-reproducible peaks are
-removed, we are left with almost the same amount of overlapping peaks for FSeq
-and Macs2. In other words, whe using FSeq we get higher % and the same number
-of overlapping peaks.
-
-|    | Average number of called peaks | Overlap between replicates | Number of overlapping peaks | 
-| ------------------------ | ------- | ------- | ------ | 
-| FSeq default parameters  | 221,509 |  13.62% | 30,171 |
-| FSeq chosen parameters   |  15,354 |  66.8%  | 10,256 |
-| Macs2 default parameters |  32,928 |  50.53% | 16,638 |
-| Macs2 chosen parameters  |  23,383 |  46.54% | 10,882 |
-
-
-**Signal to noise ratio**
-
-We can see that signal to noise ratio is not very much influenced by different
-parameters. Even more so -- it drops for chosen macs2 parameters. This is most
-probably caused by the fact that we are calling more peaks with default
-parameters, which means there are areas which do contain some coverage. When we
-call less peaks, we restrict the area of peaks (and therefore count less
-reads), however, our background now includes those areas which used to be peaks
-and have some coverage. Therefore we normalized signal-to-noise ratio by the
-number of bases in called peaks. We did the same normalization of S2N for the
-number of called peaks, it gave very similar results. However, since we are
-already using bases for other metrics (Fscore, Sensitivity, etc), we decided to
-use base pairs here as well.
-
-Looking at the normalized S2N, we can appreciate that S2N increased greatly for
-chosen parameters compared to the default parameters and is slightly higher for
-Macs2 than for FSeq.
-
-| Parameter set            | Fresh K562 | S2N / #bp |
-| ------------------------ | ---------- | --------- |
-| FSeq default parameters  | 3.5        | 2.15      | 
-| FSeq chosen parameters   | 3.3        | 5.8       |
-| Macs2 default parameters | 3.48       | 4.01      |
-| Macs2 chosen parameters  | 2.34       | 6.31      |
-
 
 #### Illustrations
 
