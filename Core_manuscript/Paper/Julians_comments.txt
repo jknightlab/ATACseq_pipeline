@@ -1,0 +1,8 @@
+For the results,
+- I think emphasising novelty in the pinechrom pipeline is important – both as a unified pipeline and any individual components you feel you have innovated vs the literature; any relevant competitor pipelines?
+- I would perhaps move the section on comparing ATAC profiles to the other state-of-the-art chromatin accessibility assays to before a combined ‘biological section’ (ie Biological differences between ATAC profiles of different states of material + ATAC profiles and the effect of cryopreservation and cellular fixation on immune cell types). This allows us to explore dependency of results on specific cell types and describe any novelty in terms of biological findings that our data rich analysis, particularly of primary cells, has discovered vs the literature. There is likely to be some; will need some annotation linking ATAC sites to genes and then pathway enrichment / relationship to gene expression datasets specific to these cell types etc. As discussed briefly before, Hai’s pathway tools may be helpful
+
+I would suggest you proceed with writing the results, the last section will need the primary cell data but writing whatever else you can seems very sensible.
+
+I think Anna has in the end helped Alicia quite a bit with the processing so would be good to include her in the author list.
+
