@@ -333,10 +333,10 @@ And these are the values that we get:
 
 | Parameter set            | Fresh K562 |
 | ------------------------ | ---------- |
-| FSeq default parameters  | 3.499      |
-| FSeq chosen parameters   | 4.156      |
-| Macs2 default parameters | 3.484      |
-| Macs2 chosen parameters  | 6.79       |
+| FSeq default parameters  | 2.95       |
+| FSeq chosen parameters   | 3.504      |
+| Macs2 default parameters | 2.937      |
+| Macs2 chosen parameters  | 5.724      |
 
 
 #### Illustrations
