@@ -1,0 +1,28 @@
+(DONE) Figure 1, a. Schematic overview of the procedures
+(DONE) Figure 1, b. Flow chart with the workflow of Pinechrom
+(DONE) Figure 2, a. F-Score for FSeq and Macs2 as a barplot.
+(DONE) Figure 2, b. F-Score for FSeq and Macs2 for all threshold values and a certain length value.
+(DONE) Figure 3, a. Correlation between different types of material.
+(DONE) Figure 3, b. Overlap with different annotation categories.
+(TO DO) Figure 3, c. Annotation of peaks unique for each type of material.
+(TO DO) Figure 4, a. Overlap between DNase, FAIRE and ATAC.
+(TO DO) Figure 4, b. Peaks unique for DNase, FAIRE and ATAC.
+(TO DO) Figure 4, c. Example of peaks only present in ATAC and not DNase/FAIRE from UCSC.
+
+(DONE) Table 1. Description of the samples and number of reads sequenced for each type of material.
+(ALMOST) Table 2. Comparison of Fseq and Macs2, chosen and default parameters
+(DONE) Table 3. Overview of the main characteristics of ATAC data in 6 states of material of K562 cells.
+
+(waiting for Alicia) Supplementary figure 1. Examples of tapestation profiles for each type of material.
+(DONE) Supplementary figure 2. Signal-to-noise ratio.
+(DONE) Supplementary figure 3. How we calculate intersections between peaks.
+(DONE) Supplementary figure 4. Distribution of peaks across different categories of the annotation.
+
+(DONE) Supplementary table 1. Ranges of parameter values tested for F-Seq and Macs2.
+(DONE) Supplementary table 2. List of all output files of Pinechrom and their content.
+(DONE) Supplementary table 3. Correlation between peak coverage of common peaks.
+(ALMOST) Supplementary table 4. Downsampling.
+
+
+
+
