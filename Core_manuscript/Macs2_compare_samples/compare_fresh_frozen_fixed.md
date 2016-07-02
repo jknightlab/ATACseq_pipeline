@@ -24,7 +24,7 @@ from any material type is meaningful at all.
 | Number of filtered reads     | 11,860,451 | 15,979,159 | 33,108,409 | 26,462,788 | 36,800,607 | 49,502,051 |
 | Average fragment width       | 494        | 517        | 599        | 640        | 376        | 381        |
 | Number of peaks              | 17,655     | 25,464     | 23,919     | 22,844     | 21,822     | 22,675     |
-| Normalized number of peaks   | 148.86     | 159.36     | 72.24      | 2.42       | 1.02       | 0.78       |
+| Normalized number of peaks   | 148.86     | 159.36     | 72.24      | 86,32      | 59.3       | 45.81      |
 | Number of bases in peaks     | 20,401,332 | 30,954,626 | 37,835,051 | 35,027,062 | 24,281,923 | 24,272,305 |
 | [Signal to noise ratio](https://raw.githubusercontent.com/jknightlab/ATACseq_pipeline/master/Core_manuscript/FSeq_compare_samples/s2n_calculations.txt)  | 5.724 | 4.692 | 3.535 | 4.722 | 0.724 | 0.44 |
 | Overlap between replicates   | 61.22%     | 63.14%     | 37.17%     | 46.97%     | 25.95%     | 19.49%     |
