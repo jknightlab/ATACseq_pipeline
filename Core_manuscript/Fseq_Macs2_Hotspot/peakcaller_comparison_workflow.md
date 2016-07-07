@@ -188,7 +188,7 @@ showed the same behaviour of F-Score with changing threshold values and
 suggested to use a threshold value between 2 and 3 for DNaseI data.
 
 
-#### Choosing the best parameters for FSeq
+#### Choosing the best parameters for Macs2
 
 Higher Macs2 were observed for the extension values of 600 and 800 (default 200
 is not in this list, indicating that the default settings might not be the ones
