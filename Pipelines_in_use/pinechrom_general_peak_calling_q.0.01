@@ -351,6 +351,13 @@ $BEDTOOLS bamtobed \
     2> $FILENAME.stderr.txt
 echo "done."
 
+echo -n "`date`: BED Creating bed file... "
+$BEDTOOLS bamtobed \
+    -i $FILENAME.filtered.name_sort.bam > \
+    $FILENAME.filtered.bed \
+    2> $FILENAME.stderr.txt
+echo "done."
+
 echo -n "`date`: Sorting bedpe file... "
 rm -rf $FILENAME.sorted.bed
 for i in `echo {1..22} X Y`
