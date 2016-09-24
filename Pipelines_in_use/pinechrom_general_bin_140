@@ -314,13 +314,13 @@ $FRAGMENTS_BIN \
 echo "done."
 
 ###Paste header to the file containing the fragments of interest
-cat HEADER.$FILENAME.txt bin170orig.txt.sam > $FILENAME.bin.170.sam #name using dots not underscores!!!!
+cat HEADER.$FILENAME.txt bin140orig.txt.sam > $FILENAME.bin.140.sam #name using dots not underscores!!!!
 
 mv $FILENAME.bam  $FILENAME.all.reads.bam
 
-$SAMTOOLS view -bh $FILENAME.bin.170.sam > $FILENAME.bin.170.bam
+$SAMTOOLS view -bh $FILENAME.bin.140.sam > $FILENAME.bin.140.bam
 
-mv $FILENAME.bin.170.bam $FILENAME.bam	
+mv $FILENAME.bin.140.bam $FILENAME.bam	
 
 
 
