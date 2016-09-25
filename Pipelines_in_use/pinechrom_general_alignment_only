@@ -211,12 +211,9 @@ fi
 
 cd $FULL_PATH_PINECHROM_RES
 
-if [ "$BAM" != "default" ]; then
-    $SAMTOOLS view -b $BAM > $FILENAME.bam
-
     echo -n "`date`: sorting alignments in order to remove duplicates... "
     $SAMTOOLS sort \
-        $FILENAME.bam \
+        $FILENAME.bam1 \
         $FILENAME.sorted \
         2> $FILENAME.samtools_stderr.txt
     echo "done."
