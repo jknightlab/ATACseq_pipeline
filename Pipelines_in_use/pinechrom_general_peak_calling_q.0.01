@@ -647,6 +647,8 @@ rm $FILENAME.sam
 rm $FILENAME.bam1
 rm $FILENAME.sorted.bam
 # rm $FILENAME.unfiltered.bam
+rm $READ1.trimmed.fastq
+rm $READ2.trimmed.fastq
 
 echo "END : `date`"
 
