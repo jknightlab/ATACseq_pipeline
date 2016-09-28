@@ -351,7 +351,7 @@ $BEDTOOLS bamtobed \
     2> $FILENAME.stderr.txt
 echo "done."
 
-echo -n "`date`: BED Creating bed file... "
+echo -n "`date`: BED Creating bed file from filtered and sorted BAM ... "
 $BEDTOOLS bamtobed \
     -i $FILENAME.filtered.name_sort.bam > \
     $FILENAME.filtered.bed \
